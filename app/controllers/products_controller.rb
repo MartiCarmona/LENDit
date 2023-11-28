@@ -14,6 +14,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @booking = Booking.new
     @favorite = Favorite.new
+    @booked_products = current_user.booked_products
   end
 
   def new

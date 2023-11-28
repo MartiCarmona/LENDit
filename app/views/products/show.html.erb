@@ -30,7 +30,7 @@
 
                 <div class="booking-container">
                   <div id="booking">
-                    <% unless current_user == @product.user %>
+                    <% unless current_user == @product.user || @booked_products.include?(@product) %>
                       <%= simple_form_for [@product, @booking], html: { id: 'booking-form', data: { controller: 'booking-form' } } do |f| %>
                         <div class="date-inputs">
                           <%= f.input :start_date, as: :string, input_html: { data: { controller: "datepicker" } } %>
