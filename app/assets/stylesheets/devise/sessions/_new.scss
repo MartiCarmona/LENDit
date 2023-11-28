@@ -1,0 +1,104 @@
+#container {
+  margin-top: 50px;;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+
+  .info h1{
+    font-size: 25px;
+    font-weight: bold;
+    margin: 20px;
+  }
+
+  .form-container{
+    background-color: rgb(255, 255, 255);
+    width: 50rem;
+    border-radius: 0.5rem;
+  }
+
+  .form-row {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping to the next line if needed */
+    margin-bottom: 1rem; /* Add some spacing between the form groups */
+  }
+
+  .form-group {
+    flex: 1; /* Each form group takes equal width within the container */
+    margin-right: 1rem; /* Add some spacing between the form groups */
+    margin-bottom: 1.5rem; /* Adjust vertical spacing if needed */
+  }
+
+  .form-group.category {
+    flex: 0 0 20%; /* Specify a fixed width for the price form, adjust as needed */
+  }
+
+
+  .form-group.price {
+    flex: 0 0 15%; /* Specify a fixed width for the price form, adjust as needed */
+  }
+
+  h1 {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  .alert {
+    margin-bottom: 20px;
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    padding: 15px;
+    border-radius: 5px;
+  }
+
+  form {
+    max-width: 50rem;
+    margin: 0 auto;
+
+
+    .mb-3 {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+      margin: 1.5rem
+    }
+
+    .form-label {
+      font-weight: bold;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      margin-top: 5px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      background-color: white;
+    }
+
+    .upload-button {
+      text-align: center;
+    }
+
+
+    .btn-primary {
+      background-color: #01C1AD;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .btn-primary:hover {
+      background-color: #007883;
+    }
+  }
+}
+

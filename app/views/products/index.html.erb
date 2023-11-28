@@ -1,0 +1,54 @@
+<section id="content" class="container">
+  <% unless params[:category_id].present? %>
+    <h2 class="my-4"><strong>Recently Seen:</strong></h2>
+  <% else %>
+    <% category = Category.find_by(id: params[:category_id]) %>
+    <% if category %>
+      <h2 class="my-4"><strong><%= category.name %></strong></h2>
+    <% else %>
+      <h2 class="my-4">Category not found</h2>
+    <% end %>
+  <% end %>
+
+  <div class="products-grid">
+    <% @products.first(5).each do |product| %>
+      <%= link_to product_path(product), class: 'product-link mb-3' do %>
+        <div class="product-card">
+          <%= image_tag(product.image, class: 'product-image') if product.image.attached? %>
+          <div class="product-info">
+            <span
+              class="price"><%= product.price_per_day.to_i == product.price_per_day ? product.price_per_day.to_i : product.price_per_day %>€</span>
+            <p class="title"><%= product.title %></p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+   <% unless params[:category_id].present? %>
+    <h2 class="my-4"><strong>Recommended for you:</strong></h2>
+  <% end %>
+
+  <div class="products-grid">
+    <% @products.drop(5).each do |product| %>
+      <%= link_to product_path(product), class: 'product-link' do %>
+        <div class="product-card">
+          <%= image_tag(product.image, class: 'product-image') if product.image.attached? %>
+          <div class="product-info">
+            <span
+              class="price"><%= product.price_per_day.to_i == product.price_per_day ? product.price_per_day.to_i : product.price_per_day %>
+              €
+            </span>
+            <p class="title"><%= product.title %></p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>">
+      <%= value %>
+    </div>
+  <% end %>
+</section>
