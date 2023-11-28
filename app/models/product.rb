@@ -20,7 +20,7 @@ class Product < ApplicationRecord
   end
 
   def booked_by_user?(user)
-    bookings.include?(user)
+    bookings.where(user: user, status: 'booked').exists?
   end
 
   def self.search(query)

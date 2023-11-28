@@ -18,4 +18,10 @@ class User < ApplicationRecord
       favorited_products << product
     end
   end
+
+  def show
+    @user = User.find(params[:id])
+    @products = @user.products
+    @booked_products = @user.booked_products
+  end
 end

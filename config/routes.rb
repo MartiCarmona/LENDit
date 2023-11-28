@@ -46,7 +46,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :profile, only: [:show, :update]
+  get "profile/:id", to: "profiles#show", as: :profile
 
   get '/help', to: 'helps#index'
 end

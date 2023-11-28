@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class ProfilesController < ApplicationController
   before_action :authenticate_user!
 
   def show
@@ -6,6 +6,6 @@ class UsersController < ApplicationController
     @products = @user.products
     @favorites = @user.favorites
     @bookings = @user.bookings
-    render 'profile/profile'
+    @booked_products = @user.booked_products
   end
 end
