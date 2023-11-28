@@ -3,8 +3,8 @@ class ProductsController < ApplicationController
   def index
     if params[:search].present?
       @products = Product.where("title ILIKE ? OR description ILIKE ? OR category ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
-    elsif params[:category].present?
-      @products = Product.where(category: params[:category]).where.not(user: current_user)
+    elsif params[:category_id].present?
+      @products = Product.where(category_id: params[:category_id]).where.not(user: current_user)
     else
       @products = Product.all.where.not(user: current_user)
     end
@@ -54,6 +54,6 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:title, :description, :price_per_day, :condition, :image, :category)
+    params.require(:product).permit(:title, :description, :price_per_day, :condition, :category_id, :image)
   end
 end

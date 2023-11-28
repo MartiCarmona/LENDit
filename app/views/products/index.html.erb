@@ -1,10 +1,14 @@
 <section id="content" class="container">
-<% unless params[:category].present? %>
-  <h2 class="my-4"><strong>Recently Seen:</strong></h2>
-<% end %>
-<% if params[:category].present? %>
-  <h2 class="my-4"><strong> <%= params[:category].camelcase %></strong></h2>
-<% end %>
+  <% unless params[:category_id].present? %>
+    <h2 class="my-4"><strong>Recently Seen:</strong></h2>
+  <% else %>
+    <% category = Category.find_by(id: params[:category_id]) %>
+    <% if category %>
+      <h2 class="my-4"><strong><%= category.name %></strong></h2>
+    <% else %>
+      <h2 class="my-4">Category not found</h2>
+    <% end %>
+  <% end %>
 
   <div class="products-grid">
     <% @products.first(5).each do |product| %>
@@ -21,7 +25,7 @@
     <% end %>
   </div>
 
-   <% unless params[:category].present? %>
+   <% unless params[:category_id].present? %>
     <h2 class="my-4"><strong>Recommended for you:</strong></h2>
   <% end %>
 
@@ -33,7 +37,6 @@
           <div class="product-info">
             <span
               class="price"><%= product.price_per_day.to_i == product.price_per_day ? product.price_per_day.to_i : product.price_per_day %>
-              <%= image_tag "like.png", class: "product-icon" %>
               €
             </span>
             <p class="title"><%= product.title %></p>

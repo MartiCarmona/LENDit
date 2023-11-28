@@ -58,21 +58,11 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-tech-categories">
   <div class="container-fluid">
     <ul class="navbar-nav me-auto">
-      <li class="nav-item">
-        <%= link_to "Consoles", products_path({ category: "Consoles" }), class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "Audio", products_path({ category: "Audio" }), class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "Cameras", products_path({ category: "Cameras" }), class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "Outdoor", products_path({ category: "Outdoor" }), class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "Gadgets", products_path({ category: "Gadgets" }), class: "nav-link" %>
-      </li>
+      <% Category.all.each do |category| %>
+        <li class="nav-item">
+          <%= link_to category.name, products_path(category_id: category.id), class: "nav-link" %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </div>

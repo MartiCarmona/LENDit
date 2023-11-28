@@ -22,9 +22,10 @@
   </div>
 <div class="form-row">
   <div class="mb-3 form-group category">
-    <%= f.label :category, class: "form-label" %>
-    <%= f.select :category, options_for_select(["Consoles", "Audio", "Cameras", "Outdoor", "Gadgets" ]), {}, { class: "form-control" } %>
+    <%= f.label :category_id, class: "form-label" %>
+    <%= f.collection_select :category_id, Category.all, :id, :name, {}, { class: "form-control" } %>
   </div>
+
 
   <div class="mb-3 form-group condition">
     <%= f.label :condition, class: "form-label" %>
