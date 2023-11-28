@@ -1,0 +1,190 @@
+#booking {
+  text-align: center;
+  padding-left: 4rem;
+  padding-right: 4rem;
+
+  .date-inputs {
+    display: flex;
+    gap: 10px; /* Adjust the gap between the date inputs as needed */
+    margin-top: -11.5rem;
+    margin-bottom: 1rem;
+    margin-left: -3rem;
+    margin-right: -3rem;
+  }
+
+  input[type="text"] {
+    width: 200px; /* Adjust the width as needed */
+    padding: 10px; /* Adjust the padding as needed */
+    font-size: 16px; /* Adjust the font size as needed */
+  }
+
+
+  .btn-rent-now {
+    background-color: #01C1AD; // This is a placeholder color, adjust it to match your specific color
+    color: #ffffff; // This is a placeholder text color, adjust it to match your specific color
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    object-position: center;
+
+    &:hover {
+      background-color: darken($color: #007883, $amount: 10%); // Darken the button on hover
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(93, 219, 149, 0.5); // A light glow effect that matches the button color
+    }
+
+    &:active {
+      background-color: darken($color: #5cdb95, $amount: 15%); // Even darker when the button is clicked
+    }
+  }
+}
+.product-show-container {
+  background: #f4f4f4;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+
+  .product-card {
+    display: flex;
+    background: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 1400px;
+    max-width: 100%;
+    height: 585px;
+
+    .product-image-wrapper {
+      // flex-basis: 70%;
+      max-width: 70%;
+      height: 585px;
+      width: 850px;
+
+      .product-image {
+        object-fit: cover;
+        width: 850px;
+        width: 100%; /* Adjusted to cover the entire container */
+        height: 100%;
+        object-position: center;
+      }
+    }
+
+    .product-details .input.btn {
+      align-items: center;
+      display: flex;
+    }
+
+    .product-details {
+      flex: 4;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: auto;
+
+      input.btn{
+        background-color: #01C1AD;
+        border: none;
+        border-radius: 20px;
+        color: white;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        font-weight: bold;
+        display: inline-flex;
+        align-items: center;
+
+          &:hover {
+            background-color: #007883
+          }
+      }
+
+
+      .rent-button-wrapper {
+        .btn-rent-now {
+          background-color: #01C1AD; // This is a placeholder color, adjust it to match your specific color
+          color: #ffffff; // This is a placeholder text color, adjust it to match your specific color
+          padding: 10px 20px;
+          border: none;
+          border-radius: 20px;
+          font-size: 16px;
+          font-weight: bold;
+          text-transform: uppercase;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          text-decoration: none;
+          object-position: center;
+
+          &:hover {
+            background-color: darken($color: #007883, $amount: 10%); // Darken the button on hover
+          }
+
+          &:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(93, 219, 149, 0.5); // A light glow effect that matches the button color
+          }
+
+          &:active {
+            background-color: darken($color: #5cdb95, $amount: 15%); // Even darker when the button is clicked
+          }
+        }
+      }
+
+
+      .booking {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        object-position: center;
+      }
+
+
+      .product-info {
+        padding: 2rem;
+        border-radius: 0.5rem;
+        margin-bottom: -5rem;
+
+        .product-price {
+          font-size: 1.5rem;
+          color: #3c3c3c;
+          display: block;
+        }
+
+        .product-title {
+          font-size: 2rem;
+          color: #333;
+          margin-bottom: 30px;
+        }
+
+        .product-condition,
+        .product-category {
+          font-size: 1rem;
+          color: #666;
+          background: #e9ecef;
+          padding: 0.25rem 0.5rem;
+          border-radius: 0.25rem;
+          display: inline-block;
+          margin-right: 0.5rem;
+          margin-bottom: 20px; /* Add margin between condition/category and the next item */
+        }
+
+        .product-description {
+          font-size: 1rem;
+          color: #666;
+          line-height: 1.5;
+          margin-top: 1rem;
+          margin-bottom: 20px; /* Increase margin between description and the next item */
+        }
+      }
+
+    }
+  }
+}

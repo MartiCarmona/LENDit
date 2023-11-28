@@ -1,0 +1,44 @@
+<section id=container>
+
+<div class="form-container">
+<div class="info">
+<h1>Product information</h1>
+</div>
+<%= form_for @product, html: { multipart: true } do |f| %>
+
+  <div class="mb-3">
+    <%= f.label :image, class: "form-label" %>
+    <%= f.file_field :image, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :title, class: "form-label" %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :description, class: "form-label" %>
+    <%= f.text_field :description, class: "form-control" %>
+  </div>
+<div class="form-row">
+  <div class="mb-3 form-group category">
+    <%= f.label :category, class: "form-label" %>
+    <%= f.select :category, options_for_select(["Consoles", "Audio", "Cameras", "Outdoor", "Gadgets" ]), {}, { class: "form-control" } %>
+  </div>
+
+  <div class="mb-3 form-group condition">
+    <%= f.label :condition, class: "form-label" %>
+    <%= f.select :condition, options_for_select(["New - Never used before", "As new - In perfect conditions", "Good state - Well preserved", "Acceptable - Worth the price", "Very used - Deteriorated but functional", ]), {}, { class: "form-control" } %>
+  </div>
+
+  <div class="mb-3 form-group price">
+    <%= f.label :price_per_day, value: "Price/day €", class: "form-label" %>
+    <%= f.number_field :price_per_day, class: "form-control", step: "0.01" %>
+  </div>
+</div>
+  <div class="upload-button">
+  <%= f.submit "Upload Product", class: "btn btn-primary" %>
+  </div>
+<% end %>
+</div>
+</section>

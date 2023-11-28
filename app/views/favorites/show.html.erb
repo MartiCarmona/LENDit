@@ -1,0 +1,36 @@
+<section id="content" class="product-show-container">
+  <div class="product-card">
+    <div class="product-image-wrapper">
+      <%= image_tag(@product.image, class: 'product-image') if @product.image.attached? %>
+    </div>
+    <div class="product-details">
+      <div class="product-interactions">
+        <button class="btn-chat">Chat</button>
+      </div>
+
+      <div class="rent-button-wrapper">
+        <% if user_signed_in? %>
+        <% if current_user.products.exclude?(@product)%>
+          <%= link_to toggle_favorite_product_path(@product), method: :post, class: 'product-icon' do %>
+          <%= image_tag 'like.png' %>
+          <% end %>
+
+
+         <%= button_to 'Rent now!', product_rentals_path(@product), class: 'btn-rent-now' %>
+          <% end %>
+        <% else %>
+          <%= link_to 'Rent now!', new_user_session_path, class: 'btn-rent-now' %>
+        <% end %>
+
+      </div>
+
+      <div class="product-info">
+        <span class="product-price"><%= number_to_currency(@product.price_per_day, unit: '€') %></span>
+        <h1 class="product-title"><%= @product.title %></h1>
+        <span class="product-condition"><%= @product.condition %></span>
+        <span class="product-category"><%= @product.category.camelcase %></span>
+        <p class="product-description"><%= @product.description %></p>
+      </div>
+    </div>
+  </div>
+</section>

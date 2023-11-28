@@ -1,0 +1,7 @@
+<div class="product-card">
+  <%= image_tag(product.image, class: 'product-image') if product.image.attached? %>
+  <div class="product-info">
+    <span class="price">€<%= product.price_per_day.to_i == product.price_per_day ? product.price_per_day.to_i : product.price_per_day %></span>
+    <p class="title"><%= product.title %></p>
+  </div>
+</div>
