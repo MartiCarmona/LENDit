@@ -32,13 +32,9 @@ class ProductsController < ApplicationController
     end
   end
 
-  # def edit
-  #   @product = Product.find(params[:id])
-  #   if @product.user != current_user
-  #     flash[:alert] = "You can only edit your own products"
-  #     redirect_to root_path
-  #   end
-  # end
+  def edit
+    @product = current_user.products.find(params[:id])
+  end
 
   def search
     @products = Product.search(params[:search])
