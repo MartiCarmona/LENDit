@@ -21,12 +21,9 @@
           <div class="product-icon">
             <%= link_to new_user_session_path, method: :post do %>
               <%= image_tag 'like.png' %>
-            <% end %>
-          </div>
-
-          <div class="btn-chat">
-            <%= link_to new_user_session_path do %>
-              <button class="btn-chat">Chat</button>
+               <%= link_to new_user_session_path do %>
+                 <button class="btn-chat">Chat</button>
+              <% end %>
             <% end %>
           </div>
         <% end %>
@@ -59,7 +56,17 @@
               </div>
             </div>
           <% else %>
-            <%= button_to 'Rent now!', new_user_session_path, class: 'btn-rent-now' %>
+              <div class="booking-container">
+                <div id="booking">
+                  <%= simple_form_for [@product, @booking], html: { id: 'booking-form', data: { controller: 'booking-form' } } do |f| %>
+                    <div class="date-inputs">
+                        <%= f.input :start_date, as: :string, input_html: { data: { controller: "datepicker" } } %>
+                        <%= f.input :end_date, as: :string, input_html: { data: { controller: "datepicker" } } %>
+                    </div>
+                        <%= f.button :submit, 'Rent now!', class: 'btn-rent-now', data: { disable_with: 'Renting...' }, disabled: false %>
+                  <% end %>
+                </div>
+              </div>
           <% end %>
         </div>
       <% end %>
