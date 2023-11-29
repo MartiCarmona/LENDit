@@ -40,14 +40,15 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
 
     if @product.update(product_params)
-      redirect_to product_path(@product), notice: 'Product was successfully updated.'
+      redirect_to profile_path(current_user), notice: 'Product was successfully updated.'
     end
   end
 
   def destroy
     @product = Product.find(params[:id])
     @product.destroy
-    redirect_to root_path, notice: 'Product was successfully deleted.'
+
+    redirect_to profile_path(current_user), notice: 'Product was successfully deleted.', status: :see_other
   end
 
   def search

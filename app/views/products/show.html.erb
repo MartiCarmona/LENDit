@@ -29,6 +29,7 @@
           </div>
         <% end %>
 
+
         <h1 class="product-title"><%= @product.title %></h1>
         <span class="product-condition"><%= @product.condition %></span>
         <span class="product-category"><%= @product.category.name %></span>
@@ -41,22 +42,11 @@
                 <%= link_to edit_product_path(@product), class: 'btn btn-outline-secondary' do %>
                   Edit Product
                 <% end %>
-                <%= link_to "Delete Product", @product, method: :delete, id: 'delete-product', data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger' %>
-
+                <%= link_to @product, data: { turbo_method: "delete", confirm: 'Are you sure you want to delete this product?'}, class: 'btn btn-outline-secondary', id: 'delete-product' do %>
+                  Delete Product
+                <% end %>
 
               </div>
-
-              <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                  document.getElementById('delete-product').addEventListener('click', function (event) {
-                    event.preventDefault();
-                    console.log('Delete button clicked');  // Check if this message appears in the console
-                    if (confirm('Are you sure you want to delete this product?')) {
-                      window.location.href = this.getAttribute('href');
-                    }
-                  });
-                });
-              </script>
             <% end %>
 
 
