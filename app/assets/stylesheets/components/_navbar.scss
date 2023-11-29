@@ -3,9 +3,9 @@ body, html {
 }
 
 #content{
-  margin-top: 150px;
-  padding-left: 7.3rem;
-  padding-right: 7.3rem;
+  margin-top: 125px;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
   word-wrap: break-word;
 }
 
@@ -17,6 +17,7 @@ body, html {
   top: 0;
   width: 100%;
   z-index: 1000;
+  height: 67px;
   border-bottom: 1px solid #e6e6e6;
   display: flex;
 }
@@ -28,13 +29,13 @@ body, html {
 }
 
 .nav-icon {
-  height: 25px;
+  height: 26px;
   width: auto;
   margin-left: 0.5rem;
 }
 
 .nav-icon-2 {
-  height: 25px;
+  height: 27px;
   width: auto;
   margin-right: 0.5rem;
 }
@@ -42,7 +43,7 @@ body, html {
 .container-fluid {
   padding: 0.25rem 1rem;
   margin: 0 auto;
-  max-width: calc(100% - 12rem);
+  max-width: calc(100% - 2.5rem);
   width: 100%;
 }
 
@@ -52,7 +53,7 @@ body, html {
 }
 
 .navbar .navbar-brand img {
-  max-height: 30px;
+  max-height: 38px;
   width: auto;
   margin-right: 0.5rem;
 }
@@ -70,7 +71,7 @@ body, html {
 
 .navbar .navbar-nav .nav-link {
   color: #333;
-  text-transform: uppercase;
+  text-transform: capitalize;
   font-weight: bold;
   padding: 0.5rem 0.75rem;
   font-size: 0.9rem;
@@ -92,8 +93,8 @@ body, html {
   margin-right: 0.3rem;
 }
 .avatar {
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   object-fit: cover;
   vertical-align: middle;
@@ -107,7 +108,7 @@ body, html {
   color: white;
   padding: 0.5rem 1rem;
   font-size: 0.9rem;
-  text-transform: uppercase;
+  text-transform: capitalize;
   font-weight: bold;
   display: inline-flex;
   align-items: center;
@@ -136,20 +137,31 @@ body, html {
   position: fixed;
   top: 67px;
   width: 100%;
-  height: 6%;
+  height: auto;
   z-index: 999;
+  padding-top: 5px;
+  padding-bottom: 5px;
   display: flex;
   justify-content: center;
 }
 
-.navbar-tech-categories .navbar-nav {
-  justify-content: flex-start;
-}
+
 
 .navbar-tech-categories .navbar-nav .nav-link {
   color: #333;
-  text-transform: uppercase;
+  text-transform: capitalize;
   font-weight: bold;
-  padding: 0.5rem 0.75rem;
-  font-size: 0.8rem;
+  padding: 0.1rem 0.75rem;
+  font-size: 0.9rem;
+}
+
+.container-fluid-2 {
+  padding: 0.1rem 1rem;
+  margin: 0 auto;
+  max-width: calc(100% - 3rem);
+  width: 100%;
+}
+
+.navbar-tech-categories .navbar-nav {
+  justify-content: flex-start;
 }
