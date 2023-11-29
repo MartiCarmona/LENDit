@@ -14,8 +14,6 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/favorites/index', to: 'favorites#index'
-
   # bookings
   resources :bookings, only: [] do
     member do
@@ -51,6 +49,7 @@ Rails.application.routes.draw do
   end
 
   get "/profile/:id", to: "profiles#show", as: "profile"
+  get "/profile/:id/favorites", to: "favorites#index", as: "profile_favorites"
 
   get '/help', to: 'helps#index'
 end
