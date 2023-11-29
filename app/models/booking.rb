@@ -6,7 +6,24 @@ class Booking < ApplicationRecord
   validate :unique_booking_for_user
   validate :cannot_book_own_product
 
+  validates :start_date, presence: true
+  validates :end_date, presence: true
+
+  validate :valid_dates
+
   private
+
+  def valid_dates
+    return unless start_date && end_date
+
+    if start_date < Date.today
+      errors.add(:start_date, 'cannot be in the past')
+    end
+
+    if end_date <= start_date
+      errors.add(:end_date, 'must be after the start date')
+    end
+  end
 
   def unique_booking_for_user
     if user.bookings.where(product: product, status: 'booked').exists?

@@ -6,7 +6,7 @@ class BookingsController < ApplicationController
   def new
     @booking = Booking.new
     @booking.user = current_user
-    @booking.event = Event.find(params[:event_id])
+    @booking.product = Product.find(params[:event_id])
   end
 
   # POST /bookings
@@ -15,6 +15,9 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     @booking.user = current_user
     @booking.product = Product.find(params[:product_id])
+    @booking.start_date = params[:booking][:start_date]
+    @booking.end_date = params[:booking][:end_date]
+    @booking.status = 'booked'
 
     if @booking.save
       redirect_to profile_path(current_user), notice: 'Booking was successfully created.'
