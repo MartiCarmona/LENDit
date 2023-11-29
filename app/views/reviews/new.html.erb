@@ -1,0 +1,21 @@
+<h1>New review</h1>
+<%= form_for [@product, @review] html: { multipart: true } do |f| %>
+   <div class="mb-3">
+    <%= f.label :rating %>
+    <%= f.number_field :rating, class: "form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :content %>
+    <%= f.text_area :content, class: "form-control" %>
+  </div>
+  <%= f.submit "Create review", class: "btn btn-primary" %>
+<% end %>
+<%= link_to "Back", product_path(@product) %>
+
+<p><strong>Reviews</strong></p>
+<ul class="list-group">
+  <% @product.reviews.each do |review| %>
+    <li class="list-group-item"><%= review.content %></li>
+  <% end %>
+</ul>
+
