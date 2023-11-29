@@ -12,8 +12,10 @@ Rails.application.routes.draw do
     member do
       get 'toggle_favorite'
     end
-      get 'favorites/index', to: 'favorites#index'
-    end
+  end
+
+  get '/favorites/index', to: 'favorites#index'
+
   # bookings
   resources :bookings, only: [] do
     member do
@@ -21,6 +23,7 @@ Rails.application.routes.draw do
       patch :reject
     end
   end
+
   # chats
   resources :chats, only: [:show] do
     resources :messages, only: [:create]
@@ -38,6 +41,7 @@ Rails.application.routes.draw do
       get :finished
     end
   end
+
   # status borrows
   resources :borrows, only: [] do
     collection do

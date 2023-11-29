@@ -6,6 +6,29 @@
 
     <div class="product-details">
       <div class="product-info">
+        <% if user_signed_in? %>
+          <p class="product-owner">PP <%= @product.user.first_name + ' ' + @product.user.last_name.first + '.' %></p>
+          <% if @product.favorited_by_user?(current_user) %>
+            <%= link_to toggle_favorite_product_path(@product), method: :post, class: 'product-icon-filled' do %>
+              <%= image_tag 'like_filled.png' %>
+            <% end %>
+          <% else %>
+            <%= link_to toggle_favorite_product_path(@product), method: :post, class: 'product-icon' do %>
+              <%= image_tag 'like.png' %>
+            <% end %>
+          <% end %>
+          <button class="btn-chat">Chat</button>
+        <% else %>
+          <div class="product-icon">
+            <%= link_to new_user_session_path, method: :post do %>
+              <%= image_tag 'like.png' %>
+               <%= link_to new_user_session_path do %>
+                 <button class="btn-chat">Chat</button>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+
         <h1 class="product-title"><%= @product.title %></h1>
         <span class="product-condition"><%= @product.condition %></span>
         <span class="product-category"><%= @product.category.name %></span>
@@ -13,46 +36,64 @@
         <strong><span class="product-price"><%= number_to_currency(@product.price_per_day, unit: '', format: "%n€") %>/day</span></strong>
       </div>
 
+    <% if current_user == @product.user %>
+      <div class="product-actions">
+        <%= link_to edit_product_path(@product), class: 'btn btn-outline-secondary' do %>
+          Edit Product
+        <% end %>
+
+        <%= link_to @product, method: :delete, class: 'btn btn-outline-secondary', id: 'delete-product', data: { confirm: 'Are you sure you want to delete this product?' } do %>
+          Delete Product
+        <% end %>
+      </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          document.getElementById('delete-product').addEventListener('click', function (event) {
+            event.preventDefault();
+            if (confirm('Are you sure you want to delete this product?')) {
+              window.location.href = this.getAttribute('href');
+            }
+          });
+        });
+      </script>
+    <% end %>
+
       <% unless current_user == @product.user %>
         <div class="rent-button-wrapper">
-          <button class="btn-chat">Chat</button>
-          <% if user_signed_in? %>
-            <% if current_user.products.exclude?(@product) %>
-              <% if @product.favorited_by_user?(current_user) %>
-                <%= link_to toggle_favorite_product_path(@product), method: :post, class: 'product-icon-filled' do %>
-                  <%= image_tag 'like_filled.png' %>
+          <% if user_signed_in? && current_user.products.exclude?(@product) %>
+            <div class="booking-container">
+              <div id="booking">
+                <% unless current_user == @product.user %>
+                  <%= simple_form_for [@product, @booking], html: { id: 'booking-form', data: { controller: 'booking-form' } } do |f| %>
+                    <div class="date-inputs">
+                      <%= f.input :start_date, as: :string, input_html: { data: { controller: "datepicker" } } %>
+                      <%= f.input :end_date, as: :string, input_html: { data: { controller: "datepicker" } } %>
+                    </div>
+                    <% if current_user == @product.user || @product.booked_by_user?(current_user) %>
+                      <%= f.button :submit, 'Rent now!', class: 'btn-rent-now', data: { disable_with: 'Renting...' }, disabled: true %>
+                    <% else %>
+                      <%= f.button :submit, 'Rent now!', class: 'btn-rent-now', data: { disable_with: 'Renting...' }, disabled: false %>
+                    <% end %>
+                  <% end %>
                 <% end %>
-              <% else %>
-                <%= link_to toggle_favorite_product_path(@product), method: :post, class: 'product-icon' do %>
-                  <%= image_tag 'like.png' %>
-                <% end %>
-              <% end %>
-              <div class="booking-container">
+              </div>
+            </div>
+          <% else %>
               <div class="booking-container">
                 <div id="booking">
-                  <% unless current_user == @product.user %>
-                      <%= simple_form_for [@product, @booking], html: { id: 'booking-form', data: { controller: 'booking-form' } } do |f| %>
-                      <div class="date-inputs">
+                  <%= simple_form_for [@product, @booking], html: { id: 'booking-form', data: { controller: 'booking-form' } } do |f| %>
+                    <div class="date-inputs">
                         <%= f.input :start_date, as: :string, input_html: { data: { controller: "datepicker" } } %>
                         <%= f.input :end_date, as: :string, input_html: { data: { controller: "datepicker" } } %>
-                      </div>
-                      <% if current_user == @product.user || @product.booked_by_user?(current_user) %>
-                        <%= f.button :submit, 'Rent now!', class: 'btn-rent-now', data: { disable_with: 'Renting...' }, disabled: true %>
-                      <% else %>
+                    </div>
                         <%= f.button :submit, 'Rent now!', class: 'btn-rent-now', data: { disable_with: 'Renting...' }, disabled: false %>
-                      <% end %>
-                    <% end %>
                   <% end %>
                 </div>
               </div>
-            </div>
-            <% else %>
-              <%= link_to 'Rent now!', new_user_session_path, class: 'btn-rent-now' %>
-            <% end %>
           <% end %>
-          </div>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </section>
