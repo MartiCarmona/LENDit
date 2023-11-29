@@ -29,9 +29,6 @@
       <%= f.label :price_per_day, value: "Price/day €", class: "form-label" %>
       <%= f.number_field :price_per_day, class: "form-control", step: "0.01" %>
     </div>
-  </div>
-
-  <div class="upload-button">
-    <%= f.submit "Update Product", class: "btn btn-primary" %>
-  </div>
+    
+  <%= f.submit "Update Product", class: "btn btn-primary" %>
 <% end %>
