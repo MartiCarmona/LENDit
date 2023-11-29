@@ -19,7 +19,7 @@
           <li class="nav-item active">
             <%= link_to "Upload Product", new_product_path, class: "nav-link btn-upload" %>
           <li class="nav-item active">
-            <%= link_to favorites_index_path, class: "nav-link d-flex align-items-center" do %>
+            <%= link_to profile_favorites_path(current_user), class: "nav-link d-flex align-items-center" do %>
               <%= image_tag "passion.png", class: "nav-icon me-2" %>
               <span>Favorites</span>
             <% end %>
@@ -31,13 +31,13 @@
             <span>Messages</span>
             <% end %>
           </li>
-        
+
           <li class="nav-item">
             <%= link_to profile_path(current_user), class: "nav-link" do %>
               <%= image_tag "joseluis.svg.png", class: "avatar", alt: "User profile" %>
             <% end %>
           </li>
-      
+
         <% else %>
 
          <form action="<%= products_path %>" method="get" class="search-bar-container">
