@@ -12,6 +12,7 @@
         <div class="profile-actions">
           <%= link_to "Edit Profile", edit_user_registration_path, class: 'btn btn-outline-secondary' %>
         </div>
+        <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-danger" %>
       </div>
     </div>
 
@@ -54,7 +55,7 @@
   </div>
 </section>
 
-<script>
+<%# <script>
   document.addEventListener('DOMContentLoaded', function() {
     const btnProducts = document.getElementById('btn-products');
     const btnRents = document.getElementById('btn-rents');
@@ -75,4 +76,4 @@
       btnProducts.classList.remove('active');
     });
   });
-</script>
+</script> %>
