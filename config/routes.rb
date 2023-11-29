@@ -55,7 +55,5 @@ Rails.application.routes.draw do
 
   get "/profile/:id", to: "profiles#show", as: "profile"
 
-
-
   get '/help', to: 'helps#index'
 end
