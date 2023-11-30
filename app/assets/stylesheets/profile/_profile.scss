@@ -5,6 +5,7 @@
     padding: 20px 30px;
     background-color: #f4f4f4;
     height: 230px;
+    border-radius: 0.5rem;
 
     .profile-picture {
       overflow: hidden;
@@ -125,7 +126,7 @@
 // sidebar
 
 .sidebar {
-  width: 250px;
+  width: 200px;
   background-color: #ffffff;
   box-sizing: border-box;
   z-index: 100;
@@ -234,10 +235,16 @@
   }
 }
 
-.box {
-  background-color: #fff; // or any color you prefer
-  border-radius: 4px; // to give the rounded corners
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1); // for a subtle shadow
-  margin: 20px 0; // adjust as needed for spacing
-  padding: 20px; // padding inside the box
+.with-sidebar-container {
+  margin-left: 200px;
+  background-color: #f4f4f4;
+  margin-top: 154px;
+
+  .card-body {
+    margin: 3rem;
+    padding: 2rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+  }
 }

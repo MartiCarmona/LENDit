@@ -1,0 +1,10 @@
+<%= content_for :wrapped_content do %>
+  <%= render "profiles/sidebar" %>
+  <div class="with-sidebar-container">
+    <div class="card-body">
+      <%= yield %>
+    </div>
+  </div>
+<% end %>
+
+<%= render template: "layouts/application" %>

@@ -4,7 +4,7 @@
       <div class="user-info-with-pic">
       <%= image_tag("joseluis.svg.png", class: "profile-pic") %>
         <div class="user-info">
-          <p class="name"><strong>Martiiii C.</strong></p>
+          <p class="name"><strong>Ana C.</strong></p>
           <p class="rating">
           <span class="stars">★★★★★</span>
           <span class="rating-stars">(7)</span>
@@ -20,7 +20,6 @@
     </div>
     <span class="sidebar-category">Lends</span>
   <% end %>
-
 
   <%= link_to "#", class: "sidebar-settings d-flex align-items-center" do %>
     <div class="icon-margin">
@@ -58,23 +57,3 @@
   <% end %>
 
 </aside>
-
-<section id="content">
-  <div class="profile-section">
-    <div class="profile-header">
-      <div class="profile-picture">
-        <%= image_tag("joseluis.svg.png", class: "profile-image") %>
-      </div>
-      <div class="profile-details">
-        <div class="profile-name-email">
-          <h2 class="profile-name"><%= "#{current_user.first_name} #{current_user.last_name}" %></h2>
-          <p class="profile-email"><%= current_user.email %></p>
-        </div>
-        <div class="profile-actions">
-          <%= link_to "Edit Profile", edit_user_registration_path, class: 'btn btn-outline-secondary' %>
-        </div>
-        <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-danger" %>
-      </div>
-    </div>
-  </div>
-</section>

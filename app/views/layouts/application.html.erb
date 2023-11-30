@@ -12,8 +12,7 @@
   </head>
 
   <body>
-    <%= yield %>
-    <p class="alert"><%= alert %></p>
+    <%= content_for?(:wrapped_content) ? yield(:wrapped_content) : yield %>
     <%= render "shared/navbar" %>
     <%= render "shared/flashes" %>
   </body>

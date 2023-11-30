@@ -7,7 +7,7 @@
     <div class="product-details">
       <div class="product-info">
         <% if user_signed_in? && current_user != @product.user %>
-          <p class="product-owner">PP <%= @product.user.first_name + ' ' + @product.user.last_name.first + '.' %></p>
+          <%= link_to @product.user.first_name + ' ' + @product.user.last_name.first + '.', profile_path(@product.user), class: "btn btn-primary" %>
           <% if @product.favorited_by_user?(current_user) && current_user != @product.user%>
             <%= link_to toggle_favorite_product_path(@product), method: :post, class: 'product-icon-filled' do %>
               <%= image_tag 'like_filled.png' %>
@@ -28,7 +28,6 @@
             <% end %>
           </div>
         <% end %>
-
 
         <h1 class="product-title"><%= @product.title %></h1>
         <span class="product-condition"><%= @product.condition %></span>
