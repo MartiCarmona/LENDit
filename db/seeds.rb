@@ -18,7 +18,7 @@ furniture_category = Category.find_or_create_by(name: 'Furniture')
 
 products = [
   {
-    title: 'Smartwatch X',
+    title: 'Smartwatch XX',
     description: 'Stay connected with the latest smartwatch on the market.',
     price_per_day: 12.99,
     condition: 'New',
@@ -416,4 +416,4 @@ products.each do |product|
   end
 end
 
-Booking.create(start_date: Date.today, end_date: Date.today + 1, status: 'accepted', user: User.first, product: Product.first)
+Booking.create(start_date: Date.today, end_date: Date.today + 1, status: 'finished', user: User.first, product: Product.first)
