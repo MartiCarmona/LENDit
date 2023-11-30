@@ -1,0 +1,17 @@
+<section id="content" class="container">
+  <h1>Pending Lend Requests</h1>
+  <div class="products-grid">
+    <% @pending_lend_requests.each do |booking| %>
+        <div class="product-card">
+          <p class="user-email">User: <%= booking.user.email %></p>
+          <p class="product-info">Product: <%= booking.product.title %></p>
+          <p class="booking-status">Status: <%= booking.status %></p>
+
+          <div class="booking-actions">
+            <%= link_to 'Accept', accept_booking_path(booking), method: :patch, class: 'accept-button' %>
+            <%= link_to 'Decline', decline_booking_path(booking), method: :patch, class: 'decline-button' %>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</section>

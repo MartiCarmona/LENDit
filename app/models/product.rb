@@ -8,7 +8,7 @@ class Product < ApplicationRecord
   has_many :favorited_by_users, through: :favorites, source: :user
 
   def favorited_by_user?(user)
-    favorited_by_users.include?(user: user, status: 'booked')
+    favorited_by_users.include?(user)
   end
 
   def image_format

@@ -1,0 +1,10 @@
+<h1>Declined Lend Requests</h1>
+
+<% @declined_lend_requests.each do |booking| %>
+  <div>
+    <p>User: <%= booking.user.email %></p>
+    <p>Product: <%= booking.product.title %></p>
+    <p>Status: <%= booking.status %></p>
+  </div>
+  <hr>
+<% end %>
