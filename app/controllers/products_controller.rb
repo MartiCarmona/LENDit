@@ -6,7 +6,15 @@ class ProductsController < ApplicationController
     elsif params[:category_id].present?
       @products = Product.where(category_id: params[:category_id]).where.not(user: current_user)
     else
+<<<<<<< HEAD
       @products = Product.all.where.not(user: current_user)
+=======
+      if current_user.present?
+        @products = Product.where.not(user: current_user).where.not(id: current_user.booked_products.pluck(:id))
+      else
+        @products = Product.all
+      end
+>>>>>>> 2b6578e161ec642d6bc0ed0c02d9afaf044fd6da
     end
   end
 
