@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
       end
     end
   end
-
+          # ds
   def show
     @product = Product.find(params[:id])
     @booking = Booking.new
