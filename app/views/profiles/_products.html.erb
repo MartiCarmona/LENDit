@@ -1,17 +1,15 @@
-
-  <h1>Your Favorite Products</h1>
+<div id="products" class="tab-content active">
   <div class="products-grid">
-    <% current_user.favorited_products.each do |product| %>
+    <% @products.each do |product| %>
       <%= link_to product_path(product), class: 'product-link' do %>
         <div class="product-card">
           <%= image_tag(product.image, class: 'product-image') if product.image.attached? %>
           <div class="product-info">
-            <span class="price">
-              €<%= product.price_per_day.to_i == product.price_per_day ? product.price_per_day.to_i : product.price_per_day %>
-            </span>
+            <span class="price">€<%= product.price_per_day.to_i == product.price_per_day ? product.price_per_day.to_i : product.price_per_day %></span>
             <p class="title"><%= product.title %></p>
           </div>
         </div>
       <% end %>
     <% end %>
   </div>
+</div>

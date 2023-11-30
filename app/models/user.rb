@@ -25,4 +25,8 @@ class User < ApplicationRecord
     @products = @user.products
     @booked_products = @user.booked_products
   end
+
+  def name_with_initial
+    "#{first_name} #{last_name.first}"
+  end
 end

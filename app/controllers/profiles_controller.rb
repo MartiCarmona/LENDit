@@ -7,5 +7,6 @@ class ProfilesController < ApplicationController
     @favorites = @user.favorites
     @bookings = @user.bookings
     @booked_products = @user.booked_products
+    render layout: "with_sidebar"
   end
 end
