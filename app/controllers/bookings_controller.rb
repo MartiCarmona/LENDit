@@ -1,5 +1,19 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
+<<<<<<< HEAD
+=======
+  # before_action :set_booking, only: [:edit, :update, :destroy]
+  def index
+    @pending_lend_requests = Booking.where(status: 'pending_lend')
+    @accepted_lend_requests = Booking.where(status: 'accepted_lend')
+    @declined_lend_requests = Booking.where(status: 'declined_lend')
+
+    @pending_borrow_requests = Booking.where(status: 'pending_borrow')
+    @accepted_borrow_requests = Booking.where(status: 'accepted_borrow')
+    @declined_borrow_requests = Booking.where(status: 'declined_borrow')
+  end
+
+>>>>>>> 7b776bfe184d310b18ad9bb5b4add52c8f34bf19
 
   def new
     @booking = Booking.new
@@ -7,43 +21,65 @@ class BookingsController < ApplicationController
     @booking.product = Product.find(params[:event_id])
   end
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7b776bfe184d310b18ad9bb5b4add52c8f34bf19
   def create
     @booking = Booking.new(booking_params)
     @booking.user = current_user
     @booking.product = Product.find(params[:product_id])
-    @booking.start_date = params[:booking][:start_date]
-    @booking.end_date = params[:booking][:end_date]
-    @booking.status = 'booked'
+    @booking.status = 'pending_lend'
 
     if @booking.save
-      redirect_to profile_path(current_user), notice: 'Booking was successfully created.'
+      redirect_to profile_path(current_user), notice: 'Booking request sent.'
     else
-      redirect_to product_path(@booking.product), notice: 'Booking could not be created'
+      redirect_to product_path(@booking.product), notice: 'Booking request could not be sent.'
     end
-
-    # respond_to do |format|
-    #   if @booking.save
-    #     format.html { redirect_to @booking.event, notice: 'Booking was successfully created.' }
-    #     format.json { render :show, status: :created, location: @booking.event }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @booking.event.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
-  # DELETE /bookings/1
-  # DELETE /bookings/1.json
-  # def destroy
-  #   event = @booking
-  #   event.destroy
-  #   respond_to do |format|
-  #     format.html { redirect_to events_url, notice: 'Booking was successfully destroyed.' }
-  #     format.json { head :no_content }
-  #   end
-  # end
+  def accept
+    @booking.update(status: 'accepted_lend') if @booking.status == 'pending_lend'
+    @booking.update(status: 'accepted_borrow') if @booking.status == 'pending_borrow'
+    redirect_to bookings_path, notice: 'Booking request accepted.'
+  end
+
+  def decline
+    @booking.update(status: 'declined_lend') if @booking.status == 'pending_lend'
+    @booking.update(status: 'declined_borrow') if @booking.status == 'pending_borrow'
+    redirect_to bookings_path, notice: 'Booking request declined.'
+  end
+
+  def pending_lend
+    @pending_lend_requests = Booking.where(status: 'pending_lend')
+  end
+
+  def accepted_lend
+    @accepted_lend_requests = Booking.where(status: 'accepted_lend')
+  end
+
+  def declined_lend
+    @declined_lend_requests = Booking.where(status: 'declined_lend')
+  end
+
+  def pending_borrow
+    @pending_borrow_requests = Booking.where(status: 'pending_borrow')
+  end
+
+  def accepted_borrow
+    @accepted_borrow_requests = Booking.where(status: 'accepted_borrow')
+  end
+
+  def declined_borrow
+    @declined_borrow_requests = Booking.where(status: 'declined_borrow')
+  end
 
   private
+
+  def find_booking
+    @booking = Booking.find(params[:id])
+  end
+
 
   def set_booking
     @booking = Booking.find(params[:id])
