@@ -6,11 +6,13 @@ class BookingsController < ApplicationController
   def lends
     @pending_lend_requests = current_user.received_bookings.where(status: 'pending')
     @accepted_lend_requests = current_user.received_bookings.where(status: 'accepted')
+    render layout: "with_sidebar"
   end
 
   def borrows
     @pending_borrow_requests = current_user.bookings.where(status: 'pending')
     @accepted_borrow_requests = current_user.bookings.where(status: 'accepted')
+    render layout: "with_sidebar"
   end
 
   def update
