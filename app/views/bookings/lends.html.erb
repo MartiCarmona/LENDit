@@ -1,11 +1,14 @@
-<section id="content" class="product-show-container">
+<div class="product-show-container">
 
   <h1>Lend Requests</h1>
 
   <h2>Pending Requests</h2>
   <% @pending_lend_requests.each do |booking| %>
     <div class="booking-item">
-      <p>Product: <%= link_to booking.product.title, product_path(booking.product) %></p>
+      <p>Owner: <%= "#{booking.product.user.first_name} #{booking.product.user.last_name}" %></p>
+      <p>Status: <%= booking.status.capitalize %></p>
+      <p>Start Date: <%= booking.start_date %></p>
+      <h1>Product: <%= link_to booking.product.title, product_path(booking.product) %></h1>
       <p>Status: <%= booking.status.capitalize %></p>
       <p>Start Date: <%= booking.start_date %></p>
       <p>End Date: <%= booking.end_date %></p>
@@ -25,4 +28,4 @@
       <%= link_to 'View Details', booking_path(booking) %>
     </div>
   <% end %>
-</section>
+</div>
