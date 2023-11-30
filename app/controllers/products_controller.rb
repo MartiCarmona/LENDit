@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
     elsif params[:category_id].present?
       @products = Product.where(category_id: params[:category_id]).where.not(user: current_user)
     else
-      @products = Product.all.where.not(user: current_user)
+       @products = Product.where.not(user: current_user).where.not(id: current_user.booked_products.pluck(:id))\
     end
   end
 
@@ -14,6 +14,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @booking = Booking.new
     @favorite = Favorite.new
+    @booked_products = current_user.nil? ? [] : current_user.booked_products
   end
 
   def new

@@ -8,7 +8,7 @@ class Product < ApplicationRecord
   has_many :favorited_by_users, through: :favorites, source: :user
 
   def favorited_by_user?(user)
-    favorited_by_users.include?(user)
+    favorited_by_users.include?(user: user, status: 'booked')
   end
 
   def image_format
@@ -20,7 +20,7 @@ class Product < ApplicationRecord
   end
 
   def booked_by_user?(user)
-    bookings.include?(user)
+    bookings.where(user: user, status: 'booked').exists?
   end
 
   def self.search(query)

@@ -17,6 +17,11 @@
       </div>
     </div>
 
+    <div class="tab-buttons">
+      <button id="btn-products" class="tab-btn active">Products</button>
+      <button id="btn-rents" class="tab-btn">Bookings</button>
+    </div>
+
     <div id="products" class="tab-content active">
       <div class="products-grid">
         <% @products.each do |product| %>
@@ -35,13 +40,13 @@
 
     <div id="rents" class="tab-content">
       <div class="products-grid">
-        <% @bookings.each do |bookings| %>
-          <%= link_to product_path(bookings), class: 'product-link' do %>
+        <% @booked_products.each do |product| %>
+          <%= link_to product_path(product), class: 'product-link' do %>
             <div class="product-card">
-              <%= image_tag(bookings.image, class: 'product-image') if bookings.image.attached? %>
+              <%= image_tag(product.image, class: 'product-image') if product.image.attached? %>
               <div class="product-info">
-                <span class="price">€<%= bookings.price_per_day.to_i == bookings.price_per_day ? bookings.price_per_day.to_i : bookings.price_per_day %></span>
-                <p class="title"><%= bookings.title %></p>
+                <span class="price">€<%= product.price_per_day.to_i == product.price_per_day ? product.price_per_day.to_i : product.price_per_day %></span>
+                <p class="title"><%= product.title %></p>
               </div>
             </div>
           <% end %>

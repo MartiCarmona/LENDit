@@ -9,6 +9,7 @@ export default class extends Controller {
   }
 
   validateDates() {
+    console.log('Validating dates')
     const startDate = new Date(this.startDateTarget.value);
     const endDate = new Date(this.endDateTarget.value);
 

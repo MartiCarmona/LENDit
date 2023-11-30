@@ -6,5 +6,6 @@ class ProfilesController < ApplicationController
     @products = @user.products
     @favorites = @user.favorites
     @bookings = @user.bookings
+    @booked_products = @user.booked_products
   end
 end
