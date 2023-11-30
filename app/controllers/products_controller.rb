@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   def index
     if params[:search].present?
-      @products = Product.where("title ILIKE ? OR description ILIKE ? OR category ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
+      @products = Product.where("title ILIKE ? OR description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
     elsif params[:category_id].present?
       @products = Product.where(category_id: params[:category_id]).where.not(user: current_user)
     else
