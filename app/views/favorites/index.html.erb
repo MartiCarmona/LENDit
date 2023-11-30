@@ -2,7 +2,7 @@
 <section id="content" class="container">
   <h1>Your Favorite Products</h1>
   <div class="products-grid">
-  <% current_user.favorite_products.each do |product| %>
+  <% current_user.favorited_products.each do |product| %>
     <%= link_to product_path(product), class: 'product-link' do %>
       <div class="product-card">
         <%= image_tag(product.image, class: 'product-image') if product.image.attached? %>

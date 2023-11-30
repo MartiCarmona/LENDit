@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
     elsif params[:category_id].present?
       @products = Product.where(category_id: params[:category_id]).where.not(user: current_user)
     else
-       @products = Product.where.not(user: current_user).where.not(id: current_user.booked_products.pluck(:id))
+       @products = Product.where.not(user: current_user).where.not(id: current_user.booked_products.pluck(:id))\
     end
   end
 
@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @booking = Booking.new
     @favorite = Favorite.new
-    @booked_products = current_user.booked_products
+    @booked_products = current_user.nil? ? [] : current_user.booked_products
   end
 
   def new
@@ -33,13 +33,24 @@ class ProductsController < ApplicationController
     end
   end
 
-  # def edit
-  #   @product = Product.find(params[:id])
-  #   if @product.user != current_user
-  #     flash[:alert] = "You can only edit your own products"
-  #     redirect_to root_path
-  #   end
-  # end
+  def edit
+    @product = Product.find(params[:id])
+  end
+
+  def update
+    @product = Product.find(params[:id])
+
+    if @product.update(product_params)
+      redirect_to profile_path(current_user), notice: 'Product was successfully updated.'
+    end
+  end
+
+  def destroy
+    @product = Product.find(params[:id])
+    @product.destroy
+
+    redirect_to profile_path(current_user), notice: 'Product was successfully deleted.', status: :see_other
+  end
 
   def search
     @products = Product.search(params[:search])

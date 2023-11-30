@@ -1,7 +1,7 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
     <%= link_to root_path, class: "navbar-brand" do %>
-      <%= image_tag "RENTech.png" %>
+      <%= image_tag "Lendit.png" %>
     <% end %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,27 +19,25 @@
           <li class="nav-item active">
             <%= link_to "Upload Product", new_product_path, class: "nav-link btn-upload" %>
           <li class="nav-item active">
-            <%= link_to "favorites/index", class: "nav-link" do %>
-              <%= image_tag "like.png", class: "nav-icon" %>
+            <%= link_to profile_favorites_path(current_user), class: "nav-link d-flex align-items-center" do %>
+              <%= image_tag "passion.png", class: "nav-icon me-2" %>
+              <span>Favorites</span>
             <% end %>
           </li>
+
           <li class="nav-item">
-            <%= link_to "#", class: "nav-link" do %>
-              <%= image_tag "mail.png", class: "nav-icon-2" %>
+            <%= link_to "#", class: "nav-link d-flex align-items-center" do %>
+            <%= image_tag "speech-bubble.png", class: "nav-icon-2 me-2" %>
+            <span>Messages</span>
             <% end %>
-
           </li>
-          <li class="nav-item dropdown">
-            <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%= image_tag "joseluis.svg.png", class: "avatar", alt: "dropdown menu" %>
-            </a>
 
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-             <%= link_to "Profile", profile_path(current_user), class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %>
-            </div>
+          <li class="nav-item">
+            <%= link_to profile_path(current_user), class: "nav-link" do %>
+              <%= image_tag "joseluis.svg.png", class: "avatar", alt: "User profile" %>
+            <% end %>
           </li>
+
         <% else %>
 
          <form action="<%= products_path %>" method="get" class="search-bar-container">
@@ -56,7 +54,7 @@
 </div>
 
 <div class="navbar navbar-expand-sm navbar-light navbar-tech-categories">
-  <div class="container-fluid">
+  <div class="container-fluid-2">
     <ul class="navbar-nav me-auto">
       <% Category.all.each do |category| %>
         <li class="nav-item">

@@ -4,8 +4,32 @@
       <%= image_tag(@product.image, class: 'product-image') if @product.image.attached? %>
     </div>
 
-<div class="product-details">
+    <div class="product-details">
       <div class="product-info">
+        <% if user_signed_in? && current_user != @product.user %>
+          <p class="product-owner">PP <%= @product.user.first_name + ' ' + @product.user.last_name.first + '.' %></p>
+          <% if @product.favorited_by_user?(current_user) && current_user != @product.user%>
+            <%= link_to toggle_favorite_product_path(@product), method: :post, class: 'product-icon-filled' do %>
+              <%= image_tag 'like_filled.png' %>
+            <% end %>
+          <% elsif current_user != @product.user%>
+            <%= link_to toggle_favorite_product_path(@product), method: :post, class: 'product-icon' do %>
+              <%= image_tag 'like.png' %>
+            <% end %>
+          <% end %>
+          <button class="btn-chat">Chat</button>
+        <% elsif  current_user != @product.user%>
+          <div class="product-icon">
+            <%= link_to new_user_session_path, method: :post do %>
+              <%= image_tag 'like.png' %>
+               <%= link_to new_user_session_path do %>
+                 <button class="btn-chat">Chat</button>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+
+
         <h1 class="product-title"><%= @product.title %></h1>
         <span class="product-condition"><%= @product.condition %></span>
         <span class="product-category"><%= @product.category.name %></span>
@@ -13,42 +37,19 @@
         <strong><span class="product-price"><%= number_to_currency(@product.price_per_day, unit: '', format: "%n€") %>/day</span></strong>
       </div>
 
-      <% unless current_user == @product.user %>
-        <div class="rent-button-wrapper">
-          <button class="btn-chat">Chat</button>
-          <% if user_signed_in? %>
-            <% if current_user.products.exclude?(@product) %>
-              <% if @product.favorited_by_user?(current_user) %>
-                <%= link_to toggle_favorite_product_path(@product), method: :post, class: 'product-icon-filled' do %>
-                  <%= image_tag 'like_filled.png' %>
-                <% end %>
-              <% else %>
-                <%= link_to toggle_favorite_product_path(@product), method: :post, class: 'product-icon' do %>
-                  <%= image_tag 'like.png' %>
-                <% end %>
-              <% end %>
-
-                <div class="booking-container">
-                  <div id="booking">
-                    <% unless current_user == @product.user || @booked_products.include?(@product) %>
-                      <%= simple_form_for [@product, @booking], html: { id: 'booking-form', data: { controller: 'booking-form' } } do |f| %>
-                        <div class="date-inputs">
-                          <%= f.input :start_date, as: :string, input_html: { data: { controller: "datepicker" } } %>
-                          <%= f.input :end_date, as: :string, input_html: { data: { controller: "datepicker" } } %>
-                        </div>
-                          <%= f.button :submit, 'Rent now!', class: 'btn-rent-now'%>
-                      <% end %>
-                    <% end %>
-                  </div>
-                </div>
-            </div>
-            <% else %>
-              <%= link_to 'Rent now!', new_user_session_path, class: 'btn-rent-now' %>
-            <% end %>
+      <% if current_user == @product.user %>
+        <div class="product-actions">
+          <%= link_to edit_product_path(@product), class: 'btn btn-outline-secondary' do %>
+            Edit Product
           <% end %>
-          </div>
-        <% end %>
-      </div>
+          <%= link_to @product, data: { turbo_method: "delete", confirm: 'Are you sure you want to delete this product?'}, class: 'btn btn-outline-secondary', id: 'delete-product' do %>
+            Delete Product
+          <% end %>
+        </div>
+      <% else %>
+        <%= render "book_product_form" %>
+      <% end %>
+        </div>
     </div>
   </div>
 </section>

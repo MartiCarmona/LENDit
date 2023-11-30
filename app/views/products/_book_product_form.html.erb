@@ -1,0 +1,35 @@
+<div class="rent-button-wrapper">
+  <div class="booking-container">
+    <div id="booking">
+      <% if @booked_products.include?(@product) %>
+        <p>Already booked</p>
+      <% else %>
+        <%= simple_form_for [@product, @booking], html: { id: 'booking-form', data: { controller: 'booking-form' } } do |f| %>
+          <div class="date-inputs">
+            <%= f.input :start_date,
+                  as: :string,
+                  input_html: {
+                    data: {
+                      controller: "datepicker",
+                      booking_form_target: "startDate",
+                      action: "change->booking-form#validateDates"
+                      }
+                    } %>
+
+            <%= f.input :end_date,
+                  as: :string,
+                  input_html: {
+                    data: {
+                      controller: "datepicker",
+                      booking_form_target: "endDate",
+                      action: "change->booking-form#validateDates"
+                      }
+                    } %>
+
+          </div>
+          <%= f.button :submit, 'Rent now!', class: 'btn-rent-now', data: { disable_with: 'Renting...', booking_form_target: "submitButton" }, disabled: false %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
