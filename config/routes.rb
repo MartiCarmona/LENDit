@@ -15,10 +15,15 @@ Rails.application.routes.draw do
   end
 
   # bookings
-  resources :bookings, only: [] do
+  resources :bookings, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
     member do
       patch :accept
-      patch :reject
+      patch :decline
+    end
+    collection do
+      get :pending_lend
+      get :accepted_lend
+      get :declined_lent
     end
   end
 
@@ -50,6 +55,7 @@ Rails.application.routes.draw do
 
   get "/profile/:id", to: "profiles#show", as: "profile"
   get "/profile/:id/favorites", to: "favorites#index", as: "profile_favorites"
+  get "/profile/:id/lends", to: "bookings#index", as: "profile_bookings"
 
   get '/help', to: 'helps#index'
 end
