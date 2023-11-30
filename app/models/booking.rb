@@ -4,7 +4,6 @@ class Booking < ApplicationRecord
   has_many :reviews
 
   validate :unique_booking_for_user
-  validate :cannot_book_own_product
 
   validates :start_date, presence: true
   validates :end_date, presence: true
@@ -14,7 +13,9 @@ class Booking < ApplicationRecord
   enum status: {
     pending: 'pending',
     accepted: 'accepted',
-    declined: 'declined'
+    declined: 'declined',
+    ongoing: 'ongoing',
+    finished: 'finished'
   }
 
   private
@@ -32,14 +33,10 @@ class Booking < ApplicationRecord
   end
 
   def unique_booking_for_user
-    if user.bookings.where(product: product, status: 'booked').exists?
-      errors.add(:base, 'You have already booked this product.')
-    end
-  end
+    booked_statuses = ['pending', 'accepted', 'declined', 'ongoing']
 
-  def cannot_book_own_product
-    if user == product.user
-      errors.add(:base, 'You cannot book your own product.')
+    if user.bookings.where(product: product, status: booked_statuses).exists?
+      errors.add(:base, 'You are currently booking  this product.')
     end
   end
 end

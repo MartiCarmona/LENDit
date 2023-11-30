@@ -3,15 +3,42 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
 
-  def lends
-    @pending_lend_requests = current_user.received_bookings.where(status: 'pending')
-    @accepted_lend_requests = current_user.received_bookings.where(status: 'accepted')
+
+  def show
+    @booking = Booking.find(params[:id])
+    @product = @booking.product
+    @user = @booking.user
     render layout: "with_sidebar"
   end
+
+  def lends
+    today = Date.today
+
+    @pending_lend_requests = current_user.received_bookings.where(status: 'pending')
+
+    @accepted_lend_requests = current_user.received_bookings
+                                      .where(status: 'accepted')
+                                      .where('start_date < ?', today)
+                                      .where('end_date >= ?', today)
+
+    @ongoing_lend_requests = current_user.received_bookings
+                                      .where(status: 'accepted')
+                                      .where('start_date >= ?', today)
+                                      .where('end_date >= ?', today)
+
+    @finished_lend_requests = current_user.received_bookings.where(status: 'accepted').where('end_date < ?', today)
+
+    render layout: "with_sidebar"
+  end
+
 
   def borrows
     @pending_borrow_requests = current_user.bookings.where(status: 'pending')
     @accepted_borrow_requests = current_user.bookings.where(status: 'accepted')
+    @finished_borrow_requests = current_user.bookings.where(status: 'accepted').where('end_date < ?', Date.today)
+    @ongoing_borrow_requests = current_user.bookings.where(status:'accepted').where('end_date >= ?', Date.today)
+
+
     render layout: "with_sidebar"
   end
 
@@ -49,6 +76,14 @@ class BookingsController < ApplicationController
     else
       redirect_to product_path(@booking.product), notice: 'Booking request could not be sent.'
     end
+  end
+
+  def cancel
+    @booking = Booking.find(params[:id])
+
+    @booking.destroy
+
+    redirect_to lends_bookings_path, notice: 'Booking request canceled.'
   end
 
   private

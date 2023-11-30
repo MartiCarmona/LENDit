@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     member do
       patch :accept
       patch :decline
+      delete :cancel
     end
     collection do
       get :lends

@@ -27,6 +27,6 @@ class User < ApplicationRecord
   end
 
   def name_with_initial
-    "#{first_name} #{last_name.first}"
+    "#{first_name} #{last_name.first}."
   end
 end
