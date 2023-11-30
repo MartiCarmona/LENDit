@@ -12,13 +12,9 @@ class Booking < ApplicationRecord
   validate :valid_dates
 
   enum status: {
-    booked: 'booked',
-    pending_lend: 'pending_lend',
-    accepted_lend: 'accepted_lend',
-    declined_lent: 'declined_lend',
-    pending_borrow: 'pending_borrow',
-    accepted_borrow: 'accepted_borrow',
-    declined_borrow: 'declined_borrow'
+    pending: 'pending',
+    accepted: 'accepted',
+    declined: 'declined'
   }
 
   private

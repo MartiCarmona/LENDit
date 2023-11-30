@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <%= link_to pending_lend_bookings_path(@product), class: "sidebar-settings d-flex align-items-center" do %>
+  <%= link_to lends_bookings_path(@product), class: "sidebar-settings d-flex align-items-center" do %>
     <div class="icon-margin">
       <%= image_tag "passion.png", class: "nav-icon" %>
     </div>
@@ -22,7 +22,7 @@
   <% end %>
 
 
-  <%= link_to "#", class: "sidebar-settings d-flex align-items-center" do %>
+  <%= link_to borrows_bookings_path(@product), class: "sidebar-settings d-flex align-items-center" do %>
     <div class="icon-margin">
       <%= image_tag "passion.png", class: "nav-icon" %>
     </div>
