@@ -15,9 +15,6 @@ Rails.application.routes.draw do
     end
   end
 
-
-
-
   # bookings
   resources :bookings, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
     member do
@@ -25,9 +22,8 @@ Rails.application.routes.draw do
       patch :decline
     end
     collection do
-      get :pending_lend
-      get :accepted_lend
-      get :declined_lent
+      get :lends
+      get :borrows
     end
   end
 

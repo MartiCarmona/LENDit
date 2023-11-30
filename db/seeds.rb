@@ -371,3 +371,5 @@ products.each do |product|
     puts "Error creating product '#{product[:title]}': #{e.message}"
   end
 end
+
+Booking.create(start_date: Date.today, end_date: Date.today + 1, status: 'accepted', user: User.first, product: Product.first)
