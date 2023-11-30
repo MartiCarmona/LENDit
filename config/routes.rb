@@ -9,10 +9,14 @@ Rails.application.routes.draw do
     resources :favorites, only: [:create]
     resources :reviews, only: [:new, :create]
     resources :chats, only: [:new, :create]
+
     member do
       get 'toggle_favorite'
     end
   end
+
+
+
 
   # bookings
   resources :bookings, only: [] do

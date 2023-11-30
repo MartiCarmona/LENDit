@@ -1,16 +1,12 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
-  # before_action :set_booking, only: [:edit, :update, :destroy]
 
-  # GET /bookings/new
   def new
     @booking = Booking.new
     @booking.user = current_user
     @booking.product = Product.find(params[:event_id])
   end
 
-  # POST /bookings
-  # POST /bookings.json
   def create
     @booking = Booking.new(booking_params)
     @booking.user = current_user
