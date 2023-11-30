@@ -1,57 +1,55 @@
+# app/controllers/bookings_controller.rb
+
 class BookingsController < ApplicationController
   before_action :authenticate_user!
-  # before_action :set_booking, only: [:edit, :update, :destroy]
 
-  # GET /bookings/new
+  def lends
+    @pending_lend_requests = current_user.received_bookings.where(status: 'pending')
+    @accepted_lend_requests = current_user.received_bookings.where(status: 'accepted')
+  end
+
+  def borrows
+    @pending_borrow_requests = current_user.bookings.where(status: 'pending')
+    @accepted_borrow_requests = current_user.bookings.where(status: 'accepted')
+  end
+
+  def update
+    @booking = Booking.find(params[:id])
+    if @booking.status == 'pending'
+      @booking.update(status: 'accepted')
+      respond_to do |format|
+        format.html { redirect_to lends_bookings_path, notice: 'Booking request accepted.' }
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to lends_bookings_path, alert: 'Invalid booking status.' }
+        format.js { render js: 'alert("Invalid booking status.");' }
+      end
+    end
+  end
+
+
   def new
     @booking = Booking.new
     @booking.user = current_user
     @booking.product = Product.find(params[:event_id])
   end
 
-  # POST /bookings
-  # POST /bookings.json
   def create
     @booking = Booking.new(booking_params)
     @booking.user = current_user
     @booking.product = Product.find(params[:product_id])
-    @booking.start_date = params[:booking][:start_date]
-    @booking.end_date = params[:booking][:end_date]
-    @booking.status = 'booked'
+    @booking.status = 'pending'
 
     if @booking.save
-      redirect_to profile_path(current_user), notice: 'Booking was successfully created.'
+      redirect_to profile_path(current_user), notice: 'Booking request sent.'
     else
-      redirect_to product_path(@booking.product), notice: 'Booking could not be created'
+      redirect_to product_path(@booking.product), notice: 'Booking request could not be sent.'
     end
-
-    # respond_to do |format|
-    #   if @booking.save
-    #     format.html { redirect_to @booking.event, notice: 'Booking was successfully created.' }
-    #     format.json { render :show, status: :created, location: @booking.event }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @booking.event.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
-
-  # DELETE /bookings/1
-  # DELETE /bookings/1.json
-  # def destroy
-  #   event = @booking
-  #   event.destroy
-  #   respond_to do |format|
-  #     format.html { redirect_to events_url, notice: 'Booking was successfully destroyed.' }
-  #     format.json { head :no_content }
-  #   end
-  # end
 
   private
-
-  def set_booking
-    @booking = Booking.find(params[:id])
-  end
 
   def booking_params
     params.require(:booking).permit(:start_date, :end_date)

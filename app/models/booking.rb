@@ -11,6 +11,12 @@ class Booking < ApplicationRecord
 
   validate :valid_dates
 
+  enum status: {
+    pending: 'pending',
+    accepted: 'accepted',
+    declined: 'declined'
+  }
+
   private
 
   def valid_dates

@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   has_many :bookings, dependent: :destroy
   has_many :booked_products, through: :bookings, source: :product
+  has_many :received_bookings, through: :products, source: :bookings
 
   has_many :favorites, dependent: :destroy
   has_many :favorited_products, through: :favorites, source: :product
@@ -23,5 +24,9 @@ class User < ApplicationRecord
     @user = User.find(params[:id])
     @products = @user.products
     @booked_products = @user.booked_products
+  end
+
+  def name_with_initial
+    "#{first_name} #{last_name.first}"
   end
 end
