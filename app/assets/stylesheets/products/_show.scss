@@ -10,6 +10,7 @@
     margin-bottom: 1rem;
     margin-left: -3rem;
     margin-right: -3rem;
+    justify-content: center;
   }
 
   input[type="text"] {
@@ -17,7 +18,6 @@
     padding: 10px; /* Adjust the padding as needed */
     font-size: 16px; /* Adjust the font size as needed */
   }
-
 
   .btn-rent-now {
     background-color: #01C1AD; // This is a placeholder color, adjust it to match your specific color
@@ -152,6 +152,27 @@
         padding: 2rem;
         border-radius: 0.5rem;
         margin-bottom: -5rem;
+
+        .icons-row {
+          display: flex;
+          justify-content: right; // Align icons to the right
+          gap: 10px; // Adjust the gap between icons as needed
+          align-items: center;
+        }
+
+        .user-btn {
+          padding: 8px 16px;
+          border: 0.5px solid #01C1AD;
+          border-radius: 20px;
+          background-color: #f4f4f4;
+          text-decoration: none;
+          font-size: 16px;
+          color: black;
+
+          &:hover {
+            background-color: #e9e9e9;
+          }
+        }
 
         .product-price {
           font-size: 1.5rem;
