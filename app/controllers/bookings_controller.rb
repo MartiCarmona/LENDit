@@ -1,5 +1,3 @@
-# app/controllers/bookings_controller.rb
-
 class BookingsController < ApplicationController
   before_action :authenticate_user!
 
@@ -13,35 +11,42 @@ class BookingsController < ApplicationController
 
   def lends
     @pending_lend_requests = current_user.received_bookings.where(status: 'pending')
-    @accepted_lend_requests = current_user.received_bookings.where(status: 'accepted')
-    @finished_lend_requests = current_user.received_bookings.where(status: 'accepted').where('end_date < ?', Date.today)
-    @ongoing_lend_requests = current_user.received_bookings.where(status: 'accepted').where('end_date >= ?', Date.today)
+    @accepted_lend_requests = current_user.received_bookings.upcoming
+    @finished_lend_requests = current_user.received_bookings.finished
+    @ongoing_lend_requests = current_user.received_bookings.ongoing
 
-    render layout: "with_sidebar"
+    render layout: 'with_sidebar'
   end
 
   def borrows
     @pending_borrow_requests = current_user.bookings.where(status: 'pending')
-    @accepted_borrow_requests = current_user.bookings.where(status: 'accepted')
-    @finished_borrow_requests = current_user.bookings.where(status: 'accepted').where('end_date < ?', Date.today)
-    @ongoing_borrow_requests = current_user.bookings.where(status:'accepted').where('end_date >= ?', Date.today)
+    @accepted_borrow_requests = current_user.bookings.upcoming
+    @finished_borrow_requests = current_user.bookings.finished
+    @ongoing_borrow_requests = current_user.bookings.ongoing.where('end_date >= ? and start_date <= ?', Date.today, Date.today)
 
-
-    render layout: "with_sidebar"
+    render layout: 'with_sidebar'
   end
 
   def update
     @booking = Booking.find(params[:id])
     if @booking.status == 'pending'
-      @booking.update(status: 'accepted')
+
+      if @booking.start_date > Date.today
+        @booking.update(status: 'accepted')
+      elsif @booking.start_date <= Date.today && @booking.end_date >= Date.today
+        @booking.update(status: 'accepted')
+      else
+        @booking.update(status: 'finished')
+      end
+
       respond_to do |format|
-        format.html { redirect_to lends_bookings_path, notice: 'Booking request accepted.' }
+        format.html { redirect_to lends_bookings_path, notice: 'Booking request updated.' }
         format.js
       end
     else
       respond_to do |format|
         format.html { redirect_to lends_bookings_path, alert: 'Invalid booking status.' }
-        format.js { render js: 'alert("Invalid booking status.");' }
+        format.js
       end
     end
   end
