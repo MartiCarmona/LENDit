@@ -20,9 +20,9 @@ class BookingsController < ApplicationController
 
   def borrows
     @pending_borrow_requests = current_user.bookings.where(status: 'pending')
-    @accepted_borrow_requests = current_user.bookings.where(status: 'accepted')
-    @finished_borrow_requests = current_user.bookings.where(status: 'finished')
-    @ongoing_borrow_requests = current_user.bookings.where(status: 'ongoing').where('end_date >= ? and start_date <= ?', Date.today, Date.today)
+    @accepted_borrow_requests = current_user.bookings.upcoming
+    @finished_borrow_requests = current_user.bookings.finished
+    @ongoing_borrow_requests = current_user.bookings.ongoing.where('end_date >= ? and start_date <= ?', Date.today, Date.today)
 
     render layout: 'with_sidebar'
   end
@@ -34,7 +34,7 @@ class BookingsController < ApplicationController
       if @booking.start_date > Date.today
         @booking.update(status: 'accepted')
       elsif @booking.start_date <= Date.today && @booking.end_date >= Date.today
-        @booking.update(status: 'ongoing')
+        @booking.update(status: 'accepted')
       else
         @booking.update(status: 'finished')
       end
