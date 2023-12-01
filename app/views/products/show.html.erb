@@ -20,7 +20,7 @@
               <% end %>
             <% end %>
             <button class="btn-chat user-btn">Chat</button>
-            <%= link_to @product.user.name_with_initial + '.', profile_path(@product.user), class: "btn btn-primary user-btn" %>
+            <%= link_to @product.user.name_with_initial, profile_path(@product.user), class: "btn btn-primary user-btn" %>
           <% elsif  !user_signed_in? %>
             <div class="product-icon">
               <%= link_to new_user_session_path, method: :post do %>
@@ -40,21 +40,24 @@
         <p class="product-description"><%= @product.description %></p>
         <strong><span class="product-price"><%= number_to_currency(@product.price_per_day, unit: '', format: "%n€") %>/day</span></strong>
       </div>
-
-      <% if current_user == @product.user %>
-        <div class="btn-edit">
-          <%= link_to edit_product_path(@product), class: 'btn btn-outline-secondary' do %>
-            Edit Product
+      <div class=under-container>
+        <div class="product-buttons-container">
+          <% if current_user == @product.user %>
+            <div class="btn-edit">
+              <%= link_to edit_product_path(@product), class: 'btn btn-outline-secondary' do %>
+                Edit Product
+              <% end %>
+            </div>
+            <div class="btn-delete">
+              <%= link_to @product, data: { turbo_method: "delete", turbo_confirm: 'Are you sure you want to delete this product?'}, class: 'btn btn-outline-secondary', id: 'delete-product' do %>
+                Delete Product
+              <% end %>
+            </div>
+          <% else %>
+            <%= render "book_product_form" %>
           <% end %>
         </div>
-        <div class="btn-delete">
-          <%= link_to @product, data: { turbo_method: "delete", turbo_confirm: 'Are you sure you want to delete this product?'}, class: 'btn btn-outline-secondary', id: 'delete-product' do %>
-            Delete Product
-          <% end %>
-        </div>
-      <% else %>
-        <%= render "book_product_form" %>
-      <% end %>
+      </div>
     </div>
   </div>
 </section>
