@@ -1,0 +1,93 @@
+.product-show-container {
+  margin: 20px;
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .pending-borrow,
+  .accepted-borrow,
+  .ongoing-borrow,
+  .finished-borrow {
+    margin-bottom: 30px;
+
+    h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .title{
+      color: #007883;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .booking-item {
+      padding: 0px;
+      margin-bottom: 15px;
+      border: 0.5px solid #01C1AD;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      transition: box-shadow 0.3s ease-in-out;
+      max-width: 225px;
+      margin: auto;
+      background-color: white;
+
+      .booking-data{
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 15px;
+      }
+
+      .product-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .product-image-wrapper {
+          max-width: 150px; /* Adjust the value based on your preference */
+          margin: 0 auto; /* Center the image within the wrapper */
+
+        }
+
+        .product-link {
+          max-width: 100%;
+          object-fit: cover;
+          display: block;
+        }
+      }
+
+      p {
+        margin: 5px 0;
+      }
+
+      .btn-outline-warning {
+        // Add your button styling here
+        background-color: #01C1AD;
+        border-radius: 20px;
+        color: white;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        text-transform: capitalize;
+        font-weight: bold;
+        display: block;
+        align-items: center;
+        border: none;
+        text-align: center;
+        margin-left: 26px;
+
+        margin-top: 10px;
+
+        &:hover {
+          background-color: #007883;
+          color: #fff;
+        }
+      }
+    }
+
+    // Add more specific styling for each section if needed
+  }
+}

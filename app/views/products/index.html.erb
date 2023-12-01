@@ -13,7 +13,6 @@
   <% unless params[:category_id].present? %>
     <div class="products-grid">
       <% @products.first(5).each do |product| %>
-        <%= link_to product_path(product), class: 'product-link mb-3' do %>
           <div class="product-card">
             <%= image_tag(product.image, class: 'product-image') if product.image.attached? %>
             <div class="product-info">
@@ -27,7 +26,6 @@
         <% end %>
     <% end %>
       </div>
-  <% end %>
 
 
 
