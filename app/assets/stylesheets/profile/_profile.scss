@@ -173,6 +173,18 @@ a {
         margin: 0;
     }
 
+    .nav-icon-lend {
+      width: 35px;
+      height: 35px;
+      margin: 0;
+    }
+
+    .nav-icon-product {
+      width: 27px;
+      height: 27px;
+      margin: 0;
+    }
+
     .sidebar-category {
         font-size: 1rem;
         margin-left: 15px;
@@ -267,4 +279,27 @@ a {
     border-radius: 0.5rem;
     background-color: #ffffff;
   }
+}
+
+.without-sidebar-container {
+  background-color: #f4f4f4;
+  margin-top: 154px;
+
+  .card-body {
+    margin: 3rem;
+    padding: 2rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+  }
+}
+
+.stars {
+  color: #ffd700;
+  font-size: 0.8em;
+}
+
+.rating-stars {
+  color: #bcbcbc;
+  font-size: 0.8em;
 }

@@ -18,7 +18,8 @@
             <%= image_tag(product.image, class: 'product-image') if product.image.attached? %>
             <div class="product-info">
               <span class="price">
-              <%= number_with_precision(product.price_per_day, precision: (product.price_per_day.to_i == product.price_per_day) ? 0 : 2) %>€
+                <%= number_with_precision(product.price_per_day, precision: (product.price_per_day.to_i == product.price_per_day) ? 0 : 2) %>€
+
               </span>
 
               <p class="title"><%= product.title %></p>
@@ -44,8 +45,9 @@
             <div class="product-info">
               <span class="price">
 
-            <%= number_with_precision(product.price_per_day, precision: (product.price_per_day.to_i == product.price_per_day) ? 0 : 2) %>€
-            </span>
+                <%= number_with_precision(product.price_per_day, precision: (product.price_per_day.to_i == product.price_per_day) ? 0 : 2) %>€
+              </span>
+
 
               <p class="title"><%= product.title %></p>
             </div>
@@ -65,7 +67,7 @@
           <div class="product-info">
             <span class="price">
 
-            <%= number_with_precision(product.price_per_day, precision: (product.price_per_day.to_i == product.price_per_day) ? 0 : 2) %>€
+              <%= number_with_precision(product.price_per_day, precision: (product.price_per_day.to_i == product.price_per_day) ? 0 : 2) %>€
 
             </span>
             <p class="title"><%= product.title %></p>

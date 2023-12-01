@@ -1,6 +1,5 @@
 <%= content_for :wrapped_content do %>
-  <%= render "profiles/sidebar" %>
-  <div class="with-sidebar-container">
+  <div class="without-sidebar-container">
     <div class="card-body">
       <%= yield %>
     </div>
@@ -8,4 +7,3 @@
 <% end %>
 
 <%= render template: "layouts/application" %>
-
