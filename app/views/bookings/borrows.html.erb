@@ -1,8 +1,9 @@
 <div class="product-show-container">
-  <h1>Borrow Requests</h1>
+  <div class="borrow-category">
+    <h1>Borrow Requests</h1>
 
-  <div class="pending-borrow">
-    <h2>Pending Borrows</h2>
+    <div class="pending-borrow">
+      <h2>Pending Borrows</h2>
       <% @pending_borrow_requests.each do |booking| %>
         <div class="booking-item">
           <% product = booking.product %>
@@ -18,10 +19,9 @@
           <%= button_to 'Cancel Request', cancel_booking_path(booking), method: :delete, data: { confirm: 'Are you sure you want to cancel this booking request?' }, class: 'btn btn-outline-warning' %>
         </div>
       <% end %>
+    </div>
   </div>
-
-
-  <div class="accepted-borrow">
+  <div class="borrow-category">
     <h2>Accepted Borrows</h2>
     <% @accepted_borrow_requests.each do |booking| %>
       <div class="booking-item">
@@ -34,7 +34,7 @@
     <% end %>
   </div>
 
-  <div class="ongoing-borrow">
+  <div class="borrow-category">
     <h2>Ongoing Borrows</h2>
     <% @ongoing_borrow_requests.each do |booking| %>
       <div class="booking-item">
@@ -47,7 +47,7 @@
     <% end %>
   </div>
 
-  <div class="finished-borrow">
+  <div class="borrow-category">
     <h2>Finished Requests</h2>
     <% @finished_borrow_requests.each do |booking| %>
       <div class="booking-item">

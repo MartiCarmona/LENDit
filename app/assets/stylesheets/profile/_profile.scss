@@ -159,6 +159,7 @@ a {
 
 
   .sidebar-settings {
+
     .icon-margin {
         width: 33px;
         height: 33px;
@@ -177,6 +178,10 @@ a {
         font-size: 1rem;
         margin-left: 15px;
         text-decoration: none;
+    }
+
+    .sidebar-category:hover {
+        color: #bbbbbb;
     }
   }
 

@@ -7,6 +7,12 @@ class ProfilesController < ApplicationController
     @favorites = @user.favorites
     @bookings = @user.bookings
     @booked_products = @user.booked_products
-    render layout: "with_sidebar"
+
+    if current_user == @user
+      render layout: "with_sidebar"
+    else
+     render "profiles/show"
+    end
   end
+
 end

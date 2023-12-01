@@ -25,6 +25,14 @@ products = [
     category: fashion_category,
     image_url: 'https://media.karousell.com/media/photos/products/2022/6/3/_jacquemus_le_chiquito_moyen_i_1654252564_c99c802c_progressive.jpg'
   },
+  {
+    title: 'Porsche E-bike',
+    description: 'Stunning electric bike with great autonomy, speed and design.',
+    price_per_day: 260,
+    condition: 'As new',
+    category: sports_category,
+    image_url: 'https://images.ctfassets.net/1oyzmkwpf3d5/4XcmGDZf7rohAHwpjPd89d/d4fe63af6027ed5e007dea9c1a637234/eBike_Kopie_1.jpg'
+  },
 
   {
     title: 'Louis Vuitton Bag',
@@ -33,6 +41,23 @@ products = [
     condition: 'As new',
     category: fashion_category,
     image_url: 'https://di2ponv0v5otw.cloudfront.net/posts/2022/09/29/6335c6a91741be83d1cc7e46/m_634472728634cba59b17aefb.jpg'
+  },
+
+  {
+    title: 'Smaco scuba gear',
+    description: 'Complete SMACO S400pro equipment, high pressure compressor included, like new.',
+    price_per_day: 35,
+    condition: 'As new',
+    category: sports_category,
+    image_url: 'https://cdn.wallapop.com/images/10420/fo/63/__/c10420p947587769/i3551779136.jpg?pictureSize=W640'
+  },
+  {
+    title: 'Insta 360',
+    description: 'Reimagine your storytelling with Insta360. This compact camera captures every angle in stunning 360.',
+    price_per_day: 20,
+    condition: 'Good state',
+    category: cameras_category,
+    image_url: 'https://cdn.wallapop.com/images/10420/fa/v2/__/c10420p925238078/i3425159627.jpg?pictureSize=W640'
   },
 
   {
@@ -164,22 +189,6 @@ products = [
     image_url: 'https://cdn.motor1.com/images/mgl/nxzro/s1/4x3/meet-the-sur-ron-light-bee-long-range-e-bike.webp'
   },
   {
-    title: 'Porsche E-bike',
-    description: 'Stunning electric bike with great autonomy, speed and design.',
-    price_per_day: 260,
-    condition: 'As new',
-    category: sports_category,
-    image_url: 'https://images.ctfassets.net/1oyzmkwpf3d5/4XcmGDZf7rohAHwpjPd89d/d4fe63af6027ed5e007dea9c1a637234/eBike_Kopie_1.jpg'
-  },
-  {
-    title: 'Smaco scuba gear',
-    description: 'Complete SMACO S400pro equipment, high pressure compressor included, like new.',
-    price_per_day: 35,
-    condition: 'As new',
-    category: sports_category,
-    image_url: 'https://cdn.wallapop.com/images/10420/fo/63/__/c10420p947587769/i3551779136.jpg?pictureSize=W640'
-  },
-  {
     title: 'Hunting Crossbow',
     description: 'Powerful and precise, this hunting crossbow delivers the perfect combination of speed and accuracy.',
     price_per_day: 110,
@@ -282,14 +291,6 @@ products = [
     condition: 'As new',
     category: cameras_category,
     image_url: 'https://cdn.wallapop.com/images/10420/ez/4h/__/c10420p905522774/i3307121797.jpg?pictureSize=W320'
-  },
-  {
-    title: 'Insta 360',
-    description: 'Reimagine your storytelling with Insta360. This compact camera captures every angle in stunning 360.',
-    price_per_day: 20,
-    condition: 'Good state',
-    category: cameras_category,
-    image_url: 'https://cdn.wallapop.com/images/10420/fa/v2/__/c10420p925238078/i3425159627.jpg?pictureSize=W640'
   },
   {
     title: 'Nikon D7500',
