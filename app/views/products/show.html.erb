@@ -6,30 +6,31 @@
 
     <div class="product-details">
       <div class="product-info">
-
-        <% if user_signed_in? && current_user != @product.user %>
-          <%= link_to @product.user.name_with_initial + '.', profile_path(@product.user), class: "btn btn-primary" %>
-          <% if @product.favorited_by_user?(current_user) && current_user != @product.user%>
-            <%= link_to toggle_favorite_product_path(@product), method: :post, class: 'product-icon-filled' do %>
-              <%= image_tag 'like_filled.png' %>
-            <% end %>
-
-          <% else%>
-            <%= link_to toggle_favorite_product_path(@product), method: :post, class: 'product-icon' do %>
-              <%= image_tag 'like.png' %>
-            <% end %>
-          <% end %>
-          <button class="btn-chat">Chat</button>
-        <% elsif  !user_signed_in? %>     <%# #con solo else funciona? %>
-          <div class="product-icon">
-            <%= link_to new_user_session_path, method: :post do %>
-              <%= image_tag 'like.png' %>
-               <%= link_to new_user_session_path do %>
-                 <button class="btn-chat">Chat</button>
+        <div class="icons-row">
+          <% if user_signed_in? && current_user != @product.user %>
+            <% if @product.favorited_by_user?(current_user) && current_user != @product.user%>
+              <%= link_to toggle_favorite_product_path(@product), method: :post, class: 'product-icon-filled' do %>
+                <%= image_tag 'like_filled.png' %>
+              <% end %>
+            <% else%>
+              <%= link_to toggle_favorite_product_path(@product), method: :post, class: 'product-icon' do %>
+                <%= image_tag 'like.png' %>
               <% end %>
             <% end %>
-          </div>
-        <% end %>
+            <button class="btn-chat user-btn">Chat</button>
+            <%= link_to @product.user.name_with_initial + '.', profile_path(@product.user), class: "btn btn-primary user-btn" %>
+          <% elsif  !user_signed_in? %>
+            <div class="product-icon">
+              <%= link_to new_user_session_path, method: :post do %>
+                <%= image_tag 'like.png' %>
+              <% end %>
+              <%= link_to new_user_session_path do %>
+                <button class="btn-chat user-btn">Chat</button>
+              <% end %>
+              <%= link_to @product.user.name_with_initial + '.', profile_path(@product.user), class: "btn btn-primary user-btn" %>
+            </div>
+          <% end %>
+        </div>
 
         <h1 class="product-title"><%= @product.title %></h1>
         <span class="product-condition"><%= @product.condition %></span>
@@ -50,7 +51,6 @@
       <% else %>
         <%= render "book_product_form" %>
       <% end %>
-        </div>
     </div>
   </div>
 </section>
