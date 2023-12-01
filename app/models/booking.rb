@@ -2,14 +2,18 @@ class Booking < ApplicationRecord
   belongs_to :product
   belongs_to :user
   has_many :reviews
+  has_one_attached :image
 
   validate :unique_booking_for_user
-  validate :cannot_book_own_product
 
   validates :start_date, presence: true
   validates :end_date, presence: true
 
   validate :valid_dates
+
+  scope :upcoming, -> { where(status: "accepted").where("start_date > ?", Date.today) }
+  scope :finished, -> { where(status: "accepted").where("end_date < ?", Date.today) }
+  scope :ongoing, -> { where(status: "accepted").where("start_date <= ? AND end_date >= ?", Date.today, Date.today) }
 
   enum status: {
     pending: 'pending',
@@ -32,14 +36,10 @@ class Booking < ApplicationRecord
   end
 
   def unique_booking_for_user
-    if user.bookings.where(product: product, status: 'booked').exists?
-      errors.add(:base, 'You have already booked this product.')
-    end
-  end
+    booked_statuses = ['pending', 'accepted', 'declined', 'ongoing']
 
-  def cannot_book_own_product
-    if user == product.user
-      errors.add(:base, 'You cannot book your own product.')
+    if user.bookings.where.not(id: self.id).where(product: product, status: booked_statuses).exists?
+      errors.add(:base, 'You are currently booking  this product.')
     end
   end
 end

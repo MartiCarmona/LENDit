@@ -1,28 +1,56 @@
 <div class="product-show-container">
-
   <h1>Lend Requests</h1>
 
-  <h2>Pending Requests</h2>
-  <% @pending_lend_requests.each do |booking| %>
-    <div class="booking-item">
-      <p>Product: <%= link_to booking.product.title, product_path(booking.product) %></p>
-      <p>Status: <%= booking.status.capitalize %></p>
-      <p>Start Date: <%= booking.start_date %></p>
-      <p>End Date: <%= booking.end_date %></p>
-      <%= link_to 'Accept', booking_path(booking), remote: true, method: :patch, data: { turbo_confirm: 'Are you sure you want to accept this booking?', turbo_method: 'patch' }, class: 'btn btn-outline-success accept-booking' %>
-      <%= link_to 'Decline', booking_path(booking), remote: true, method: :patch, data: { turbo_confirm: 'Are you sure you want to decline this booking?', turbo_method: 'patch' }, class: 'btn btn-outline-danger decline-booking' %>
-    </div>
-  <% end %>
+  <div class="pending-lends">
+    <h2>Pending Lends</h2>
+    <% @pending_lend_requests.each do |booking| %>
+      <div class="booking-item">
+        <p>Product: <%= link_to booking.product.title, product_path(booking.product) %></p>
+        <p>Status: <%= booking.status.capitalize %></p>
+        <p>Start Date: <%= booking.start_date %></p>
+        <p>End Date: <%= booking.end_date %></p>
+        <%= link_to 'Accept', booking_path(booking), remote: true, data: { turbo_confirm: 'Are you sure you want to accept this booking?', turbo_method: 'patch' }, class: 'btn btn-outline-success accept-booking' %>
+        <%= link_to 'Decline', booking_path(booking), remote: true, data: { turbo_confirm: 'Are you sure you want to decline this booking?', turbo_method: 'patch' }, class: 'btn btn-outline-danger decline-booking' %>
+      </div>
+    <% end %>
+  </div>
 
+  <div class="accepted-lends">
+    <h2>Accepted Lends</h2>
+    <% @accepted_lend_requests.each do |booking| %>
+      <div class="booking-item">
+        <p>Product: <%= link_to booking.product.title, product_path(booking.product) %></p>
+        <p>Status: <%= booking.status.capitalize %></p>
+        <p>Start Date: <%= booking.start_date %></p>
+        <p>End Date: <%= booking.end_date %></p>
+        <%= link_to 'View Details', booking_path(booking) %>
+      </div>
+    <% end %>
+  </div>
 
-  <h2>Accepted Requests</h2>
-  <% @accepted_lend_requests.each do |booking| %>
-    <div class="booking-item">
-      <p>Product: <%= link_to booking.product.title, product_path(booking.product) %></p>
-      <p>Status: <%= booking.status.capitalize %></p>
-      <p>Start Date: <%= booking.start_date %></p>
-      <p>End Date: <%= booking.end_date %></p>
-      <%= link_to 'View Details', booking_path(booking) %>
+  <div class="ongoing-lends">
+    <h2>Ongoing Lends</h2>
+    <% @ongoing_lend_requests.each do |booking| %>
+      <div class="booking-item">
+        <p>Product: <%= link_to booking.product.title, product_path(booking.product) %></p>
+        <p>Status: <%= booking.status.capitalize %></p>
+        <p>Start Date: <%= booking.start_date %></p>
+        <p>End Date: <%= booking.end_date %></p>
+        <%= link_to 'View Details', booking_path(booking) %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="finished-lends">
+    <h2>Finished Lends</h2>
+    <% @finished_lend_requests.each do |booking| %>
+      <div class="booking-item">
+        <p>Product: <%= link_to booking.product.title, product_path(booking.product) %></p>
+        <p>Status: <%= booking.status.capitalize %></p>
+        <p>Start Date: <%= booking.start_date %></p>
+        <p>End Date: <%= booking.end_date %></p>
+        <%= link_to 'View Details', booking_path(booking) %>
+      </div>
+    <% end %>
     </div>
-  <% end %>
 </div>
