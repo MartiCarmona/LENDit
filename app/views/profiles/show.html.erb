@@ -7,14 +7,16 @@
     <div class="profile-details">
       <div class="profile-name-email">
         <h2 class="profile-name"><%= "#{@user.first_name} #{@user.last_name}" %></h2>
-        <p class="profile-email"><%= @user.email %></p>
+        <p class="rating">
+              <span class="stars">★★★★★</span>
+              <span class="rating-stars">(4)</span>
+            </p>
       </div>
     </div>
   </div>
 
   <div class="tab-buttons">
     <button id="btn-products" class="tab-btn active">Products</button>
-    <button id="btn-rents" class="tab-btn">Bookings</button>
   </div>
 
   <div id="products" class="tab-content active">
