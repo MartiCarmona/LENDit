@@ -2,6 +2,7 @@ class Booking < ApplicationRecord
   belongs_to :product
   belongs_to :user
   has_many :reviews
+  has_one_attached :image
 
   validate :unique_booking_for_user
 
