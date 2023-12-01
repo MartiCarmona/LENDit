@@ -3,6 +3,7 @@
   padding-left: 4rem;
   padding-right: 4rem;
 
+
   .date-inputs {
     display: flex;
     gap: 10px; /* Adjust the gap between the date inputs as needed */
@@ -53,6 +54,38 @@
   padding: 2rem;
   display: flex;
   justify-content: center;
+
+  .btn-delete {
+    margin-left: 20px;
+  }
+
+  .product-buttons-container {
+    text-align: center;
+    height: 100px;
+  }
+
+  .btn-edit,
+  .btn-delete {
+    margin-top: 10px; // Adjust the margin as needed
+    display: inline-block;
+
+    a {
+      display: inline-block;
+      padding: 8px 16px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      border: 1px solid #01C1AD;
+      border-radius: 20px;
+      color: #01C1AD;
+      transition: background-color 0.3s ease, color 0.3s ease;
+
+      &:hover {
+        background-color: #01C1AD;
+        color: #ffffff;
+      }
+    }
+  }
 
   .product-card {
     display: flex;
