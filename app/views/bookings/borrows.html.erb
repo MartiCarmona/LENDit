@@ -66,21 +66,26 @@
   <div class="finished-borrow">
     <h2>Finished Borrows</h2>
       <% @finished_borrow_requests.each do |booking| %>
-        <div class="booking-item">
-          <% product = booking.product %>
-          <div class="product-info">
-            <%= link_to product_path(product) do %>
-              <%= image_tag(product.image.url, class: "product-link mb-3") if product.image.present? %>
-            <% end %>
-          </div>
-          <div class=booking-data>
-          <p><%= link_to product.title, product_path(product), class: 'title' %></p>
-          <p>Status: <%= booking.status.capitalize %></p>
-          <p>Start Date: <%= booking.start_date %></p>
-          <p>End Date: <%= booking.end_date %></p>
-          <%= button_to 'Cancel Request', cancel_booking_path(booking), method: :delete, data: { confirm: 'Are you sure you want to cancel this booking request?' }, class: 'btn btn-outline-warning' %>
-          </div>
-        </div>
+  <div class="booking-item">
+    <% product = booking.product %>
+    <div class="product-info">
+      <%= link_to product_path(product) do %>
+        <%= image_tag(product.image.url, class: "product-link mb-3") if product.image.present? %>
       <% end %>
+    </div>
+    <div class="booking-data">
+      <p><%= link_to product.title, product_path(product), class: 'title' %></p>
+      <p>Status: <%= booking.status.capitalize %></p>
+      <p>Start Date: <%= booking.start_date %></p>
+      <p>End Date: <%= booking.end_date %></p>
+      <%= link_to 'View Details', booking_path(booking) %>
+      <%= link_to 'Review Product Owner', new_user_review_path(booking.product.user, booking_id: booking.id, product_id: booking.product.id), class: 'btn btn-outline-primary review-button' %>
+
+
+    </div>
   </div>
+<% end %>
+
+    </div>
+</div>
 </div>
