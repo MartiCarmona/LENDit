@@ -79,8 +79,7 @@
       <p>Start Date: <%= booking.start_date %></p>
       <p>End Date: <%= booking.end_date %></p>
       <%= link_to 'View Details', booking_path(booking) %>
-      <%= link_to 'Review Product Owner', new_user_review_path(booking.product.user, booking_id: booking.id, product_id: booking.product.id), class: 'btn btn-outline-primary review-button' %>
-
+      <%= link_to 'Review Product Owner', new_booking_review_path(booking, product_id: booking.product.id), class: 'btn btn-outline-primary review-button' %>
 
     </div>
   </div>

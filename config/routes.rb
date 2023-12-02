@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   resources :products do
     resources :bookings, only: [:new, :create, :show]
     resources :favorites, only: [:create]
-    resources :reviews, only: [:index, :new, :create, :destroy]
+    resources :reviews, only: [:new, :create]
+
     resources :chats, only: [:new, :create]
 
     member do
@@ -14,12 +15,15 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :bookings, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+  resources :bookings do
+    resources :reviews, only: [:new, :create]
+
     member do
       patch :accept
       patch :decline
       delete :cancel
     end
+    
     collection do
       get :lends
       get :borrows
@@ -31,7 +35,8 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:show] do
-    resources :reviews, only: [:index, :create, :destroy, :new]
+    resources :reviews, only: [:new, :create]
+
   end
 
   namespace :status do

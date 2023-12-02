@@ -1,22 +1,29 @@
-<section id="content" class="container">
+<section id=container>
 
-  <%= simple_form_for [@product, @review], url: product_reviews_path(@product), local: true, format: :turbo_stream do |form| %>
-    <div class="form-container">
-      <div class="info">
-         <h1>Review the Booking</h1>
-      </div>
+  <div class="form-container">
 
-      <div class="mb-3">
-        <%= form.input :rating, label: "Rating", label_html: { class: "form-label" }, input_html: { class: "form-control", min: 0, max: 5 } %>
-      </div>
+    <div class="info">
+      <h1>Add Review for <%= @booking.product.title %></h1>
 
-      <div class="mb-3">
-        <%= form.input :content, label: "Content", label_html: { class: "form-label" }, input_html: { class: "form-control" } %>
-      </div>
-
-      <div class="upload-button">
-        <%= form.button :submit, 'Submit Review', class: "btn btn-primary" %>
-      </div>
+      <% if @booking.product.user == current_user %>
+        <p>Review your experience with <%= @booking.user.full_name %></p>
+      <% else %>
+        <p>Review your experience with <%= @booking.product.user.full_name %></p>
+      <% end %>
     </div>
-  <% end %>
+
+
+
+      <%= form_with(model: [@booking, @review], url: booking_reviews_path(@booking), method: :post) do |form| %>
+        <%= form.label :rating %>
+        <%= form.number_field :rating, in: 1..5 %>
+
+        <%= form.label :content %>
+        <%= form.text_area :content %>
+
+        <%= form.hidden_field :product_id, value: @booking.product.id %>
+
+        <%= form.submit 'Submit Review' %>
+      <% end %>
+    </div>
 </section>

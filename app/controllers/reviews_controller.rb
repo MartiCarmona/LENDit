@@ -1,37 +1,39 @@
 class ReviewsController < ApplicationController
-
+  before_action :authenticate_user!
+  before_action :load_booking, only: [:new, :create]
 
   def index
     @reviews = Review.all
   end
 
   def new
-    @review = Review.new
-    @booking = Booking.find(params[:booking_id])
-
-    if @booking.present?
-      @product = @booking.product
+    if @booking.status == 'accepted' && @booking.in?(Booking.finished)
+      @review = Review.new
     else
-      flash[:alert] = 'Booking not found.'
-      redirect_to root_path
-      return
+      redirect_to root_path, alert: 'You can only add a review for an accepted and finished booking.'
     end
   end
 
 
   def create
-    @product = Product.find(params[:product_id])
-    @review = @product.reviews.new(review_params)
-    @review.user = current_user
 
-    if @review.save
-      redirect_to product_reviews_path(@product)
+    existing_review = Review.find_by(user_id: current_user.id, booking_id: @booking.id)
+    if existing_review
+      redirect_to profile_path(current_user), alert: 'You already reviewed this booking.'
+    elsif @booking.status == 'accepted' && @booking.in?(Booking.finished)
+      @review = Review.new(review_params)
+      @review.user_id = current_user.id
+      @review.booking_id = @booking.id
+
+      if @review.save
+        redirect_to @booking, notice: 'Review was successfully created.'
+      else
+        render :new
+      end
     else
-      render 'index'  # This should render the new.html.erb template for reviews
+      redirect_to root_path, alert: 'You can only add a review for an accepted and finished booking.'
     end
   end
-
-
 
   def destroy
     @review = Review.find(params[:id])
@@ -41,8 +43,11 @@ class ReviewsController < ApplicationController
 
   private
 
-def review_params
-  params.require(:review).permit(:rating, :content, :user_id, :booking_id)
-end
+  def load_booking
+    @booking = Booking.find(params[:booking_id])
+  end
 
+  def review_params
+    params.require(:review).permit(:rating, :content, :product_id)
+  end
 end
