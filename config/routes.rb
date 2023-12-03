@@ -23,7 +23,7 @@ Rails.application.routes.draw do
       patch :decline
       delete :cancel
     end
-    
+
     collection do
       get :lends
       get :borrows
