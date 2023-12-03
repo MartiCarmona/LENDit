@@ -15,7 +15,7 @@
           <p>Status: <%= booking.status.capitalize %></p>
           <p>Start Date: <%= booking.start_date %></p>
           <p>End Date: <%= booking.end_date %></p>
-          <%= button_to 'Cancel Request', cancel_booking_path(booking), method: :delete, data: { confirm: 'Are you sure you want to cancel this booking request?' }, class: 'btn btn-outline-warning' %>
+          <%= button_to 'Cancel Request', cancel_booking_path(booking), method: :delete, data: { turbo_confirm: 'Are you sure you want to cancel this booking request?' }, class: 'btn btn-outline-warning' %>
           </div>
         </div>
       <% end %>

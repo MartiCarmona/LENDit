@@ -9,9 +9,12 @@
         <p>Status: <%= booking.status.capitalize %></p>
         <p>Start Date: <%= booking.start_date %></p>
         <p>End Date: <%= booking.end_date %></p>
-        <%= link_to 'Accept', booking_path(booking), remote: true, data: { turbo_confirm: 'Are you sure you want to accept this booking?', turbo_method: 'patch' }, class: 'btn btn-outline-success accept-booking' %>
-        <%= link_to 'Decline', booking_path(booking), remote: true, data: { turbo_confirm: 'Are you sure you want to decline this booking?', turbo_method: 'patch' }, class: 'btn btn-outline-danger decline-booking' %>
-      </div>
+       <div class="actions">
+          <%= link_to 'Accept', accept_booking_path(booking), remote: true, data: { turbo_confirm: 'Are you sure you want to accept this booking?', turbo_method: 'patch' }, class: 'btn btn-outline-success accept-booking' %>
+
+          <%= link_to 'Decline', decline_booking_path(booking), remote: true, data: { turbo_confirm: 'Are you sure you want to decline this booking?', turbo_method: 'patch' }, class: 'btn btn-outline-danger decline-booking' %>
+        </div>
+
     <% end %>
   </div>
 

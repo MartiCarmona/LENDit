@@ -1,7 +1,6 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
 
-
   def show
     @booking = Booking.find(params[:id])
     @product = @booking.product
@@ -32,7 +31,6 @@ class BookingsController < ApplicationController
   def update
     @booking = Booking.find(params[:id])
     if @booking.status == 'pending'
-
       if @booking.start_date > Date.today
         @booking.update(status: 'accepted')
       elsif @booking.start_date <= Date.today && @booking.end_date >= Date.today
@@ -53,7 +51,6 @@ class BookingsController < ApplicationController
     end
   end
 
-
   def new
     @booking = Booking.new
     @booking.user = current_user
@@ -67,10 +64,20 @@ class BookingsController < ApplicationController
     @booking.status = 'pending'
 
     if @booking.save
-      redirect_to profile_path(current_user), notice: 'Booking request sent.'
+      redirect_to borrows_bookings_path, notice: 'Booking request sent.'
     else
       redirect_to product_path(@booking.product), notice: 'Booking request could not be sent.'
     end
+  end
+
+  def accept
+    @booking = Booking.find(params[:id])
+    update_booking_status('accepted')
+  end
+
+  def decline
+    @booking = Booking.find(params[:id])
+    update_booking_status('declined')
   end
 
   def cancel
@@ -78,7 +85,9 @@ class BookingsController < ApplicationController
 
     @booking.destroy
 
-    redirect_to lends_bookings_path, notice: 'Booking request canceled.'
+    redirect_to borrows_bookings_path, notice: 'Booking request canceled.'
+
+    #add inteligence to redirect to the right page
   end
 
 
@@ -86,5 +95,21 @@ class BookingsController < ApplicationController
 
   def booking_params
     params.require(:booking).permit(:start_date, :end_date)
+  end
+
+  def update_booking_status(new_status)
+    return unless ['pending', 'accepted'].include?(@booking.status)
+
+    if @booking.update(status: new_status)
+      respond_to do |format|
+        format.html { redirect_to lends_bookings_path, notice: 'Booking request updated.' }
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to lends_bookings_path, alert: 'Invalid booking status.' }
+        format.js
+      end
+    end
   end
 end
