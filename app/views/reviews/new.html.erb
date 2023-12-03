@@ -1,21 +1,29 @@
-<h1>New review</h1>
-<%= form_for [@product, @review] html: { multipart: true } do |f| %>
-   <div class="mb-3">
-    <%= f.label :rating %>
-    <%= f.number_field :rating, class: "form-control" %>
-  </div>
-  <div class="mb-3">
-    <%= f.label :content %>
-    <%= f.text_area :content, class: "form-control" %>
-  </div>
-  <%= f.submit "Create review", class: "btn btn-primary" %>
-<% end %>
-<%= link_to "Back", product_path(@product) %>
+<section id=container>
 
-<p><strong>Reviews</strong></p>
-<ul class="list-group">
-  <% @product.reviews.each do |review| %>
-    <li class="list-group-item"><%= review.content %></li>
-  <% end %>
-</ul>
+  <div class="form-container">
 
+    <div class="info">
+      <h1>Add Review for <%= @booking.product.title %></h1>
+
+      <% if @booking.product.user == current_user %>
+        <p>Review your experience with <%= @booking.user.full_name %></p>
+      <% else %>
+        <p>Review your experience with <%= @booking.product.user.full_name %></p>
+      <% end %>
+    </div>
+
+
+
+      <%= form_with(model: [@booking, @review], url: booking_reviews_path(@booking), method: :post) do |form| %>
+        <%= form.label :rating %>
+        <%= form.number_field :rating, in: 1..5 %>
+
+        <%= form.label :content %>
+        <%= form.text_area :content %>
+
+        <%= form.hidden_field :product_id, value: @booking.product.id %>
+
+        <%= form.submit 'Submit Review' %>
+      <% end %>
+    </div>
+</section>

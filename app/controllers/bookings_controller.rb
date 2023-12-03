@@ -6,6 +6,8 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
     @product = @booking.product
     @user = @booking.user
+    @reviews = @booking.reviews
+    @review = Review.find_by(booking_id: @booking.id, user_id: current_user.id)
     render layout: "with_sidebar"
   end
 
@@ -22,7 +24,7 @@ class BookingsController < ApplicationController
     @pending_borrow_requests = current_user.bookings.where(status: 'pending')
     @accepted_borrow_requests = current_user.bookings.upcoming
     @finished_borrow_requests = current_user.bookings.finished
-    @ongoing_borrow_requests = current_user.bookings.ongoing.where('end_date >= ? and start_date <= ?', Date.today, Date.today)
+    @ongoing_borrow_requests = current_user.bookings.ongoing
 
     render layout: 'with_sidebar'
   end
@@ -78,6 +80,7 @@ class BookingsController < ApplicationController
 
     redirect_to lends_bookings_path, notice: 'Booking request canceled.'
   end
+
 
   private
 

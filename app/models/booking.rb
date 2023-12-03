@@ -36,10 +36,17 @@ class Booking < ApplicationRecord
   end
 
   def unique_booking_for_user
-    booked_statuses = ['pending', 'accepted', 'declined', 'ongoing']
+    return unless start_date && end_date
 
-    if user.bookings.where.not(id: self.id).where(product: product, status: booked_statuses).exists?
-      errors.add(:base, 'You are currently booking  this product.')
+    overlapping_bookings = Booking.where(user: user)
+                                  .where.not(id: id)
+                                  .where(status: "accepted")
+                                  .where("start_date <= ? AND end_date >= ?", end_date, start_date)
+
+    if overlapping_bookings.exists?
+      errors.add(:base, 'You already have a booking for this time period')
     end
   end
+
+
 end
