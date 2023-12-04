@@ -28,6 +28,7 @@
   font-family: Neue, Helvetica, sans-serif;
   color: #333;
   margin-bottom: 25px;
+  text-align: left !important;
 }
 
 a {
@@ -42,12 +43,14 @@ a {
 
 
   .borrow-group {
+    align-items: flex-start;
 
     .booking-items-container {
       display: grid;
       gap: 1rem;
       row-gap: 0.2rem;
       grid-template-columns: repeat(4, 1fr);
+      justify-content: flex-start;
 
       .booking-item {
         flex: 1 0 calc(20% - 15px);
