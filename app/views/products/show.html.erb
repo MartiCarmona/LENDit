@@ -9,6 +9,12 @@
 
         <div class="icons-row">
           <% if user_signed_in? && current_user != @product.user %>
+
+            <%= link_to index_reviews_path, id: "btn-products", class: "tab-btn active" do %>
+              <span class="stars">★★★★★</span>
+              <span class="rating-stars">(4)</span>
+            <% end %>
+
             <% if @product.favorited_by_user?(current_user) && current_user != @product.user%>
               <%= link_to toggle_favorite_product_path(@product), method: :post, class: 'product-icon-filled' do %>
                 <%= image_tag 'likeGOOD.png' %>
@@ -22,6 +28,12 @@
             <button class="btn-chat user-btn">Chat</button>
             <%= link_to @product.user.name_with_initial, profile_path(@product.user), class: "btn btn-primary user-btn" %>
           <% elsif  !user_signed_in? %>
+
+            <%= link_to new_user_session_path, id: "btn-products", class: "tab-btn active" do %>
+              <span class="stars">★★★★★</span>
+              <span class="rating-stars">(4)</span>
+            <% end %>
+
             <div class="product-icon">
               <%= link_to new_user_session_path, method: :post do %>
                 <%= image_tag 'like.png' %>
