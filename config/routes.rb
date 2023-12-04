@@ -3,11 +3,11 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'registrations' }
 
-  # products
   resources :products do
     resources :bookings, only: [:new, :create, :show]
     resources :favorites, only: [:create]
     resources :reviews, only: [:new, :create]
+
     resources :chats, only: [:new, :create]
 
     member do
@@ -15,42 +15,43 @@ Rails.application.routes.draw do
     end
   end
 
-  # bookings
-  resources :bookings, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+  resources :bookings do
+    resources :reviews, only: [:new, :create]
+
     member do
       patch :accept
       patch :decline
       delete :cancel
     end
+
     collection do
       get :lends
       get :borrows
     end
   end
 
-  # chats
   resources :chats, only: [:show] do
     resources :messages, only: [:create]
   end
 
-  # users
   resources :users, only: [:show, :update] do
-    resources :reviews, only: [:index]
+    resources :reviews, only: [:new, :create]
+
   end
 
-  # status lends
-  resources :lends, only: [] do
-    collection do
-      get :ongoing
-      get :finished
+  namespace :status do
+    resources :lends, only: [] do
+      collection do
+        get :ongoing
+        get :finished
+      end
     end
-  end
 
-  # status borrows
-  resources :borrows, only: [] do
-    collection do
-      get :ongoing
-      get :finished
+    resources :borrows, only: [] do
+      collection do
+        get :ongoing
+        get :finished
+      end
     end
   end
 
