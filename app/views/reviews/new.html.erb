@@ -15,7 +15,6 @@
             <%= form.label :product_content, 'Product Content' %>
             <%= form.text_area :product_content %>
 
-            <%= form.hidden_field :product_id, value: @booking.product.id %>
             <%= form.hidden_field :booking_id, value: @booking.id %>
             <%= form.hidden_field :review_type, value: 'product' %>
           </fieldset>

@@ -7,6 +7,7 @@ class ProfilesController < ApplicationController
     @favorites = @user.favorites
     @bookings = @user.bookings
     @booked_products = @user.booked_products
+    @received_bookings = @user.received_bookings
     if current_user == @user
       render layout: "with_sidebar"
     else

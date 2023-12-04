@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorited_products, through: :favorites, source: :product
 
+  has_many :reviews, dependent: :destroy
+
   def toggle_favorite(product)
     if favorited_products.include?(product)
       favorited_products.delete(product)
