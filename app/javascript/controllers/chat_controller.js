@@ -1,8 +1,14 @@
+// app/javascript/controllers/chat_controller.js
+
+import { Controller } from 'stimulus';
+import consumer from '../channels/consumer';
+
 export default class extends Controller {
   static targets = ['messages', 'input'];
 
   connect() {
     this.setupSubscription();
+    this.setupEnterKeyListener();
   }
 
   setupSubscription() {
@@ -18,14 +24,18 @@ export default class extends Controller {
     }
   }
 
+  setupEnterKeyListener() {
+    this.inputTarget.addEventListener('keypress', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        this.sendMessage();
+      }
+    });
+  }
+
   appendMessage(data) {
     const messageElement = document.createElement('div');
-    const isCurrentUser = data.user_id === parseInt(this.data.get('currentUserId'));
-
-    // Apply different styles based on the sender
-    messageElement.classList.add(isCurrentUser ? 'message-right' : 'message-left');
-
-    messageElement.innerHTML = `<p><strong>${data.user_name}:</strong> ${data.message}</p>`;
+    messageElement.innerHTML = data.message;
     this.messagesTarget.appendChild(messageElement);
   }
 

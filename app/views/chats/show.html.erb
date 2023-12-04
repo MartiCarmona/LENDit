@@ -6,10 +6,12 @@
     <% if message.user == current_user %>
       <div class="message-right">
         <p><strong><%= message.user.full_name %>:</strong> <%= message.content %></p>
+        <p class="timestamp"><%= message.timestamp_formatted %></p>
       </div>
     <% else %>
       <div class="message-left">
         <p><strong><%= message.user.full_name %>:</strong> <%= message.content %></p>
+        <p class="timestamp"><%= message.timestamp_formatted %></p>
       </div>
     <% end %>
   <% end %>
