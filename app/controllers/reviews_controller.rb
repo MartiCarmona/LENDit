@@ -1,15 +1,37 @@
 class ReviewsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :load_booking, only: [:new, :create]
+
+  def index
+    @reviews = Review.all
+  end
+
+  def new
+    if @booking.status == 'accepted' && @booking.in?(Booking.finished)
+      @review = Review.new
+    else
+      redirect_to root_path, alert: 'You can only add a review for an accepted and finished booking.'
+    end
+  end
 
 
   def create
-    @product = Product.find(params[:product_id])
-    @review = @product.reviews.new(review_params)
-    @review.user = current_user
 
-    if @review.save
-      redirect_to product_path(@product)
+    existing_review = Review.find_by(user_id: current_user.id, booking_id: @booking.id)
+    if existing_review
+      redirect_to profile_path(current_user), alert: 'You already reviewed this booking.'
+    elsif @booking.status == 'accepted' && @booking.in?(Booking.finished)
+      @review = Review.new(review_params)
+      @review.user_id = current_user.id
+      @review.booking_id = @booking.id
+
+      if @review.save
+        redirect_to @booking, notice: 'Review was successfully created.'
+      else
+        render :new
+      end
     else
-      render 'products/show'
+      redirect_to root_path, alert: 'You can only add a review for an accepted and finished booking.'
     end
   end
 
@@ -21,7 +43,11 @@ class ReviewsController < ApplicationController
 
   private
 
+  def load_booking
+    @booking = Booking.find(params[:booking_id])
+  end
+
   def review_params
-    params.require(:review).permit(:content, :rating)
+    params.require(:review).permit(:rating, :content, :product_id)
   end
 end

@@ -11,11 +11,11 @@
           <% if user_signed_in? && current_user != @product.user %>
             <% if @product.favorited_by_user?(current_user) && current_user != @product.user%>
               <%= link_to toggle_favorite_product_path(@product), method: :post, class: 'product-icon-filled' do %>
-                <%= image_tag 'like_filled.png' %>
+                <%= image_tag 'likeGOOD.png' %>
               <% end %>
             <% else%>
               <%= link_to toggle_favorite_product_path(@product), method: :post, class: 'product-icon' do %>
-                <%= image_tag 'like.png' %>
+                <%= image_tag 'likeGOODnot.png' %>
 
               <% end %>
             <% end %>

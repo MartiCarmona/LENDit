@@ -36,10 +36,7 @@ class Booking < ApplicationRecord
   end
 
   def unique_booking_for_user
-    booked_statuses = ['pending', 'accepted', 'declined', 'ongoing']
-
-    if user.bookings.where.not(id: self.id).where(product: product, status: booked_statuses).exists?
-      errors.add(:base, 'You are currently booking  this product.')
-    end
   end
+
+
 end
