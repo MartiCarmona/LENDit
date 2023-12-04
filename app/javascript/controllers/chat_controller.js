@@ -1,27 +1,30 @@
-// app/javascript/controllers/chat_controller.js
-
-import { Controller } from 'stimulus';
-import consumer from '../channels/consumer';
+import { Controller } from '@hotwired/stimulus';
+import { createConsumer } from "@rails/actioncable"
 
 export default class extends Controller {
   static targets = ['messages', 'input'];
+  static values = { chatid: Number }
 
   connect() {
     this.setupSubscription();
     this.setupEnterKeyListener();
+
+    console.log(this.chatidValue);
   }
 
   setupSubscription() {
-    const chatId = this.data.get('chatId');
-    if (chatId) {
-      const chatChannel = consumer.subscriptions.create({ channel: 'ChatChannel', chat_id: chatId }, {
+    const chatId = this.chatidValue
+
+
+      const chatChannel = createConsumer().subscriptions.create({ channel: 'ChatChannel', chat_id: chatId }, {
         received: (data) => {
+          console.log('hola');
           this.appendMessage(data);
         },
       });
 
       this.chatChannel = chatChannel;
-    }
+
   }
 
   setupEnterKeyListener() {
@@ -35,7 +38,9 @@ export default class extends Controller {
 
   appendMessage(data) {
     const messageElement = document.createElement('div');
-    messageElement.innerHTML = data.message;
+    console.log(data);
+  
+    messageElement.innerHTML = data;
     this.messagesTarget.appendChild(messageElement);
   }
 

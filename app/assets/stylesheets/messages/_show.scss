@@ -1,0 +1,25 @@
+// app/assets/stylesheets/messages.scss
+
+.message-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+
+  .message {
+    padding: 10px;
+    border-radius: 30px;
+    color: white;
+    width: auto;
+    max-width: 70%; // Adjust as needed
+
+    &.current-user {
+      background-color: #3498db; // Change color for current user
+      align-self: flex-end;
+    }
+
+    &.other-user {
+      background-color: #2ecc71; // Change color for other users
+      align-self: flex-start;
+    }
+  }
+}

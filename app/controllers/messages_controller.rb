@@ -7,8 +7,12 @@ class MessagesController < ApplicationController
     @message.user = current_user
 
     if @message.save
-      redirect_to chat_path(@chat), notice: 'Message sent successfully.'
-
+      ChatChannel.broadcast_to(
+        @chat,
+        render_to_string(partial: "message", locals: { message: @message})
+      )
+      head :ok
+      # redirect_to chat_path(@chat), notice: 'Message sent successfully.'
     else
       redirect_to chat_path(@chat), alert: 'Message could not be sent.'
     end

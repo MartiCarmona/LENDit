@@ -1,9 +1,50 @@
-
-
 .message-right {
   text-align: right;
+  display: flex;
+  background-color: #f0f0f0;
+  padding: 10px;
+  margin-bottom: 5px;
+  width: auto;
+  justify-content: flex-end;
 }
 
 .message-left {
+  margin-right: auto;
   text-align: left;
+  display: inline-block;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ced4da;
+}
+
+.message-box {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 5px;
+
+  .message-right {
+    text-align: right;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 30px;
+    max-width: 500px;
+  }
+
+  .message-left {
+    text-align: left;
+    padding: 10px;
+    border-radius: 30px;
+    border: 1px solid #ced4da;
+    max-width: 500px;
+  }
+}
+
+.time-right { /* Align timestamp to the end of the container */
+  font-size: x-small;
+}
+
+.time-left {
+  align-self: flex-end; /* Align timestamp to the end of the container */
+  font-size: x-small;
+  margin-left: 200px;
 }

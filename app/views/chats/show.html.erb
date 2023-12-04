@@ -1,23 +1,35 @@
-<h1><%= @chat.name %></h1>
-<h1>Chats</h1>
+  <h1><%= @chat.name %></h1>
+  <h1>Chat</h1>
+<div  data-controller="chat"  data-chat-chatid-value="<%= @chat.id %>">
+<div class="messages-container"
 
-<div id="messages-container" class="message-container">
+ data-chat-target="messages"
+  >
+
   <% @chat.messages.each do |message| %>
-    <% if message.user == current_user %>
-      <div class="message-right">
-        <p><strong><%= message.user.full_name %>:</strong> <%= message.content %></p>
-        <p class="timestamp"><%= message.timestamp_formatted %></p>
-      </div>
-    <% else %>
-      <div class="message-left">
-        <p><strong><%= message.user.full_name %>:</strong> <%= message.content %></p>
-        <p class="timestamp"><%= message.timestamp_formatted %></p>
-      </div>
-    <% end %>
+    <div class="message-box">
+      <% if message.user == current_user %>
+        <div class="message-right">
+          <div class="message-content">
+            <%= message.content %>
+          </div>
+        </div>
+         <p class="time-right"><%= message.timestamp_formatted %></p>
+      <% else %>
+        <div class="message-left">
+          <div class="message-content">
+            <%= message.content %>
+          </div>
+        </div>
+        <p class="time-left"><%= message.timestamp_formatted %></p>
+      <% end %>
+    </div>
   <% end %>
 </div>
 
-<%= form_with(model: [@chat, @message], url: chat_messages_path(@chat), local: true, method: :post) do |form| %>
-  <%= form.text_area :content, placeholder: 'Type your message...', rows: 3 %>
-  <%= form.submit 'Send Message' %>
-<% end %>
+    <%= form_with(model: [@chat, @message], url: chat_messages_path(@chat), local: true, method: :post) do |form| %>
+    <%= form.text_area :content, placeholder: 'Type your message...', rows: 3 , data: { chat_target: 'input' }%>
+    <%= form.submit 'Send Message' %>
+  <% end %>
+  </div>
+  </div>

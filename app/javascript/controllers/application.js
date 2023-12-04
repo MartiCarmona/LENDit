@@ -8,3 +8,5 @@ window.Stimulus   = application
 export { application }
 
 import 'controllers';
+
+import '@rails/actioncable';
