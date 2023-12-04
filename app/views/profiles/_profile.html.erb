@@ -1,7 +1,11 @@
 <div class="profile-section">
     <div class="profile-header">
       <div class="profile-picture">
-        <%= image_tag("joseluis.svg.png", class: "profile-image") %>
+        <% if current_user.profile_photo.attached? %>
+            <%= image_tag(current_user.profile_photo.variant(resize_to_limit: [100, 100]).processed, class: "profile-image") %>
+          <% else %>
+            <%= image_tag("profile.png", class: "profile-pic") %>
+        <% end %>
       </div>
       <div class="profile-details">
         <div class="profile-name-email">
@@ -9,9 +13,13 @@
           <p class="profile-email"><%= @user.email %></p>
         </div>
         <div class="profile-actions">
-          <%= link_to "Edit Profile", edit_user_registration_path, class: 'btn btn-outline-secondary' %>
+          <%= link_to edit_user_registration_path, class: 'btn' do %>
+            <%= image_tag "editing.png", class: "profile-icon" %>
+          <% end %>
         </div>
-          <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn-delete" %>
+          <%= link_to destroy_user_session_path, data: { turbo_method: :delete }, class: 'btn' do %>
+            <%= image_tag "log-out.png", class: "profile-icon" %>
+          <% end %>
         </div>
       </div>
     </div>

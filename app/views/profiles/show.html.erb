@@ -2,7 +2,11 @@
 <div class="profile-section">
   <div class="profile-header">
     <div class="profile-picture">
-      <%= image_tag("joseluis.svg.png", class: "profile-image") %>
+      <% if @user.profile_photo.attached? %>
+        <%= image_tag(@user.profile_photo.variant(resize_to_limit: [100, 100])) %>
+      <% else %>
+        <%= image_tag("profile.png", class: "profile-image") %>
+      <% end %>
     </div>
     <div class="profile-details">
       <div class="profile-name-email">

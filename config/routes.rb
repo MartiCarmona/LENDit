@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: 'products#index'
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'registrations' }
 
   # products
   resources :products do
@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   end
 
   # users
-  resources :users, only: [:show] do
+  resources :users, only: [:show, :update] do
     resources :reviews, only: [:index]
   end
 

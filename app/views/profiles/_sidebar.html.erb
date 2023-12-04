@@ -3,7 +3,11 @@
     <div class="sidebar-profile">
       <%= link_to profile_path(current_user) do %>
         <div class="user-info-with-pic">
-          <%= image_tag("joseluis.svg.png", class: "profile-pic") %>
+          <% if current_user.profile_photo.attached? %>
+            <%= image_tag(current_user.profile_photo.variant(resize_to_limit: [100, 100]).processed, class: "profile-pic") %>
+          <% else %>
+            <%= image_tag("profile.png", class: "profile-pic") %>
+          <% end %>
           <div class="user-info">
             <p class="name"><strong><%= current_user.first_name %> <%= current_user.last_name.first %>.</strong></p>
             <p class="rating">
@@ -16,42 +20,44 @@
     </div>
   </div>
 
-  <%= link_to lends_bookings_path(@product), class: "sidebar-settings d-flex align-items-center" do %>
+  <%= link_to lends_bookings_path(@product), class: "sidebar-settings d-flex align-items-center #{'active' if current_page?(lends_bookings_path(@product))}" do %>
     <div class="icon-margin">
       <%= image_tag "borrowing.png", class: "nav-icon-lend" %>
     </div>
     <span class="sidebar-category">Lends</span>
   <% end %>
 
-  <%= link_to borrows_bookings_path(@product), class: "sidebar-settings d-flex align-items-center" do %>
+  <%= link_to borrows_bookings_path(@product), class: "sidebar-settings d-flex align-items-center #{'active' if current_page?(borrows_bookings_path(@product))}" do %>
     <div class="icon-margin">
       <%= image_tag "borrowing.png", class: "nav-icon-lend" %>
     </div>
     <span class="sidebar-category">Borrows</span>
   <% end %>
 
-  <%= link_to "#", class: "sidebar-settings d-flex align-items-center" do %>
+  <!-- For the "#" paths, you'll need to implement a different strategy, since they don't correspond to any Rails path helper -->
+  <%= link_to "#", class: "sidebar-settings d-flex align-items-center #{'active' if request.path == '#'}" do %>
     <div class="icon-margin">
       <%= image_tag "speech-bubble.png", class: "nav-icon" %>
     </div>
     <span class="sidebar-category">Messages</span>
   <% end %>
 
-  <%= link_to profile_path(current_user), class: "sidebar-settings d-flex align-items-center" do %>
+  <%= link_to profile_path(current_user), class: "sidebar-settings d-flex align-items-center #{'active' if current_page?(profile_path(current_user))}" do %>
     <div class="icon-margin">
       <%= image_tag "product.png", class: "nav-icon-product" %>
     </div>
     <span class="sidebar-category">Products</span>
   <% end %>
 
-  <%= link_to profile_favorites_path(current_user), class: "sidebar-settings d-flex align-items-center" do %>
+  <%= link_to profile_favorites_path(current_user), class: "sidebar-settings d-flex align-items-center #{'active' if current_page?(profile_favorites_path(current_user))}" do %>
     <div class="icon-margin">
       <%= image_tag "passion.png", class: "nav-icon" %>
     </div>
     <span class="sidebar-category">Favorites</span>
   <% end %>
 
-  <%= link_to "#", class: "sidebar-settings d-flex align-items-center" do %>
+  <!-- Same here for the "#" path -->
+  <%= link_to "#", class: "sidebar-settings d-flex align-items-center #{'active' if request.path == '#'}" do %>
     <div class="icon-margin">
       <%= image_tag "question.png", class: "nav-icon" %>
     </div>

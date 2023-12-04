@@ -11,6 +11,10 @@ class User < ApplicationRecord
 
   has_many :favorites, dependent: :destroy
   has_many :favorited_products, through: :favorites, source: :product
+  has_one_attached :profile_photo
+
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
 
   def toggle_favorite(product)
     if favorited_products.include?(product)

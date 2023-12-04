@@ -2,7 +2,11 @@
   <div class="sidebar-settings-profile">
     <div class="sidebar-profile">
       <div class="user-info-with-pic">
-      <%= image_tag("joseluis.svg.png", class: "profile-pic") %>
+      <% if @user.profile_photo.attached? %>
+        <%= image_tag(@user.profile_photo.variant(resize_to_limit: [100, 100])) %>
+      <% else %>
+        <%= image_tag("profile.png", class: "profile-image") %>
+      <% end %>
         <div class="user-info">
           <p class="name"><strong>Marti C.</strong></p>
           <p class="rating">

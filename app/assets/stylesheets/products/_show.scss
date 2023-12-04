@@ -191,6 +191,13 @@
           justify-content: right;
           gap: 10px;
           align-items: center;
+
+          .profile-image-product {
+            width: 33px;
+            height: 33px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
         }
 
         .user-btn {
