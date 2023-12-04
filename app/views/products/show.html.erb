@@ -6,7 +6,6 @@
 
     <div class="product-details">
       <div class="product-info">
-
         <div class="icons-row">
           <% if user_signed_in? && current_user != @product.user %>
 
@@ -22,7 +21,6 @@
             <% else%>
               <%= link_to toggle_favorite_product_path(@product), method: :post, class: 'product-icon' do %>
                 <%= image_tag 'likeGOODnot.png' %>
-
               <% end %>
             <% end %>
             <button class="btn-chat user-btn">Chat</button>
@@ -52,6 +50,15 @@
         <p class="product-description"><%= @product.description %></p>
         <strong><span class="product-price"><%= number_to_currency(@product.price_per_day, unit: '', format: "%n€") %>/day</span></strong>
       </div>
+
+      <%= image_tag('address.png', id: 'map-trigger', class: "image-address") %>
+
+      <div class="map-container"
+          data-controller="map"
+          data-map-markers-value="<%= [{ lat: @product.user.latitude, lng: @product.user.longitude }].to_json %>"
+          data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+      </div>
+
       <div class=under-container>
         <div class="product-buttons-container">
           <% if current_user == @product.user %>

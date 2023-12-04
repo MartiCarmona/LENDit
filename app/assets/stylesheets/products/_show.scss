@@ -6,7 +6,7 @@
 
   .date-inputs {
     display: flex;
-    gap: 10px; /* Adjust the gap between the date inputs as needed */
+    gap: 10px;
     margin-top: -11.5rem;
     margin-bottom: 1rem;
     margin-left: -3rem;
@@ -15,9 +15,9 @@
   }
 
   input[type="text"] {
-    width: 200px; /* Adjust the width as needed */
-    padding: 10px; /* Adjust the padding as needed */
-    font-size: 16px; /* Adjust the font size as needed */
+    width: 200px;
+    padding: 10px;
+    font-size: 16px;
   }
 
   .btn-rent-now {
@@ -97,7 +97,6 @@
     height: 585px;
 
     .product-image-wrapper {
-      // flex-basis: 70%;
       max-width: 70%;
       height: 585px;
       width: 850px;
@@ -105,7 +104,7 @@
       .product-image {
         object-fit: cover;
         width: 850px;
-        width: 100%; /* Adjusted to cover the entire container */
+        width: 100%;
         height: 100%;
         object-position: center;
       }
@@ -123,6 +122,19 @@
       flex-direction: column;
       justify-content: space-between;
       width: auto;
+
+      .image-address {
+        width: 33px;
+        height: 33px;
+        border-radius: 50%;
+      }
+
+      .map-container {
+        margin-top: 1rem;
+        height: 200px;
+        width: 100%;
+        display: none;
+      }
 
       input.btn{
         background-color: #01C1AD;
@@ -191,6 +203,13 @@
           justify-content: right;
           gap: 10px;
           align-items: center;
+
+          .profile-image-product {
+            width: 33px;
+            height: 33px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
         }
 
         .user-btn {
