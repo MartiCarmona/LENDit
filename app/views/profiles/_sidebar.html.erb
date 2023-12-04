@@ -34,7 +34,6 @@
     <span class="sidebar-category">Borrows</span>
   <% end %>
 
-  <!-- For the "#" paths, you'll need to implement a different strategy, since they don't correspond to any Rails path helper -->
   <%= link_to "#", class: "sidebar-settings d-flex align-items-center #{'active' if request.path == '#'}" do %>
     <div class="icon-margin">
       <%= image_tag "speech-bubble.png", class: "nav-icon" %>
@@ -56,8 +55,7 @@
     <span class="sidebar-category">Favorites</span>
   <% end %>
 
-  <!-- Same here for the "#" path -->
-  <%= link_to "#", class: "sidebar-settings d-flex align-items-center #{'active' if request.path == '#'}" do %>
+  <%= link_to index_faq_path(current_user), class: "sidebar-settings d-flex align-items-center #{'active' if request.path == '#'}" do %>
     <div class="icon-margin">
       <%= image_tag "question.png", class: "nav-icon" %>
     </div>

@@ -57,6 +57,7 @@ Rails.application.routes.draw do
   get "/profile/:id", to: "profiles#show", as: "profile"
   get "/profile/:id/favorites", to: "favorites#index", as: "profile_favorites"
   get "/profile/:id/lends", to: "bookings#index", as: "profile_bookings"
+  get "/profile/:id/faq", to: "faq#index", as: "index_faq"
 
   get '/help', to: 'helps#index'
 end

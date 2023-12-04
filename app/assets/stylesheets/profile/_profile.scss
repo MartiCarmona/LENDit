@@ -9,19 +9,20 @@ a {
     align-items: flex-start;
     padding: 20px 30px;
     background-color: #f4f4f4;
-    height: 230px;
+    height: 220px;
     border-radius: 0.5rem;
 
     .profile-picture {
       overflow: hidden;
       width: 250px;
-      height: 250px;
       margin-right: 20px;
+      align-items: center;
 
       img.profile-image {
         width: 100%;
         height: auto;
         border-radius: 50%;
+        align-items: center;
       }
     }
 
@@ -60,22 +61,24 @@ a {
     .profile-details {
       display: flex;
       justify-content: space-between;
-      align-items: center;
       width: 100%;
 
       .profile-name-email {
         .profile-name {
           margin: 0;
+          align-items: center;
           font-size: 35px;
         }
 
         .profile-email {
           font-size: 20px;
+          align-items: center;
         }
       }
 
       .profile-actions {
-
+        margin-top: 0;
+        margin-right: 0;
       }
     }
   }
