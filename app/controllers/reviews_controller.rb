@@ -14,10 +14,9 @@ class ReviewsController < ApplicationController
     end
   end
 
-
   def create
-
     existing_review = Review.find_by(user_id: current_user.id, booking_id: @booking.id)
+
     if existing_review
       redirect_to profile_path(current_user), alert: 'You already reviewed this booking.'
     elsif @booking.status == 'accepted' && @booking.in?(Booking.finished)
@@ -26,20 +25,22 @@ class ReviewsController < ApplicationController
       @review.booking_id = @booking.id
 
       if @review.save
-        redirect_to @booking, notice: 'Review was successfully created.'
+        redirect_to profile_path(current_user), notice: 'Review was successfully created.'
       else
-        render :new
+        render :new, status: 422, flash_alert: 'Review was not created.'
       end
     else
       redirect_to root_path, alert: 'You can only add a review for an accepted and finished booking.'
     end
   end
 
+
   def destroy
     @review = Review.find(params[:id])
     @review.destroy
     redirect_to product_path(@review.product), status: :see_other
   end
+
 
   private
 
@@ -48,6 +49,8 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:rating, :content, :product_id)
+    params.require(:review).permit(:product_rating, :product_content, :booking_rating, :booking_content, :booking_id, :user_id)
   end
+
+
 end
