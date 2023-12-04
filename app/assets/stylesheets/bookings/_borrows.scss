@@ -132,6 +132,22 @@ a {
             color: #ffffff;
           }
         }
+
+        .review-button {
+          background-color: #01C1AD;
+          color: #fff;
+          padding: 6px 12px;
+          border: none;
+          cursor: pointer;
+          font-size: 14px;
+          border-radius: 20px;
+          text-align: center;
+          margin-bottom: 2rem;
+
+          &:hover{
+            background-color: #007883;
+          }
+        }
       }
     }
   }

@@ -95,6 +95,11 @@ a {
           text-align: center;
           background-color: white;
 
+          .view-details a{
+            color: rgb(93, 93, 93);
+            margin-bottom: 5px;
+            }
+
           .price{
             color: #007883;
             font-weight: bold;
@@ -130,7 +135,7 @@ a {
 
         .accept-booking {
           display: inline-block;
-          padding: 6px 12px;
+          padding: 4px 8px;
           text-align: center;
           text-decoration: none;
           font-size: 14px;
@@ -145,6 +150,42 @@ a {
             background-color: #01c171;
             color: white;
           }
+        }
+
+        .decline-booking {
+          display: inline-block;
+          padding: 4px 8px;
+          text-align: center;
+          text-decoration: none;
+          font-size: 14px;
+          border: 1px solid #ea4141;
+          border-radius: 20px;
+          color: #ea4141;
+          transition: background-color 0.3s ease, color 0.3s ease;
+          margin-top: 10px;
+          margin-bottom: 10px;
+
+          &:hover{
+            background-color: #ea4141;
+            color: white;
+          }
+        }
+
+        .review-button {
+          background-color: #01C1AD;
+          color: #fff;
+          padding: 6px 12px;
+          border: none;
+          cursor: pointer;
+          font-size: 14px;
+          border-radius: 20px;
+          text-align: center;
+          margin-top: 10px;
+
+          &:hover{
+            background-color: #007883;
+          }
+
         }
       }
     }
