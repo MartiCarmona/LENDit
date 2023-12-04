@@ -10,7 +10,14 @@
       <div class="profile-details">
         <div class="profile-name-email">
           <h2 class="profile-name"><%= "#{@user.first_name} #{@user.last_name}" %></h2>
-          <p class="profile-email"><%= @user.email %></p>
+
+          <div class="reviews">
+            <%= link_to index_reviews_path, id: "btn-products", class: "tab-btn active" do %>
+              <span class="stars">★★★★★</span>
+              <span class="rating-stars">(4)</span>
+            <% end %>
+          </div>
+
         </div>
         <div class="profile-actions">
           <%= link_to edit_user_registration_path, class: 'btn' do %>
@@ -23,6 +30,7 @@
       </div>
     </div>
   </div>
+
 
   <div class="tab-buttons">
     <button id="btn-products" class="tab-btn active">Products</button>

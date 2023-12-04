@@ -63,7 +63,7 @@ class BookingsController < ApplicationController
     @booking.product = Product.find(params[:product_id])
     @booking.status = 'pending'
 
-    if @booking.save
+    if @booking.save!
       redirect_to borrows_bookings_path, notice: 'Booking request sent.'
     else
       redirect_to product_path(@booking.product), notice: 'Booking request could not be sent.'
@@ -85,9 +85,7 @@ class BookingsController < ApplicationController
 
     @booking.destroy
 
-    redirect_to borrows_bookings_path, notice: 'Booking request canceled.'
 
-    #add inteligence to redirect to the right page
   end
 
 
