@@ -1,0 +1,21 @@
+<h1><%= @chat.name %></h1>
+<h1>Chats</h1>
+
+<div id="messages-container" class="message-container">
+  <% @chat.messages.each do |message| %>
+    <% if message.user == current_user %>
+      <div class="message-right">
+        <p><strong><%= message.user.full_name %>:</strong> <%= message.content %></p>
+      </div>
+    <% else %>
+      <div class="message-left">
+        <p><strong><%= message.user.full_name %>:</strong> <%= message.content %></p>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<%= form_with(model: [@chat, @message], url: chat_messages_path(@chat), local: true, method: :post) do |form| %>
+  <%= form.text_area :content, placeholder: 'Type your message...', rows: 3 %>
+  <%= form.submit 'Send Message' %>
+<% end %>

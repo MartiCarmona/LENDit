@@ -8,8 +8,6 @@ Rails.application.routes.draw do
     resources :favorites, only: [:create]
     resources :reviews, only: [:new, :create]
 
-    resources :chats, only: [:new, :create]
-
     member do
       get 'toggle_favorite'
     end
@@ -30,13 +28,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :chats, only: [:show] do
-    resources :messages, only: [:create]
-  end
-
   resources :users, only: [:show] do
     resources :reviews, only: [:new, :create]
-
   end
 
   namespace :status do
@@ -53,6 +46,10 @@ Rails.application.routes.draw do
         get :finished
       end
     end
+  end
+
+  resources :chats, only: [:index,:new, :create, :show] do
+    resources :messages, only: [:create]
   end
 
   get "/profile/:id", to: "profiles#show", as: "profile"
