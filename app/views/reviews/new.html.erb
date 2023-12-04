@@ -1,29 +1,41 @@
-<section id=container>
-
+<section id="container">
   <div class="form-container">
-
     <div class="info">
       <h1>Add Review for <%= @booking.product.title %></h1>
 
-      <% if @booking.product.user == current_user %>
-        <p>Review your experience with <%= @booking.user.full_name %></p>
-      <% else %>
-        <p>Review your experience with <%= @booking.product.user.full_name %></p>
+      <%= simple_form_for [@booking, @review], url: booking_reviews_path(@booking), method: :post do |form| %>
+
+        <% unless @booking.product.user == current_user %>
+          <fieldset>
+            <legend>Product Review</legend>
+
+            <%= form.label :product_rating, 'Product Rating' %>
+            <%= form.number_field :product_rating, in: 1..5 %>
+
+            <%= form.label :product_content, 'Product Content' %>
+            <%= form.text_area :product_content %>
+
+            <%= form.hidden_field :booking_id, value: @booking.id %>
+            <%= form.hidden_field :review_type, value: 'product' %>
+          </fieldset>
+        <% end %>
+
+        <fieldset>
+          <legend>Booking Review</legend>
+
+          <%= form.label :booking_rating, 'Booking Rating' %>
+          <%= form.number_field :booking_rating, in: 1..5 %>
+
+          <%= form.label :booking_content, 'Booking Content' %>
+          <%= form.text_area :booking_content %>
+
+          <%= form.hidden_field :booking_id, value: @booking.id %>
+          <%= form.hidden_field :review_type, value: 'booking' %>
+        </fieldset>
+
+        <%= form.submit 'Submit Reviews' %>
+
       <% end %>
     </div>
-
-
-
-      <%= form_with(model: [@booking, @review], url: booking_reviews_path(@booking), method: :post) do |form| %>
-        <%= form.label :rating %>
-        <%= form.number_field :rating, in: 1..5 %>
-
-        <%= form.label :content %>
-        <%= form.text_area :content %>
-
-        <%= form.hidden_field :product_id, value: @booking.product.id %>
-
-        <%= form.submit 'Submit Review' %>
-      <% end %>
-    </div>
+  </div>
 </section>
