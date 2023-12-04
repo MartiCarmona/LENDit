@@ -4,7 +4,7 @@
   <h2>Edit <%= resource_name.to_s.humanize %></h2>
   </div>
 
-  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { multipart: true, method: :put }) do |f| %>
     <%= f.error_notification %>
 
     <div class="form-inputs">
@@ -22,6 +22,11 @@
         <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
       <% end %>
 
+      <%= f.input :address,
+        input_html: {data: {address_autocomplete_target: "address"}},
+        wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}}
+      %>
+
       <%= f.input :password,
                   hint: "leave it blank if you don't want to change it",
                   required: false,
@@ -33,6 +38,10 @@
                   hint: "we need your current password to confirm your changes",
                   required: true,
                   input_html: { autocomplete: "current-password" } %>
+      <%= f.input :profile_photo, as: :file %>
+    <% if resource.profile_photo.attached? %>
+      <%= image_tag(resource.profile_photo.variant(resize_to_limit: [200, 200]).processed) %>
+    <% end %>
     </div>
 
     <div class="form-actions">
