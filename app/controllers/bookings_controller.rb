@@ -63,8 +63,9 @@ class BookingsController < ApplicationController
     @booking.product = Product.find(params[:product_id])
     @booking.status = 'pending'
 
-    if @booking.save!
-      redirect_to borrows_bookings_path, notice: 'Booking request sent.'
+    if @booking.save
+      chat = Chat.find_or_create_by(booking_id: @booking.id)
+      redirect_to chat_path(chat), notice: 'Booking request sent.'
     else
       redirect_to product_path(@booking.product), notice: 'Booking request could not be sent.'
     end

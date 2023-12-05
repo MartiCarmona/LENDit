@@ -9,6 +9,7 @@ export { application }
 
 import 'controllers';
 
+import '@rails/actioncable';
 document.addEventListener('DOMContentLoaded', function() {
   // Find the elements
   var mapTrigger = document.getElementById('map-trigger');

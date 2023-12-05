@@ -1,90 +1,155 @@
-<div class="product-show-container">
-
-  <div class="pending-borrow">
-    <h2>Pending Borrows</h2>
-      <% @pending_borrow_requests.each do |booking| %>
-        <div class="booking-item">
-          <% product = booking.product %>
-          <div class="product-info">
-            <%= link_to product_path(product) do %>
-              <%= image_tag(product.image.url, class: "product-link mb-3") if product.image.present? %>
-            <% end %>
-          </div>
-          <div class=booking-data>
-          <p><%= link_to product.title, product_path(product), class: 'title' %></p>
-          <p>Status: <%= booking.status.capitalize %></p>
-          <p>Start Date: <%= booking.start_date %></p>
-          <p>End Date: <%= booking.end_date %></p>
-          <%= button_to 'Cancel Request', cancel_booking_path(booking), method: :delete, data: { turbo_confirm: 'Are you sure you want to cancel this booking request?' }, class: 'btn btn-outline-warning' %>
-          </div>
-        </div>
-      <% end %>
-  </div>
-
-
-  <div class="accepted-borrow">
-    <h2>Accepted Borrows</h2>
-      <% @accepted_borrow_requests.each do |booking| %>
-        <div class="booking-item">
-          <% product = booking.product %>
-          <div class="product-info">
-            <%= link_to product_path(product) do %>
-              <%= image_tag(product.image.url, class: "product-link mb-3") if product.image.present? %>
-            <% end %>
-          </div>
-          <div class=booking-data>
-          <p><%= link_to product.title, product_path(product), class: 'title' %></p>
-          <p>Status: <%= booking.status.capitalize %></p>
-          <p>Start Date: <%= booking.start_date %></p>
-          <p>End Date: <%= booking.end_date %></p>
-          <%= button_to 'Cancel Request', cancel_booking_path(booking), method: :delete, data: { confirm: 'Are you sure you want to cancel this booking request?' }, class: 'btn btn-outline-warning' %>
-          </div>
-        </div>
-      <% end %>
-  </div>
-
-  <div class="ongoing-borrow">
-    <h2>Ongoing Borrows</h2>
-      <% @ongoing_borrow_requests.each do |booking| %>
-        <div class="booking-item">
-          <% product = booking.product %>
-          <div class="product-info">
-            <%= link_to product_path(product) do %>
-              <%= image_tag(product.image.url, class: "product-link mb-3") if product.image.present? %>
-            <% end %>
-          </div>
-          <div class=booking-data>
-          <p><%= link_to product.title, product_path(product), class: 'title' %></p>
-          <p>Status: <%= booking.status.capitalize %></p>
-          <p>Start Date: <%= booking.start_date %></p>
-          <p>End Date: <%= booking.end_date %></p>
-          </div>
-        </div>
-      <% end %>
-  </div>
-
-  <div class="finished-borrow">
-    <h2>Finished Borrows</h2>
-      <% @finished_borrow_requests.each do |booking| %>
-  <div class="booking-item">
-    <% product = booking.product %>
-    <div class="product-info">
-      <%= link_to product_path(product) do %>
-        <%= image_tag(product.image.url, class: "product-link mb-3") if product.image.present? %>
-      <% end %>
-    </div>
-    <div class="booking-data">
-      <p><%= link_to product.title, product_path(product), class: 'title' %></p>
-      <p>Status: <%= booking.status.capitalize %></p>
-      <p>Start Date: <%= booking.start_date %></p>
-      <p>End Date: <%= booking.end_date %></p>
-      <%= link_to 'View Details', booking_path(booking) %>
-      <%= link_to 'Review Product Owner', new_booking_review_path(booking, product_id: booking.product.id), class: 'btn btn-outline-primary review-button' %>
-
-    </div>
-  </div>
-<% end %>
-
-    </div>
+<div class="tabs">
+  <button class="tab" onclick="toggleTab('pending')">Pending</button>
+  <button class="tab" onclick="toggleTab('accepted')">Accepted</button>
+  <button class="tab" onclick="toggleTab('ongoing')">Ongoing</button>
+  <button class="tab" onclick="toggleTab('finished')">Finished</button>
 </div>
+
+<div class="tab-content" id="pendingTab">
+  <div class="product-show-container">
+    <div class="borrow-group">
+      <h2 class="title">Pending Borrows</h2>
+      <div class="booking-items-container">
+        <% @pending_borrow_requests.each do |booking| %>
+            <div class="booking-item">
+              <% product = booking.product %>
+              <div class="product-info">
+                <%= link_to product_path(product) do %>
+                  <div class="image-container">
+                    <%= image_tag(product.image.url, class: "product-link mb-3") if product.image.present? %>
+                  </div>
+                <% end %>
+              </div>
+              <div class="booking-data">
+                <p><%= link_to product.title, product_path(product), class: 'title' %></p>
+                <p class="concept"><strong>Status:</strong> <%= booking.status.capitalize %></p>
+                <p class="concept"><strong>Start:</strong> <%= booking.start_date %></p>
+                <p class="concept"><strong>End:</strong> <%= booking.end_date %></p>
+                <span class="price">
+                  <%=number_with_precision(booking.product.price_per_day * (booking.end_date-booking.start_date), precision: (product.price_per_day.to_i == product.price_per_day) ? 0 : 2) %>€
+                  (<%=number_with_precision(booking.product.price_per_day, precision: (product.price_per_day.to_i == product.price_per_day) ? 0 : 2) %>€/day)
+                </span>
+                <%= button_to 'Cancel Request', cancel_booking_path(booking), method: :delete, data: { turbo_confirm: 'Are you sure you want to cancel this booking request?' }, class: 'btn btn-outline-warning' %>
+              </div>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
+
+<div class="tab-content" id="acceptedTab">
+  <div class="product-show-container">
+    <div class="borrow-group">
+      <h2 class="title">Accepted Borrows</h2>
+      <div class="booking-items-container">
+        <% @accepted_borrow_requests.each do |booking| %>
+            <div class="booking-item">
+              <% product = booking.product %>
+              <div class="product-info">
+                <%= link_to product_path(product) do %>
+                  <div class="image-container">
+                    <%= image_tag(product.image.url, class: "product-link mb-3") if product.image.present? %>
+                  </div>
+                <% end %>
+              </div>
+              <div class="booking-data">
+                <p><%= link_to product.title, product_path(product), class: 'title' %></p>
+                <p class="concept"><strong>Status:</strong> <%= booking.status.capitalize %></p>
+                <p class="concept"><strong>Start:</strong> <%= booking.start_date %></p>
+                <p class="concept"><strong>End:</strong> <%= booking.end_date %></p>
+                <span class="price">
+                  <%=number_with_precision(booking.product.price_per_day * (booking.end_date-booking.start_date), precision: (product.price_per_day.to_i == product.price_per_day) ? 0 : 2) %>€
+                  (<%=number_with_precision(booking.product.price_per_day, precision: (product.price_per_day.to_i == product.price_per_day) ? 0 : 2) %>€/day)
+                </span>
+                <%= button_to 'Cancel Request', cancel_booking_path(booking), method: :delete, data: { turbo_confirm: 'Are you sure you want to cancel this booking request?' }, class: 'btn btn-outline-warning' %>
+              </div>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tab-content" id="ongoingTab">
+  <div class="product-show-container">
+    <div class="borrow-group">
+      <h2 class="title">Ongoing Borrows</h2>
+      <div class="booking-items-container">
+        <% @ongoing_borrow_requests.each do |booking| %>
+            <div class="booking-item">
+              <% product = booking.product %>
+              <div class="product-info">
+                <%= link_to product_path(product) do %>
+                  <div class="image-container">
+                    <%= image_tag(product.image.url, class: "product-link mb-3") if product.image.present? %>
+                  </div>
+                <% end %>
+              </div>
+              <div class="booking-data">
+                <p><%= link_to product.title, product_path(product), class: 'title' %></p>
+                <p class="concept"><strong>Status:</strong> <%= booking.status.capitalize %></p>
+                <p class="concept"><strong>Start:</strong> <%= booking.start_date %></p>
+                <p class="concept"><strong>End:</strong> <%= booking.end_date %></p>
+                <span class="price">
+                  <%=number_with_precision(booking.product.price_per_day * (booking.end_date-booking.start_date), precision: (product.price_per_day.to_i == product.price_per_day) ? 0 : 2) %>€
+                  (<%=number_with_precision(booking.product.price_per_day, precision: (product.price_per_day.to_i == product.price_per_day) ? 0 : 2) %>€/day)
+                </span>
+              </div>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tab-content" id="finishedTab">
+  <div class="product-show-container">
+    <div class="borrow-group">
+      <h2 class="title">Finished Borrows</h2>
+      <div class="booking-items-container">
+        <% @finished_borrow_requests.each do |booking| %>
+            <div class="booking-item">
+              <% product = booking.product %>
+              <div class="product-info">
+                <%= link_to product_path(product) do %>
+                  <div class="image-container">
+                    <%= image_tag(product.image.url, class: "product-link mb-3") if product.image.present? %>
+                  </div>
+                <% end %>
+              </div>
+              <div class="booking-data">
+                <p><%= link_to product.title, product_path(product), class: 'title' %></p>
+                <p class="concept"><strong>Status:</strong> <%= booking.status.capitalize %></p>
+                <p class="concept"><strong>Start:</strong> <%= booking.start_date %></p>
+                <p class="concept"><strong>End:</strong> <%= booking.end_date %></p>
+                <span class="price">
+                  <%=number_with_precision(booking.product.price_per_day * (booking.end_date-booking.start_date), precision: (product.price_per_day.to_i == product.price_per_day) ? 0 : 2) %>€
+                  (<%=number_with_precision(booking.product.price_per_day, precision: (product.price_per_day.to_i == product.price_per_day) ? 0 : 2) %>€/day)
+                </span>
+                <%= link_to 'View Details', booking_path(booking) %>
+                <%= link_to 'Review Product Owner', new_booking_review_path(booking, product_id: booking.product.id), class: 'btn btn-outline-primary review-button' %>
+              </div>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleTab(tabName) {
+    document.querySelectorAll('.tab-content').forEach(tab => {
+      tab.style.display = 'none';
+    });
+
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.classList.remove('active');
+    });
+
+    document.getElementById(`${tabName}Tab`).style.display = 'block';
+    document.querySelector(`.tab.${tabName}`).classList.add('active');
+  }
+
+  toggleTab('pending');
+</script>

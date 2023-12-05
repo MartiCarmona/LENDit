@@ -1,0 +1,33 @@
+  <h1><%= @chat.name %></h1>
+  <h1>Chat</h1>
+<div  data-controller="chat"  data-chat-chatid-value="<%= @chat.id %>" data-current-user-id="<%= current_user.id %>">
+
+<div class="messages-container" data-chat-target="messages">
+
+  <% @chat.messages.each do |message| %>
+    <div class="message-box">
+      <% if message.user == current_user %>
+        <div class="message-right">
+          <div class="message-content">
+            <%= message.content %>
+          </div>
+        </div>
+         <p class="time-right"><%= message.timestamp_formatted %></p>
+      <% else %>
+        <div class="message-left">
+          <div class="message-content">
+            <%= message.content %>
+          </div>
+        </div>
+        <p class="time-left"><%= message.timestamp_formatted %></p>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+    <%= form_with(model: [@chat, @message], url: chat_messages_path(@chat), local: true, method: :post) do |form| %>
+    <%= form.text_area :content, placeholder: 'Type your message...', rows: 3 , data: { chat_target: 'input' }%>
+    <%= form.submit 'Send Message' %>
+  <% end %>
+  </div>
+  </div>
