@@ -34,7 +34,11 @@
 
           <li class="nav-item">
             <%= link_to profile_path(current_user), class: "nav-link" do %>
-              <%= image_tag "joseluis.svg.png", class: "avatar", alt: "User profile" %>
+              <% if current_user.profile_photo.attached? %>
+                <%= image_tag(current_user.profile_photo.variant(resize_to_limit: [100, 100]).processed, class: "avatar", alt: "User profile") %>
+              <% else %>
+                <%= image_tag("profile.png", class: "avatar") %>
+              <% end %>
             <% end %>
           </li>
 

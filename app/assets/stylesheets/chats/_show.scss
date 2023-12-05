@@ -9,7 +9,6 @@
 }
 
 .message-left {
-  margin-right: auto;
   text-align: left;
   display: inline-block;
   padding: 10px;
@@ -44,7 +43,6 @@
 }
 
 .time-left {
-  align-self: flex-end; /* Align timestamp to the end of the container */
   font-size: x-small;
-  margin-left: 200px;
+  margin-right: auto;
 }

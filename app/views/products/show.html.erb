@@ -6,9 +6,14 @@
 
     <div class="product-details">
       <div class="product-info">
-
         <div class="icons-row">
           <% if user_signed_in? && current_user != @product.user %>
+
+            <%= link_to index_reviews_path, id: "btn-products", class: "tab-btn active" do %>
+              <span class="stars">★★★★★</span>
+              <span class="rating-stars">(4)</span>
+            <% end %>
+
             <% if @product.favorited_by_user?(current_user) && current_user != @product.user%>
               <%= link_to toggle_favorite_product_path(@product), method: :post, class: 'product-icon-filled' do %>
                 <%= image_tag 'likeGOOD.png' %>
@@ -16,12 +21,17 @@
             <% else%>
               <%= link_to toggle_favorite_product_path(@product), method: :post, class: 'product-icon' do %>
                 <%= image_tag 'likeGOODnot.png' %>
-
               <% end %>
             <% end %>
             <button class="btn-chat user-btn">Chat</button>
             <%= link_to @product.user.name_with_initial, profile_path(@product.user), class: "btn btn-primary user-btn" %>
           <% elsif  !user_signed_in? %>
+
+            <%= link_to new_user_session_path, id: "btn-products", class: "tab-btn active" do %>
+              <span class="stars">★★★★★</span>
+              <span class="rating-stars">(4)</span>
+            <% end %>
+
             <div class="product-icon">
               <%= link_to new_user_session_path, method: :post do %>
                 <%= image_tag 'like.png' %>
@@ -40,6 +50,15 @@
         <p class="product-description"><%= @product.description %></p>
         <strong><span class="product-price"><%= number_to_currency(@product.price_per_day, unit: '', format: "%n€") %>/day</span></strong>
       </div>
+
+      <%= image_tag('address.png', id: 'map-trigger', class: "image-address") %>
+
+      <div class="map-container"
+          data-controller="map"
+          data-map-markers-value="<%= [{ lat: @product.user.latitude, lng: @product.user.longitude }].to_json %>"
+          data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+      </div>
+
       <div class=under-container>
         <div class="product-buttons-container">
           <% if current_user == @product.user %>

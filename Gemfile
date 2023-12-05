@@ -80,3 +80,7 @@ end
 
 gem "devise"
 gem 'redis'
+
+gem "image_processing", "~> 1.12"
+
+gem "geocoder"

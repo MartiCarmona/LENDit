@@ -1,10 +1,8 @@
   <h1><%= @chat.name %></h1>
   <h1>Chat</h1>
-<div  data-controller="chat"  data-chat-chatid-value="<%= @chat.id %>">
-<div class="messages-container"
+<div  data-controller="chat"  data-chat-chatid-value="<%= @chat.id %>" data-current-user-id="<%= current_user.id %>">
 
- data-chat-target="messages"
-  >
+<div class="messages-container" data-chat-target="messages">
 
   <% @chat.messages.each do |message| %>
     <div class="message-box">

@@ -37,11 +37,20 @@ export default class extends Controller {
   }
 
   appendMessage(data) {
-    const messageElement = document.createElement('div');
-    console.log(data);
-  
-    messageElement.innerHTML = data;
-    this.messagesTarget.appendChild(messageElement);
+    const user = this.element.getAttribute('data-current-user-id');
+    console.log(user);
+    console.log(data.userId);
+    console.log(data.content);
+    const isMyMessage = data.userId == user;
+    const messageClass = isMyMessage ? 'message-right' : 'message-left';
+    const timeClass = isMyMessage ? 'time-right' : 'time-left';
+    // const messageElement = document.createElement('div');
+
+    // messageElement.innerHTML = data;
+    // this.messagesTarget.appendChild(messageElement);
+    const messageHtml = `<div class="message-box"><div class="${messageClass}"><div class="message-content">${data.content}</div></div><p class="${timeClass}">${data.timestamp}</p></div>`
+    this.messagesTarget.insertAdjacentHTML("beforeend", messageHtml);
+
   }
 
   sendMessage() {

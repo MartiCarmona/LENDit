@@ -9,7 +9,8 @@ class MessagesController < ApplicationController
     if @message.save
       ChatChannel.broadcast_to(
         @chat,
-        render_to_string(partial: "message", locals: { message: @message})
+        { content: render_to_string(partial: "message", locals: { message: @message}),
+        userId: @message.user.id, timestamp: @message.timestamp_formatted }
       )
       head :ok
       # redirect_to chat_path(@chat), notice: 'Message sent successfully.'

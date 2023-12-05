@@ -86,9 +86,7 @@ class BookingsController < ApplicationController
 
     @booking.destroy
 
-    redirect_to borrows_bookings_path, notice: 'Booking request canceled.'
 
-    #add inteligence to redirect to the right page
   end
 
 
