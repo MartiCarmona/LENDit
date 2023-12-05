@@ -3,8 +3,11 @@ class ReviewsController < ApplicationController
   before_action :load_booking, only: [:new, :create]
 
   def index
-    @reviews = Review.all
+    puts "Params: #{params.inspect}"
+    @user = User.find(params[:user_id])
+    @reviews = @user.received_reviews
   end
+
 
   def new
     if @booking.status == 'accepted' && @booking.in?(Booking.finished)
