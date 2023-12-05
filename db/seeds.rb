@@ -438,5 +438,5 @@ Booking.create(
   end_date: 4.days.ago.to_date,
   status: 'accepted',
   user: User.first,
-  product: Product.first
+  product: Product.find(69)
 )

@@ -3,7 +3,6 @@ class ReviewsController < ApplicationController
   before_action :load_booking, only: [:new, :create]
 
   def index
-    @received_reviews = Review.where(user_id: current_user.id)
 
     render layout: "with_sidebar"
   end
@@ -16,6 +15,12 @@ class ReviewsController < ApplicationController
     render layout: "without_sidebar"
   end
 
+  def reviewer
+    @review = Review.find(params[:id])
+    @reviewer = @review.user
+    @reviewed_product = @review.product
+    @reviewed_booking = @review.booking
+  end
 
   def new
     if @booking.status == 'accepted' && @booking.in?(Booking.finished)
