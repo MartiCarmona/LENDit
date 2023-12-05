@@ -9,7 +9,7 @@
         <div class="icons-row">
           <% if user_signed_in? && current_user != @product.user %>
 
-            <%= link_to index_reviews_path, id: "btn-products", class: "tab-btn active" do %>
+            <%= link_to product_reviews_index_path(@product), id: "btn-products", class: "tab-btn active" do %>
               <span class="stars">★★★★★</span>
               <span class="rating-stars">(4)</span>
             <% end %>
@@ -51,8 +51,7 @@
         <strong><span class="product-price"><%= number_to_currency(@product.price_per_day, unit: '', format: "%n€") %>/day</span></strong>
       </div>
 
-      <%= image_tag('address.png', id: 'map-trigger', class: "image-address") %>
-
+      <%= image_tag('address.png', id: 'map-trigger', class: "image-address", style: "width: 33px; height: 33px; margin: 0;") %>
       <div class="map-container"
           data-controller="map"
           data-map-markers-value="<%= [{ lat: @product.user.latitude, lng: @product.user.longitude }].to_json %>"
