@@ -79,6 +79,7 @@ group :test do
 end
 
 gem "devise"
+gem 'redis'
 
 gem "image_processing", "~> 1.12"
 
