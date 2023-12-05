@@ -2,6 +2,7 @@ class ReviewsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_booking, only: [:new, :create]
 
+
   def products_review_index
     @product = Product.find(params[:id])
     @bookings = @product.bookings
