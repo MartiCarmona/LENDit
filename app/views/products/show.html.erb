@@ -45,21 +45,29 @@
         </div>
 
         <h1 class="product-title"><%= @product.title %></h1>
-        <span class="product-condition"><%= @product.condition %></span>
-        <span class="product-category"><%= @product.category.name %></span>
+
+        <div class="row-container">
+          <div class="product-condition">
+            <%= @product.condition %>
+          </div>
+          <div class="product-category">
+            <%= @product.category.name %>
+          </div>
+          <%= image_tag('map3.png', id: 'map-trigger', class: "image-address") %>
+        </div>
+
         <p class="product-description"><%= @product.description %></p>
+
         <div class="price-and-rating-row">
           <div class="price-container">
             <strong><span class="product-price"><%= number_to_currency(@product.price_per_day, unit: '', format: "%n€") %>/day</span></strong>
           </div>
 
-          <!-- Stars and Rating Stars -->
           <%= link_to index_reviews_path, id: "btn-products", class: "tab-btn active" do %>
             <span class="stars">★★★★★</span>
             <span class="rating-stars">(4)</span>
           <% end %>
 
-          <!-- Avatar Image Button -->
           <%= link_to profile_path(@product.user), class: "avatar-btn" do %>
             <% if current_user.profile_photo.attached? %>
               <%= image_tag(current_user.profile_photo.variant(resize_to_limit: [30, 30]).processed, class: "avatar", alt: "User profile") %>
@@ -69,8 +77,6 @@
           <% end %>
         </div>
       </div>
-
-      <%# <%= image_tag('address.png', id: 'map-trigger', class: "image-address") %>
 
       <div class="map-container"
           data-controller="map"

@@ -198,6 +198,30 @@
         border-radius: 0.5rem;
         margin-bottom: -5rem;
 
+        .row-container {
+          display: flex;
+          height: auto;
+          margin-bottom: 30px;
+        }
+
+        .product-condition,
+        .product-category {
+          font-size: 1rem;
+          color: #666;
+          background: #e9ecef;
+          padding: 0.25rem 0.5rem;
+          border-radius: 0.25rem;
+          display: inline-block;
+          margin-right: 0.5rem;
+        }
+
+        .image-address {
+          margin-left: 0.5rem; // Add margin between category and address
+          width: 33px;
+          height: 33px;
+        }
+
+
         .icons-row {
           display: flex;
           justify-content: right;
@@ -289,7 +313,7 @@
           border-radius: 0.25rem;
           display: inline-block;
           margin-right: 0.5rem;
-          margin-bottom: 20px; /* Add margin between condition/category and the next item */
+          // margin-bottom: 20px;
         }
 
         .product-description {
@@ -297,7 +321,7 @@
           color: #666;
           line-height: 1.5;
           margin-top: 1rem;
-          margin-bottom: 20px; /* Increase margin between description and the next item */
+          // margin-bottom: 20px;
         }
       }
 
