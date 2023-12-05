@@ -1,33 +1,57 @@
-  <h1><%= @chat.name %></h1>
-  <h1>Chat</h1>
-<div  data-controller="chat"  data-chat-chatid-value="<%= @chat.id %>" data-current-user-id="<%= current_user.id %>">
-
-<div class="messages-container" data-chat-target="messages">
-
-  <% @chat.messages.each do |message| %>
-    <div class="message-box">
-      <% if message.user == current_user %>
-        <div class="message-right">
-          <div class="message-content">
-            <%= message.content %>
-          </div>
-        </div>
-         <p class="time-right"><%= message.timestamp_formatted %></p>
-      <% else %>
-        <div class="message-left">
-          <div class="message-content">
-            <%= message.content %>
-          </div>
-        </div>
-        <p class="time-left"><%= message.timestamp_formatted %></p>
-      <% end %>
+<h1><%= @chat.name %></h1>
+<div class="chat-product-item">
+  <% product = @booking.product if @booking.present? %>
+  <% if product %>
+    <div class="chat-image-container">
+      <%= image_tag(product.image.url, class: "chat-product-link") if product.image.present? %>
     </div>
+    <div class="chat-product-info">
+      <%= link_to product.title, product_path(product), class: "product-title" %>
+      <div class="date-range">
+        <span class="start-date">Start: <%= @booking.start_date.strftime('%b %d') %></span>
+        <span class="end-date">End: <%= @booking.end_date.strftime('%b %d') %></span>
+      </div>
+      <div class="chat-booking-price">
+        <span class="price">
+          <%= number_with_precision(@booking.total_price, precision: 2) %>€
+          (<%= number_with_precision(product.price_per_day, precision: 2) %>€/day)
+        </span>
+      </div>
+    </div>
+    <%= link_to profile_path(@product.user), class: "avatar-container" do %>
+      <% if @product.user.profile_photo.attached? %>
+        <%= image_tag(@product.user.profile_photo.variant(resize_to_limit: [50, 50]).processed, class: "avatar", alt: "User profile") %>
+      <% else %>
+        <%= image_tag("default-avatar.png", class: "avatar") %>
+      <% end %>
+    <% end %>
   <% end %>
 </div>
 
-    <%= form_with(model: [@chat, @message], url: chat_messages_path(@chat), local: true, method: :post) do |form| %>
-    <%= form.text_area :content, placeholder: 'Type your message...', rows: 3 , data: { chat_target: 'input' }%>
-    <%= form.submit 'Send Message' %>
+<div class="chat-containers" data-controller="chat"  data-chat-chatid-value="<%= @chat.id %>" data-current-user-id="<%= current_user.id %>">
+  <div class="messages-container" data-chat-target="messages">
+    <% @chat.messages.each do |message| %>
+      <div class="message-box">
+        <% if message.user == current_user %>
+          <div class="message-right">
+            <div class="message-content">
+              <%= message.content %>
+            </div>
+          </div>
+          <p class="time-right"><%= message.timestamp_formatted %></p>
+        <% else %>
+          <div class="message-left">
+            <div class="message-content">
+              <%= message.content %>
+            </div>
+          </div>
+          <p class="time-left"><%= message.timestamp_formatted %></p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <%= form_with(model: [@chat, @message], url: chat_messages_path(@chat), local: true, method: :post, html: { class: 'chat-form' }) do |form| %>
+    <%= form.text_area :content, placeholder: 'Type your message...', rows: 3 , data: { chat_target: 'input' }, class: 'form-control chat-input'%>
+    <%= form.submit 'Send Message', class: 'btn btn-primary chat-send-button' %>
   <% end %>
-  </div>
-  </div>
+</div>

@@ -1,7 +1,14 @@
+.messages-container {
+  min-height: 430px;
+  max-height: 430px;
+  overflow-y: auto;
+}
+
 .message-right {
   text-align: right;
   display: flex;
-  background-color: #f0f0f0;
+  background-color: #f8f8f8;
+  border: 0.5px solid #01C1AD;
   padding: 10px;
   margin-bottom: 5px;
   width: auto;
@@ -13,7 +20,7 @@
   display: inline-block;
   padding: 10px;
   margin-bottom: 10px;
-  border: 1px solid #ced4da;
+  border: 0.5px solid #01C1AD;
 }
 
 .message-box {
@@ -23,26 +30,143 @@
 
   .message-right {
     text-align: right;
-    background-color: #f0f0f0;
+    background-color: #f8f8f8;
+    border: 0.5px solid #01C1AD;
     padding: 10px;
-    border-radius: 30px;
+    border-radius: 20px;
     max-width: 500px;
   }
 
   .message-left {
     text-align: left;
     padding: 10px;
-    border-radius: 30px;
-    border: 1px solid #ced4da;
+    border-radius: 20px;
+    border: 0.5px solid #01C1AD;
     max-width: 500px;
   }
 }
 
-.time-right { /* Align timestamp to the end of the container */
+.time-right {
   font-size: x-small;
 }
 
 .time-left {
   font-size: x-small;
   margin-right: auto;
+}
+
+.chat-form {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+
+  .chat-input {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 20px;
+    font-family: 'Arial', sans-serif;
+    background-color: white;
+    resize: none;
+    height: 50px;
+  }
+
+  .chat-send-button {
+    background-color: #007883;
+    border-radius: 20px;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+}
+
+// dsdsd
+// dsdsd
+
+.chat-product-item {
+  display: grid;
+  grid-template-columns: 70px 1fr auto 50px;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #CED4DA;
+  background-color: white;
+
+  .chat-product-info {
+    max-height: 80px;
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+
+    .product-title {
+      font-weight: bold;
+      color: #333;
+      font-size: 1.7rem;
+      margin: 0;
+    }
+
+    .chat-booking-price {
+      align-self: start;
+      margin-top: 4px;
+
+      .price {
+        font-weight: bold;
+        color: #007883;
+        background-color: #f8f9fa;
+        padding: 2px 8px;
+        border-radius: 10px;
+        width: fit-content;
+      }
+    }
+  }
+
+  .chat-image-container {
+    grid-column: 1;
+    width: 70px;
+    height: 70px;
+
+    .chat-product-link {
+      border-radius: 20px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .date-range {
+    grid-column: 3;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    .start-date,
+    .end-date {
+      background-color: #f8f9fa;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin: 2px 0;
+      width: fit-content;
+    }
+  }
+
+  .avatar-container {
+    grid-column: 4;
+    justify-self: end;
+    width: 50px;
+    height: 50px;
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
 }
