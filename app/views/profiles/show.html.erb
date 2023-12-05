@@ -20,23 +20,9 @@
               <span class="rating-stars">(4)</span>
             <% end %>
           </div>
-
         </div>
       </div>
     </div>
-
-    <div class="reviews-section">
-      <h3>Reviews</h3>
-      <% @user.reviews.each do |review| %>
-        <div class="review">
-          <p><strong>Product Rating:</strong> <%= review.product_rating %></p>
-          <p><strong>Booking Rating:</strong> <%= review.booking_rating %></p>
-          <p><strong>Content:</strong> <%= review.product_content || review.booking_content %></p>
-          <p><strong>Reviewed by:</strong> <%= review.user.full_name %></p>
-        </div>
-      <% end %>
-    </div>
-
 
   <div class="tab-buttons">
     <button id="btn-products" class="tab-btn active">Products</button>

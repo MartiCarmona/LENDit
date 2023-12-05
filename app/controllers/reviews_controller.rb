@@ -3,9 +3,9 @@ class ReviewsController < ApplicationController
   before_action :load_booking, only: [:new, :create]
 
   def index
-    puts "Params: #{params.inspect}"
-    @user = User.find(params[:user_id])
-    @reviews = @user.received_reviews
+    @received_reviews = Review.where(user_id: current_user.id)
+
+    render layout: "with_sidebar"
   end
 
 
@@ -43,6 +43,8 @@ class ReviewsController < ApplicationController
       redirect_to root_path, alert: 'You can only add a review for an accepted and finished booking.'
     end
   end
+
+
 
 
   def destroy
