@@ -34,7 +34,7 @@
     <span class="sidebar-category">Borrows</span>
   <% end %>
 
-  <%= link_to "#", class: "sidebar-settings d-flex align-items-center #{'active' if request.path == '#'}" do %>
+  <%= link_to chats_path(current_user), class: "sidebar-settings d-flex align-items-center" do %>
     <div class="icon-margin">
       <%= image_tag "speech-bubble.png", class: "nav-icon" %>
     </div>
