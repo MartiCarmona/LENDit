@@ -9,17 +9,18 @@
         <%= image_tag("profile.png", class: "profile-image") %>
       <% end %>
     </div>
-    
+
     <div class="profile-details">
         <div class="profile-name-email">
           <h2 class="profile-name"><%= "#{@user.first_name} #{@user.last_name}" %></h2>
 
-          <div class="tab-buttons">
-          <button id="btn-products" class="tab-btn active">★★★★★</span>
-            <span class="rating-stars">(4)</span>
-          </button>
+          <div class="reviews">
+            <%= link_to index_reviews_path, id: "btn-products", class: "tab-btn active" do %>
+              <span class="stars">★★★★★</span>
+              <span class="rating-stars">(4)</span>
+            <% end %>
           </div>
-          
+
         </div>
       </div>
     </div>

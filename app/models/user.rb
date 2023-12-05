@@ -16,7 +16,8 @@ class User < ApplicationRecord
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
 
-  has_many :reviews, dependent: :destroy
+  has_many :reviews, foreign_key: :user_id
+  has_many :received_reviews, through: :reviews, source: :booking
 
   def toggle_favorite(product)
     if favorited_products.include?(product)
