@@ -58,3 +58,18 @@
     </div>
   </div>
 </div>
+
+ <% @reviews.each do |review| %>
+  <% unless review.booking.user == current_user %>
+  <h3>Product rating</h3>
+  <h5>Rating</h5>
+  <%= review.product_rating %>
+  <h5>Content</h5>
+  <%= review.product_content %>
+  <% end %>
+  <h3>Booking Rating</h3>
+   <h5>Rating</h5>
+  <%= review.booking_rating %>
+  <h5>Content</h5>
+  <%= review.booking_content %>
+  <% end %>

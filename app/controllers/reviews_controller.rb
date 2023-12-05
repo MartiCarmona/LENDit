@@ -2,11 +2,6 @@ class ReviewsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_booking, only: [:new, :create]
 
-  def index
-
-    render layout: "with_sidebar"
-  end
-
   def products_review_index
     @product = Product.find(params[:id])
     @bookings = @product.bookings
