@@ -2,7 +2,12 @@
   <div class="product-card">
     <div class="product-image-wrapper">
       <%= image_tag(@product.image, class: 'product-image') if @product.image.attached? %>
+      <div class="floating-button">
+        <%= link_to root_path, class: 'btn btn-floating' do %>
+        4.2 <span class="star">★</span>
+    <% end %>
     </div>
+  </div>
 
     <div class="product-details">
       <div class="product-info">
@@ -76,12 +81,11 @@
             <% end %>
           <% end %>
         </div>
-      </div>
-
-      <div class="map-container"
+        <div class="map-container"
           data-controller="map"
           data-map-markers-value="<%= [{ lat: @product.user.latitude, lng: @product.user.longitude }].to_json %>"
           data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+      </div>
       </div>
 
       <div class=under-container>
