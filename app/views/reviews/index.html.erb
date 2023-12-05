@@ -1,0 +1,10 @@
+<div class="reviews-section">
+  <h3>Reviews</h3>
+  <% @user.received_reviews.each do |review| %>
+    <div class="review">
+      <p><strong>Product Rating:</strong> <%= review.product_rating %></p>
+      <p><strong>Booking Rating:</strong> <%= review.booking_rating %></p>
+      <!-- Add other review details as needed -->
+    </div>
+  <% end %>
+</div>

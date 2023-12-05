@@ -36,7 +36,7 @@ Rails.application.routes.draw do
 
 
   resources :users, only: [:show, :update] do
-    resources :reviews, only: [:new, :create, :destroy, :index]
+    resources :reviews
   end
 
   namespace :status do
