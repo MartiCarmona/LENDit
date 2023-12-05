@@ -433,4 +433,10 @@ products.each do |product|
   end
 end
 
-Booking.create(start_date: Date.today, end_date: Date.today + 1, status: 'accepted', user: User.first, product: Product.first)
+Booking.create(
+  start_date: 5.days.ago.to_date,
+  end_date: 4.days.ago.to_date,
+  status: 'accepted',
+  user: User.first,
+  product: Product.first
+)

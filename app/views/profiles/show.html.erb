@@ -15,7 +15,7 @@
           <h2 class="profile-name"><%= "#{@user.first_name} #{@user.last_name}" %></h2>
 
           <div class="reviews">
-            <%= link_to index_reviews_path, id: "btn-products", class: "tab-btn active" do %>
+            <%= link_to "View Reviews", user_reviews_path(@user) , id: "btn-products", class: "tab-btn active" do %>dar
               <span class="stars">★★★★★</span>
               <span class="rating-stars">(4)</span>
             <% end %>

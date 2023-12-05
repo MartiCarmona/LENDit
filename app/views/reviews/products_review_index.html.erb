@@ -1,0 +1,14 @@
+<div class="profile-section">
+
+ <div class="reviews-container">
+  <h3>Product Reviews</h3>
+
+  <% @product_reviews.each do |review| %>
+    <div class="review">
+      <p><strong>Product Rating:</strong> <%= review.product_rating %></p>
+      <p><strong>Product Content:</strong> <%= review.product_content %></p>
+    </div>
+  <% end %>
+</div>
+
+</div>

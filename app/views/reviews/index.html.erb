@@ -1,18 +1,17 @@
 <div class="profile-section">
+  <h3>Reviews</h3>
 
-<% @current_user.received_reviews.each do |review| %>
-  <% unless @booking.product.user == current_user %>
-    <h3>Reviews1</h3>
-
-
+  <% @user.received_reviews.each do |review| %>
     <div class="review">
+      <p><strong>Reviewed by:</strong> <%= review.user.full_name %></p>
+
+      <% if review.review_type == 'product' %>
         <p><strong>Product Rating:</strong> <%= review.product_rating %></p>
+        <p><strong>Product Content:</strong> <%= review.product_content %></p>
+      <% elsif review.review_type == 'booking' %>
         <p><strong>Booking Rating:</strong> <%= review.booking_rating %></p>
-        <p><strong>Content:</strong> <%= review.product_content || review.booking_content %></p>
-        <p><strong>Reviewed by:</strong> <%= review.user.full_name %></p>
-      </div>
-
+        <p><strong>Booking Content:</strong> <%= review.booking_content %></p>
+      <% end %>
+    </div>
   <% end %>
-  <% else %>
-
 </div>

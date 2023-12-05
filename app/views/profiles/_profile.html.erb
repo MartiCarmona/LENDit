@@ -12,7 +12,7 @@
           <h2 class="profile-name"><%= "#{@user.first_name} #{@user.last_name}" %></h2>
 
           <div class="reviews">
-            <%= link_to index_reviews_path, id: "btn-products", class: "tab-btn active" do %>
+            <%= link_to index_reviews_path, id: "btn-products", class: "tab-btn active" do %>dar
               <span class="stars">★★★★★</span>
               <span class="rating-stars">(4)</span>
             <% end %>
@@ -21,10 +21,10 @@
         </div>
         <div class="profile-actions">
           <%= link_to edit_user_registration_path, class: 'btn' do %>
-            <%= image_tag "editing.png", class: "profile-icon" %>
+            <%= image_tag "editing.png", class: "profile-icon", style: "width: 25px; height: 25px; margin: 0;"%>
           <% end %>
           <%= link_to destroy_user_session_path, data: { turbo_method: :delete }, class: 'btn' do %>
-            <%= image_tag "log-out.png", class: "profile-icon" %>
+            <%= image_tag "log-out.png", class: "profile-icon", style: "width: 25px; height: 25px; margin: 0;" %>
           <% end %>
         </div>
       </div>
@@ -32,9 +32,15 @@
   </div>
 
 
-  <div class="tab-buttons">
-    <button id="btn-products" class="tab-btn active">Products</button>
+  <div class="tab-content" id="productsTab">
+
   </div>
+
+      <div class="tab-buttons">
+      <%= link_to profile_path(current_user), id: "btn-products", class: "tab-btn active" do %>
+        Products
+      <% end %>
+    </div>
 
   <div id="products" class="tab-content active">
     <div class="products-grid">
