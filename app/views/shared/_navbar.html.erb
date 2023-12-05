@@ -26,7 +26,7 @@
           </li>
 
           <li class="nav-item">
-            <%= link_to "#", class: "nav-link d-flex align-items-center" do %>
+            <%= link_to chats_path(current_user), class: "nav-link d-flex align-items-center" do %>
             <%= image_tag "speech-bubble.png", class: "nav-icon-2 me-2" %>
             <span>Messages</span>
             <% end %>
