@@ -1,7 +1,22 @@
-<h1>All Chats</h1>
+<h2>Your Messages</h2>
 
-<ul>
+<ul class="chat-list">
   <% @chats.each do |chat| %>
-    <li><%= link_to chat.name, chat_path(chat) %></li>
+    <li class="chat-card">
+      <%= link_to chat_path(chat) do %>
+        <div class="card-content">
+          <% if chat.booking.present? && chat.booking.product.present? %>
+            <div class="image-container">
+              <%= image_tag(chat.booking.product.image.url, class: "card-image") %>
+            </div>
+            <div class="card-details">
+              <h3 class="card-title"><%= chat.booking.product.title %></h3>
+            </div>
+          <% else %>
+            <p>No booking product information available</p>
+          <% end %>
+        </div>
+      <% end %>
+    </li>
   <% end %>
 </ul>
