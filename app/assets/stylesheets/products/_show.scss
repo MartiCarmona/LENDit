@@ -204,12 +204,24 @@
           gap: 10px;
           align-items: center;
 
+          .product-icon .product-icon-filled{
+            margin-right: 10px;
+            width: 50px;
+            height: 50px;
+          }
+
           .profile-image-product {
             width: 33px;
             height: 33px;
             border-radius: 50%;
             object-fit: cover;
           }
+        }
+
+        .chat-icon {
+          width: 28.5px;
+          height: 28.5x;
+          margin-left: 5px;
         }
 
         .user-btn {
@@ -225,11 +237,40 @@
             background-color: #e9e9e9;
           }
         }
+        .avatar{
+          height: 30px;
+          width: 30px;
+        }
 
+        .avatar-btn {
+          // border: 0.5px solid #01C1AD;
+          border-radius: 50%;
+          background-color: #f4f4f4;
+          width: 30px;
+          height: 30px;
+        }
+
+        .price-and-rating-row {
+          display: flex;
+          align-items: center;
+          margin-top: 10px; // Adjust the margin as needed
+
+          .price-container {
+            margin-right: auto; // Adjust the margin between price and stars
+          }
+
+          .stars,
+          .rating-stars {
+            margin-left: 0px; // Adjust the margin between stars and rating
+          }
+
+          .avatar-btn {
+            margin-left: 10px; // Adjust the margin between rating and avatar
+          }
+        }
         .product-price {
           font-size: 1.5rem;
           color: #3c3c3c;
-          display: block;
         }
 
         .product-title {
@@ -237,6 +278,7 @@
           color: #333;
           margin-bottom: 30px;
         }
+
 
         .product-condition,
         .product-category {
