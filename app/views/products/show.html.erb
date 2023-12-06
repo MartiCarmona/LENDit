@@ -3,9 +3,12 @@
     <div class="product-image-wrapper">
       <%= image_tag(@product.image, class: 'product-image') if @product.image.attached? %>
       <div class="floating-button">
-        <%= link_to root_path, class: 'btn btn-floating' do %>
-        4.2 <span class="star">★</span>
+        <%= link_to product_reviews_index_path, class: 'btn btn-floating' do %>
+        <span class="rating-stars" style= "color: rgb(93, 93, 93)";>( <%= (@reviews.average(:product_rating)&.round(1)  || 0) %> )</span>
+        <span class="star"><i class="fa-solid fa-star"></i></span>
+
     <% end %>
+
     </div>
   </div>
 

@@ -6,7 +6,7 @@ class Product < ApplicationRecord
   has_one_attached :image
   has_many :favorites, dependent: :destroy
   has_many :favorited_by_users, through: :favorites, source: :user
-  # has_many :reviews
+  #has_many :reviews
 
   def favorited_by_user?(user)
     favorited_by_users.include?(user)
@@ -20,6 +20,9 @@ class Product < ApplicationRecord
     end
   end
 
+  def average_rating
+  end
+
   def booked_by_user?(user)
     bookings.where(user: user, status: 'booked').exists?
   end
@@ -27,4 +30,5 @@ class Product < ApplicationRecord
   def self.search(query)
     where("name ILIKE ? OR category ILIKE ? OR description ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
   end
+
 end

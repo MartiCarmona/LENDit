@@ -19,6 +19,9 @@ class ProductsController < ApplicationController
     @booking = Booking.new
     @favorite = Favorite.new
     @booked_products = current_user.nil? ? [] : current_user.booked_products
+
+    @reviews = Review.where(booking: Booking.where(product: @product))
+
   end
 
   def new
