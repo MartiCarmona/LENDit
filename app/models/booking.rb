@@ -4,8 +4,6 @@ class Booking < ApplicationRecord
   has_many :reviews
   has_one_attached :image
 
-  validate :unique_booking_for_user
-
   validates :start_date, presence: true
   validates :end_date, presence: true
 
