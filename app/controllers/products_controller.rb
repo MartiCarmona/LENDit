@@ -19,7 +19,6 @@ class ProductsController < ApplicationController
     @booking = Booking.new
     @favorite = Favorite.new
     @booked_products = current_user.nil? ? [] : current_user.booked_products
-
   end
 
   def new

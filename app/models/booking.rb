@@ -42,5 +42,6 @@ class Booking < ApplicationRecord
   def unique_booking_for_user
   end
 
+  
 
 end

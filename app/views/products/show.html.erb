@@ -51,10 +51,24 @@
             <strong><span class="product-price"><%= number_to_currency(@product.price_per_day, unit: '', format: "%n€") %>/day</span></strong>
           </div>
 
-          <%= link_to index_reviews_path, id: "btn-products", class: "tab-btn active" do %>
-            <span class="stars">★★★★★</span>
-            <span class="rating-stars">(4)</span>
+           <span class="stars" style="color: #007883">
+          <% filled_stars = (@product.user.average_rating || 0).to_i %>
+          <% half_star = (@product.user.average_rating || 0) - filled_stars %>
+          <% empty_stars = 5 - filled_stars - (half_star.positive? ? 1 : 0) %>
+
+          <% filled_stars.times do %>
+            <i class="fa-solid fa-star"></i>
           <% end %>
+
+          <% if half_star.positive? %>
+            <i class="fa-solid fa-star-half-stroke"></i>
+          <% end %>
+
+          <% empty_stars.times do %>
+            <i class="fa-regular fa-star"></i>
+          <% end %>
+        </span>
+        <span class="rating-stars" style= "color: rgb(93, 93, 93)";>( <%= (@product.user.all_received_reviews.count  || 0) %> )</span>
 
           <%= link_to profile_path(@product.user), class: "avatar-btn" do %>
             <% if current_user %>

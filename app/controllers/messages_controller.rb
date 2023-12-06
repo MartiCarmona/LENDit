@@ -13,7 +13,6 @@ class MessagesController < ApplicationController
         userId: @message.user.id, timestamp: @message.timestamp_formatted }
       )
       head :ok
-      # redirect_to chat_path(@chat), notice: 'Message sent successfully.'
     else
       redirect_to chat_path(@chat), alert: 'Message could not be sent.'
     end
