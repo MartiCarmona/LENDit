@@ -134,6 +134,8 @@ GEM
     erubi (1.12.0)
     execjs (2.9.1)
     ffi (1.16.3)
+    font-awesome-rails (4.7.0.8)
+      railties (>= 3.2, < 8.0)
     font-awesome-sass (6.4.2)
       sassc (~> 2.0)
     geocoder (1.8.2)
@@ -325,6 +327,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   error_highlight (>= 0.4.0)
+  font-awesome-rails
   font-awesome-sass (~> 6.1)
   geocoder
   image_processing (~> 1.12)
