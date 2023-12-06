@@ -17,9 +17,24 @@ class User < ApplicationRecord
   after_validation :geocode, if: :will_save_change_to_address?
 
   has_many :reviews, foreign_key: :user_id
-  has_many :received_reviews, through: :reviews, source: :booking
 
+  def received_reviews_as_renter
+    Review.joins(:booking).where(bookings: { user_id: self.id }, review_type: 'by_owner')
+  end
 
+  def received_reviews_as_owner
+    Review.joins(booking: :product).where(products: { user_id: self.id }, review_type: 'by_renter')
+  end
+
+  def all_received_reviews
+    received_reviews_as_renter + received_reviews_as_owner
+  end
+
+  def average_rating
+    return nil if all_received_reviews.empty?
+
+    all_received_reviews.sum(&:booking_rating) / all_received_reviews.count.to_f
+  end
 
   def toggle_favorite(product)
     if favorited_products.include?(product)

@@ -7,7 +7,7 @@ class ReviewsController < ApplicationController
     @product = Product.find(params[:id])
     @bookings = @product.bookings
 
-    @product_reviews = Review.joins(:booking).where(bookings: { product_id: @product.id }, review_type: 'product')
+    @product_reviews = Review.joins(:booking).where(bookings: { product_id: @product.id }, review_type: 'by_renter')
     render layout: "without_sidebar"
   end
 
@@ -38,11 +38,9 @@ class ReviewsController < ApplicationController
       @review.user_id = current_user.id
       @review.booking_id = @booking.id
         if current_user == @booking.product.user
-          @review.product_content = "Content"
-          @review.product_rating = 1
-          @review.review_type = "booking"
+          @review.review_type = "by_owner"
         else
-          @review.review_type = "product"
+          @review.review_type = "by_renter"
         end
 
 
