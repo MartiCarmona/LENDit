@@ -7,14 +7,16 @@
     </div>
     <div class="chat-product-info">
       <%= link_to product.title, product_path(product), class: "product-title" %>
-      <span class="price">
-        <%=number_with_precision(@booking.product.price_per_day * (@booking.end_date-@booking.start_date), precision: (product.price_per_day.to_i == product.price_per_day) ? 0 : 2) %>€
-        (<%=number_with_precision(@booking.product.price_per_day, precision: (product.price_per_day.to_i == product.price_per_day) ? 0 : 2) %>€/day)
-      </span>
-    </div>
-    <div class="date-range">
-      <span class="start-date">Start: <%= @booking.start_date.strftime('%b %d') %></span>
-      <span class="end-date">End: <%= @booking.end_date.strftime('%b %d') %></span>
+      <div class="date-range">
+        <span class="start-date">Start: <%= @booking.start_date.strftime('%b %d') %></span>
+        <span class="end-date">End: <%= @booking.end_date.strftime('%b %d') %></span>
+      </div>
+      <div class="chat-booking-price">
+        <span class="price">
+          <%= number_with_precision(@booking.total_price, precision: 2) %>€
+          (<%= number_with_precision(product.price_per_day, precision: 2) %>€/day)
+        </span>
+      </div>
     </div>
     <%= link_to profile_path(@product.user), class: "avatar-container" do %>
       <% if @product.user.profile_photo.attached? %>
@@ -32,14 +34,14 @@
       <div class="message-box">
         <% if message.user == current_user %>
           <div class="message-right">
-            <div class="message-content" style="font-family: 'helvetica neue'">
+            <div class="message-content">
               <%= message.content %>
             </div>
           </div>
           <p class="time-right"><%= message.timestamp_formatted %></p>
         <% else %>
           <div class="message-left">
-            <div class="message-content" style="font-family: 'helvetica neue'">
+            <div class="message-content">
               <%= message.content %>
             </div>
           </div>
@@ -49,7 +51,7 @@
     <% end %>
   </div>
   <%= form_with(model: [@chat, @message], url: chat_messages_path(@chat), local: true, method: :post, html: { class: 'chat-form' }) do |form| %>
-    <%= form.text_area :content, placeholder: 'Type your message...', rows: 3 , data: { chat_target: 'input' }, class: 'form-control chat-input', style:"font-family: 'helvetica neue'"%>
-    <%= form.submit 'Send Message', class: 'btn btn-primary chat-send-button', style:"font-family: 'helvetica neue'" %>
+    <%= form.text_area :content, placeholder: 'Type your message...', rows: 3 , data: { chat_target: 'input' }, class: 'form-control chat-input'%>
+    <%= form.submit 'Send Message', class: 'btn btn-primary chat-send-button' %>
   <% end %>
 </div>

@@ -432,11 +432,3 @@ products.each do |product|
     puts "Error creating product '#{product[:title]}': #{e.message}"
   end
 end
-
-Booking.create(
-  start_date: 5.days.ago.to_date,
-  end_date: 4.days.ago.to_date,
-  status: 'accepted',
-  user: User.first,
-  product: Product.find(69)
-)

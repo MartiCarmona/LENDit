@@ -7,10 +7,9 @@ h2 {
 }
 
 .profile-section {
-
   .profile-header {
     display: flex;
-    align-items: flex-start;
+    align-items: center; // Changed to center the items vertically within the header
     padding: 20px 30px;
     background-color: #f4f4f4;
     height: 220px;
@@ -20,13 +19,32 @@ h2 {
       overflow: hidden;
       width: 250px;
       margin-right: 20px;
-      align-items: center;
+      display: flex; // Ensure the content of profile-picture is also flex
+      justify-content: center; // Center horizontally
+      align-items: center; // Center vertically
 
       img.profile-image {
         width: 100%;
         height: auto;
         border-radius: 50%;
-        align-items: center;
+        object-fit: cover; // Ensure the image covers the area without distortion
+        // Add any specific margins you need, for example:
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+    }
+
+    .tab-2-buttons {
+      margin-top: 20px;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+      button.tab-2-btn {
+        padding: 8px 16px;
+        background-color: #f4f4f4;
+        border-radius: 20px;
+        margin-right: 10px;
+        cursor: pointer;
+        margin-top: 40px;
       }
     }
 
@@ -64,6 +82,8 @@ h2 {
 
 
     .profile-details {
+      margin-top: -70px;
+      margin-left: 20px;
       display: flex;
       justify-content: space-between;
       width: 100%;
