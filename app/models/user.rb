@@ -19,6 +19,8 @@ class User < ApplicationRecord
   has_many :reviews, foreign_key: :user_id
   has_many :received_reviews, through: :reviews, source: :booking
 
+
+
   def toggle_favorite(product)
     if favorited_products.include?(product)
       favorited_products.delete(product)
@@ -40,4 +42,5 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
 end

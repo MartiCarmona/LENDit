@@ -9,7 +9,7 @@ class Booking < ApplicationRecord
   validates :start_date, presence: true
   validates :end_date, presence: true
 
-  validate :valid_dates
+  #validate :valid_dates
 
   scope :upcoming, -> { where(status: "accepted").where("start_date > ?", Date.today) }
   scope :finished, -> { where(status: "accepted").where("end_date < ?", Date.today) }

@@ -17,6 +17,8 @@ class ChatsController < ApplicationController
   def show
     @chat = Chat.find(params[:id])
     @message = Message.new
+    @booking = @chat.booking
+    @product = @booking.product if @booking.present?
     render layout: "with_sidebar"
   end
 end

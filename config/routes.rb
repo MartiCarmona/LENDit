@@ -6,12 +6,15 @@ Rails.application.routes.draw do
   resources :products do
     resources :bookings, only: [:new, :create, :show]
     resources :favorites, only: [:create]
-    resources :reviews, only: [:new, :create, :destroy, :index]
+    resources :reviews, only: [:new, :create]
 
     member do
       get 'toggle_favorite'
     end
   end
+
+  get "products/:id/reviews", to: "reviews#products_review_index", as: "product_reviews_index"
+
 
   resources :bookings do
     resources :reviews, only: [:new, :create, :destroy, :index]
@@ -31,7 +34,6 @@ Rails.application.routes.draw do
   resources :chats, only: [:show] do
     resources :messages, only: [:create]
   end
-
 
   resources :users, only: [:show, :update] do
     resources :reviews

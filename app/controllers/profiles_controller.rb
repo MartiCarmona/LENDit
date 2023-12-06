@@ -8,6 +8,7 @@ class ProfilesController < ApplicationController
     @bookings = @user.bookings
     @booked_products = @user.booked_products
     @received_bookings = @user.received_bookings
+    @reviews = Review.all.select { |review| (review.booking.product.user == @user || review.booking.user == @user) && review.user !=  @user  }
     if current_user == @user
       render layout: "with_sidebar"
     else
