@@ -16,7 +16,7 @@
             <%= form.text_area :product_content %>
 
             <%= form.hidden_field :booking_id, value: @booking.id %>
-            <%= form.hidden_field :review_type, value: 'product' %>
+            <%= form.hidden_field :review_type, value: 'by_renter' %>
           </fieldset>
         <% end %>
 
@@ -30,7 +30,7 @@
           <%= form.text_area :booking_content %>
 
           <%= form.hidden_field :booking_id, value: @booking.id %>
-          <%= form.hidden_field :review_type, value: 'booking' %>
+          <%= form.hidden_field :review_type, value: 'by_owner' %>
         </fieldset>
 
         <%= form.submit 'Submit Reviews' %>
