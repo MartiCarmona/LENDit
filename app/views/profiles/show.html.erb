@@ -15,7 +15,25 @@
           <h2 class="profile-name"><%= "#{@user.first_name} #{@user.last_name}" %></h2>
 
             <div class="tabs">
-              <button class="tab star-tab" id=" tab star-tab"onclick="toggleTab('reviews')"> <span class="stars" style="color: #007883">★★★★★</span> <span class="rating-stars">(4)</span>
+              <button class="tab star-tab" id="tab-star-tab" onclick="toggleTab('reviews')">
+                <span class="stars" style="color: #007883">
+                  <% filled_stars = (@user.average_rating || 0).to_i %>
+                  <% half_star = (@user.average_rating || 0) - filled_stars %>
+                  <% empty_stars = 5 - filled_stars - (half_star.positive? ? 1 : 0) %>
+
+                  <% filled_stars.times do %>
+                    <i class="fa-solid fa-star"></i>
+                  <% end %>
+
+                  <% if half_star.positive? %>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                  <% end %>
+
+                  <% empty_stars.times do %>
+                    <i class="fa-regular fa-star"></i>
+                  <% end %>
+                </span>
+                <span class="rating-stars" style= "color: rgb(93, 93, 93)";>( <%= (@user.all_received_reviews.count  || 0) %> )</span>
               </button>
             </div>
 
@@ -64,29 +82,32 @@
 </div>
  </div>
 
-   <div class="tab-content" id="reviewsTab">
-    <div class="reviews-container">
-  <h2>Average Booking Rating: <%= @average_booking_rating %></h2>
+<div class="tab-content" id="reviewsTab">
 
-  <% @reviews.each do |review| %>
-    <% unless review.booking.user == current_user %>
-      <!-- Display product rating and content -->
-      <h3>Product rating</h3>
+  <div class="reviews-container">
+    <h2>Overall User Rating: <%= '★' * (@user.average_rating || 0) %> (<%= @user.average_rating || 0 %>)</h2>
+
+    <% @reviews.each do |review| %>
+      <% unless review.booking.user == current_user %>
+        <% if review.review_type == 'by_renter' && review.product_rating.present? && review.booking.present? && review.booking.product.user == current_user %>
+          <h3>Product Rating</h3>
+          <h5>Rating</h5>
+          <%= review.product_rating %>
+          <h5>Content</h5>
+          <%= review.product_content %>
+        <% end %>
+      <% end %>
+
+      <h3>Booking Rating</h3>
       <h5>Rating</h5>
-      <%= review.product_rating %>
+      <%= review.booking_rating %>
       <h5>Content</h5>
-      <%= review.product_content %>
+      <%= review.booking_content %>
     <% end %>
+  </div>
+</div>
 
-    <!-- Display booking rating and content -->
-    <h3>Booking Rating</h3>
-    <h5>Rating</h5>
-    <%= review.booking_rating %>
-    <h5>Content</h5>
-    <%= review.booking_content %>
-  <% end %>
-</div>
-</div>
+
 
   <script>
   function toggleTab(tabName) {

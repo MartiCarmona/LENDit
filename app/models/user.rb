@@ -30,6 +30,10 @@ class User < ApplicationRecord
     received_reviews_as_renter + received_reviews_as_owner
   end
 
+  def number_of_received_reviews
+    all_received_reviews.count
+  end
+
   def average_rating
     return nil if all_received_reviews.empty?
 

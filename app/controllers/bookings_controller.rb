@@ -7,6 +7,7 @@ class BookingsController < ApplicationController
     @user = @booking.user
     @reviews = @booking.reviews
     @review = Review.find_by(booking_id: @booking.id, user_id: current_user.id)
+
     render layout: "with_sidebar"
   end
 
@@ -15,6 +16,7 @@ class BookingsController < ApplicationController
     @accepted_lend_requests = current_user.received_bookings.upcoming
     @finished_lend_requests = current_user.received_bookings.finished
     @ongoing_lend_requests = current_user.received_bookings.ongoing
+    @user = current_user
 
     render layout: 'with_sidebar'
   end
@@ -24,6 +26,8 @@ class BookingsController < ApplicationController
     @accepted_borrow_requests = current_user.bookings.upcoming
     @finished_borrow_requests = current_user.bookings.finished
     @ongoing_borrow_requests = current_user.bookings.ongoing
+    @user = current_user
+
 
     render layout: 'with_sidebar'
   end
@@ -71,6 +75,7 @@ class BookingsController < ApplicationController
     end
   end
 
+
   def accept
     @booking = Booking.find(params[:id])
     update_booking_status('accepted')
@@ -89,7 +94,6 @@ class BookingsController < ApplicationController
 
 
   end
-
 
   private
 
