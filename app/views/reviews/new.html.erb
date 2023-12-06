@@ -2,40 +2,38 @@
   <div class="form-container">
     <div class="info">
       <h1>Add Review for <%= @booking.product.title %></h1>
-
-      <%= simple_form_for [@booking, @review], url: booking_reviews_path(@booking), method: :post do |form| %>
-
-        <% unless @booking.product.user == current_user %>
-          <fieldset>
-            <legend>Product Review</legend>
-
-            <%= form.label :product_rating, 'Product Rating' %>
-            <%= form.number_field :product_rating, in: 1..5 %>
-
-            <%= form.label :product_content, 'Product Content' %>
-            <%= form.text_area :product_content %>
-
-            <%= form.hidden_field :booking_id, value: @booking.id %>
-            <%= form.hidden_field :review_type, value: 'by_renter' %>
-          </fieldset>
-        <% end %>
-
-        <fieldset>
-          <legend>Booking Review</legend>
-
-          <%= form.label :booking_rating, 'Booking Rating' %>
-          <%= form.number_field :booking_rating, in: 1..5 %>
-
-          <%= form.label :booking_content, 'Booking Content' %>
-          <%= form.text_area :booking_content %>
-
-          <%= form.hidden_field :booking_id, value: @booking.id %>
-          <%= form.hidden_field :review_type, value: 'by_owner' %>
-        </fieldset>
-
-        <%= form.submit 'Submit Reviews' %>
-
-      <% end %>
     </div>
+
+    <%= simple_form_for [@booking, @review], url: booking_reviews_path(@booking), method: :post do |form| %>
+      <fieldset class="mb-3">
+        <% unless @booking.product.user == current_user %>
+          <legend class="form-legend">Product Review</legend>
+          <div class="form-row">
+            <div class="form-group form-group-rating">
+              <%= form.input :product_rating, label: 'Product Rating', collection: 1..5, selected: 5, include_blank: false, wrapper: false, label_html: { class: 'form-label-rating' }, input_html: { class: 'form-control rating-select' } %>
+            </div>
+            <div class="form-group form-group-content">
+              <%= form.input :product_content, label: 'Product Content', as: :text, wrapper: false, label_html: { class: 'form-label-content' }, input_html: { class: 'form-control content-textarea' } %>
+            </div>
+          </div>
+        <% end %>
+      </fieldset>
+
+      <fieldset class="mb-3">
+        <legend class="form-legend">Booking Review</legend>
+        <div class="form-row">
+          <div class="form-group form-group-rating">
+            <%= form.input :booking_rating, label: 'Booking Rating', collection: 1..5, selected: 5, include_blank: false, wrapper: false, label_html: { class: 'form-label-rating' }, input_html: { class: 'form-control rating-select' } %>
+          </div>
+          <div class="form-group form-group-content">
+            <%= form.input :booking_content, label: 'Booking Content', as: :text, wrapper: false, label_html: { class: 'form-label-content' }, input_html: { class: 'form-control content-textarea' } %>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="upload-button">
+        <%= form.button :submit, 'Submit Reviews', class: "btn btn-primary" %>
+      </div>
+    <% end %>
   </div>
 </section>
