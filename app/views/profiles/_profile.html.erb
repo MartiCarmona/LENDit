@@ -2,47 +2,42 @@
     <div class="profile-header">
       <div class="profile-picture">
         <% if current_user.profile_photo.attached? %>
-            <%= image_tag(current_user.profile_photo.variant(resize_to_limit: [100, 100]).processed, class: "profile-image") %>
+          <%= image_tag(current_user.profile_photo.variant(resize_to_limit: [100, 100]).processed,class:"profile-image") %>
           <% else %>
-            <%= image_tag("profile.png", class: "profile-pic") %>
+            <%= image_tag("profile.png", class: "profile-image") %>
         <% end %>
       </div>
       <div class="profile-details">
         <div class="profile-name-email">
           <h2 class="profile-name"><%= "#{@user.first_name} #{@user.last_name}" %></h2>
 
-          <div class="reviews">
-            <%= link_to index_reviews_path, id: "btn-products", class: "tab-btn active" do %>
-              <span class="stars" style="color: #007883">★★★★★</span>
-              <span class="rating-stars">(4)</span>
-            <% end %>
+
+        <div class="tabs">
+          <button class="tab star-tab" id=" tab star-tab"onclick="toggleTab('reviews')"> <span class="stars" style="color: #007883">★★★★★</span> <span class="rating-stars">(4)</span>
+          </button>
+
           </div>
 
         </div>
         <div class="profile-actions">
           <%= link_to edit_user_registration_path, class: 'btn' do %>
-            <%= image_tag "editing.png", class: "profile-icon", style: "width: 25px; height: 25px; margin: 0;"%>
+            <%= image_tag "editing.png", class: "profile-icon" %>
           <% end %>
           <%= link_to destroy_user_session_path, data: { turbo_method: :delete }, class: 'btn' do %>
-            <%= image_tag "log-out.png", class: "profile-icon", style: "width: 25px; height: 25px; margin: 0;" %>
+            <%= image_tag "log-out.png", class: "profile-icon" %>
           <% end %>
         </div>
       </div>
     </div>
   </div>
 
-
-  <div class="tab-content" id="productsTab">
-
+  <div class="tabs">
+  <button class="tab" onclick="toggleTab('products')">Products</button>
+  <button class="tab" onclick="toggleTab('reviews')">Reviews</button>
   </div>
 
-      <div class="tab-buttons">
-      <%= link_to profile_path(current_user), id: "btn-products", class: "tab-btn active" do %>
-        Products
-      <% end %>
-    </div>
 
-  <div id="products" class="tab-content active">
+<div class="tab-content" id="productsTab">
     <div class="products-grid">
       <% @products.each do |product| %>
         <%= link_to product_path(product), class: 'product-link' do %>
@@ -57,19 +52,52 @@
       <% end %>
     </div>
   </div>
+  </div>
+
+
+<div class="tab-content" id="reviewsTab">
+
+  <div class="reviews-container">
+    <h2>Overall User Rating: <%= '★' * (@user.average_rating || 0) %> (<%= @user.average_rating || 0 %>)</h2>
+
+    <% @reviews.each do |review| %>
+      <% unless review.booking.user == current_user %>
+        <% if review.review_type == 'by_renter' && review.product_rating.present? && review.booking.present? && review.booking.product.user == current_user %>
+          <h3>Product Rating</h3>
+          <h5>Rating</h5>
+          <%= review.product_rating %>
+          <h5>Content</h5>
+          <%= review.product_content %>
+        <% end %>
+      <% end %>
+
+      <h3>Booking Rating</h3>
+      <h5>Rating</h5>
+      <%= review.booking_rating %>
+      <h5>Content</h5>
+      <%= review.booking_content %>
+    <% end %>
+  </div>
 </div>
 
- <% @reviews.each do |review| %>
-  <% unless review.booking.user == current_user %>
-  <h3>Product rating</h3>
-  <h5>Rating</h5>
-  <%= review.product_rating %>
-  <h5>Content</h5>
-  <%= review.product_content %>
-  <% end %>
-  <h3>Booking Rating</h3>
-   <h5>Rating</h5>
-  <%= review.booking_rating %>
-  <h5>Content</h5>
-  <%= review.booking_content %>
-  <% end %>
+
+
+
+
+
+<script>
+  function toggleTab(tabName) {
+    document.querySelectorAll('.tab-content').forEach(tab => {
+      tab.style.display = 'none';
+    });
+
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.classList.remove('active');
+    });
+
+    document.getElementById(`${tabName}Tab`).style.display = 'block';
+    document.querySelector(`.tab.${tabName}`).classList.add('active');
+  }
+
+  toggleTab('products');
+</script>
