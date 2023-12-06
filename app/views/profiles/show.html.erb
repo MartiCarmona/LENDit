@@ -85,8 +85,6 @@
 <div class="tab-content" id="reviewsTab">
 
   <div class="reviews-container">
-    <h2>Overall User Rating: <%= '★' * (@user.average_rating || 0) %> (<%= @user.average_rating || 0 %>)</h2>
-
     <% @reviews.each do |review| %>
       <% unless review.booking.user == current_user %>
         <% if review.review_type == 'by_renter' && review.product_rating.present? && review.booking.present? && review.booking.product.user == current_user %>

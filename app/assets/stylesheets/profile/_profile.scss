@@ -6,6 +6,17 @@ h2 {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+h3 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+span{
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+
+
+
 .profile-section {
   .profile-header {
     display: flex;
@@ -332,6 +343,7 @@ h2 {
 
 .star-tab{
   border: none;
+  margin-left: -18px;
 }
 
 // reviews
@@ -347,7 +359,6 @@ h2 {
 
   .review-card {
     list-style: none;
-    margin: 10px;
     width: calc(100% - 20px);
     border-radius: 8px;
     overflow: hidden;
@@ -360,6 +371,7 @@ h2 {
 
     .card-content {
       display: flex;
+      height: 115px;
 
       .image-container {
         width: 115px;
