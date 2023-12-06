@@ -1,56 +1,81 @@
-.chat-layout {
-  display: flex;
-  height: calc(100vh - 50px); // Adjust the height based on your navbar height
+h2 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  margin-bottom: 20px;
 }
 
-// Chat list sidebar styling
-.chat-list {
-  background-color: #e9ecef;
-  width: 300px; // Example width for the chat list
-  overflow-y: auto;
-  padding: 20px;
-  border-right: 1px solid #ddd;
+h3 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
 
-  h1 {
-    font-family: 'Arial', sans-serif;
+
+ul.chat-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.chat-card {
+  margin: 10px;
+  width: calc(100% - 20px); /* Adjust the width as needed */
+  border-radius: 8px;
+  overflow: hidden;
+  height: 115px;
+  border: 0.5px solid #01C1AD;
+  transition: box-shadow 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   }
 
-  ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
 
-    .chat-item {
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-      &.active {
-        background-color: #f0f0f0;
+  .card-content {
+    display: flex;
+
+    .image-container {
+      width: 115px; /* Adjust the width of the square container */
+      height: 115px; /* Make it a square */
+      overflow: hidden;
+      border-radius: 8px 0 0 8px; /* Rounded left corners */
+
+      .card-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Preserve aspect ratio without stretching */
       }
-      &:hover {
-        background-color: lighten(#f0f0f0, 5%);
+    }
+
+    .card-details {
+      padding: 18px;
+      flex-grow: 1;
+
+      .person-names {
+        margin-left: 10px;
+        color: rgb(93, 93, 93);
+        font-size: 15px;
+        font-weight: 200;
       }
 
-      // Style the chat link
-      a {
-        text-decoration: none;
-        color: inherit;
-        display: block;
+      .card-title {
+        margin-top: 3px;
+        margin-bottom: 10px;
+        margin-left: 10px;
+        font-size: 16px;
+        font-weight: bold;
       }
 
-      // Style for the timestamp
-      .chat-timestamp {
-        display: block;
-        color: gray;
+      .last-message {
+        margin-left: 10px;
+        color: rgb(93, 93, 93);
+        font-size: 16px;
+        margin-bottom: 0px;
+      }
+
+      .timestamp {
         font-size: small;
-        text-align: right;
+        font-weight: lighter;
+        margin-left: 5px;
       }
     }
   }
-}
-
-// Chat content area styling
-.chat-content {
-  flex-grow: 1;
-  padding: 20px;
-  // Additional styling for the chat content
 }

@@ -21,6 +21,10 @@ class Booking < ApplicationRecord
     declined: 'declined'
   }
 
+  def other_user(current_user)
+    [user, product.user].find { |user| user != current_user }
+  end
+
   private
 
   def valid_dates

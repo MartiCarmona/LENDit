@@ -13,7 +13,7 @@
         <% if user_signed_in? %>
 
         <form action="<%= products_path %>" method="get" class="search-bar-container">
-            <input type="text" class="form-control search-bar" placeholder="Search for items" name="search">
+            <input type="text" class="form-control search-bar" placeholder="Search for items" name="search" style="font-family: Helvetica Neue">
         </form>
 
           <li class="nav-item active">
@@ -45,7 +45,7 @@
         <% else %>
 
          <form action="<%= products_path %>" method="get" class="search-bar-container">
-            <input type="text" class="form-control search-bar" placeholder="Search for items" name="search">
+            <input type="text" class="form-control search-bar" placeholder="Search for items" name="search" style="font-family: Helvetica Neue">
           </form>
 
           <li class="nav-item">

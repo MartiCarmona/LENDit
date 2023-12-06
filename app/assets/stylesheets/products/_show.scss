@@ -3,7 +3,6 @@
   padding-left: 4rem;
   padding-right: 4rem;
 
-
   .date-inputs {
     display: flex;
     gap: 10px;
@@ -12,6 +11,8 @@
     margin-left: -3rem;
     margin-right: -3rem;
     justify-content: center;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
   }
 
   input[type="text"] {
@@ -33,6 +34,8 @@
     transition: background-color 0.3s ease;
     text-decoration: none;
     object-position: center;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
 
     &:hover {
       background-color: darken($color: #007883, $amount: 10%); // Darken the button on hover
@@ -100,6 +103,7 @@
       max-width: 70%;
       height: 585px;
       width: 850px;
+      position: relative;
 
       .product-image {
         object-fit: cover;
@@ -107,6 +111,36 @@
         width: 100%;
         height: 100%;
         object-position: center;
+      }
+
+      .floating-button {
+        position: absolute;
+        top: 16px; // Adjust the top position as needed
+        left: 16px; // Adjust the right position as needed
+        z-index: 1;
+      }
+
+      .star{
+        text-align: center;
+        color: #007883;
+        font-size: 20px;
+      }
+
+      .btn-floating{
+        padding: 6px 12px;
+        border: 0.5px solid #01C1AD;
+        border-radius: 20px;
+        background-color: #f4f4f4;
+        text-decoration: none;
+        font-size: 20px;
+        color: black;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        text-decoration: none;
+        object-position: center;
+        text-align: center;
       }
     }
 
@@ -198,11 +232,41 @@
         border-radius: 0.5rem;
         margin-bottom: -5rem;
 
+        .row-container {
+          display: flex;
+          height: auto;
+          margin-bottom: 30px;
+        }
+
+        .product-condition,
+        .product-category {
+          font-size: 1rem;
+          color: #666;
+          background: #e9ecef;
+          padding: 0.25rem 0.5rem;
+          border-radius: 0.25rem;
+          display: inline-block;
+          margin-right: 0.5rem;
+        }
+
+        .image-address {
+          margin-left: 0.5rem; // Add margin between category and address
+          width: 33px;
+          height: 33px;
+        }
+
+
         .icons-row {
           display: flex;
           justify-content: right;
           gap: 10px;
           align-items: center;
+
+          .product-icon .product-icon-filled{
+            margin-right: 10px;
+            width: 50px;
+            height: 50px;
+          }
 
           .profile-image-product {
             width: 33px;
@@ -210,6 +274,12 @@
             border-radius: 50%;
             object-fit: cover;
           }
+        }
+
+        .chat-icon {
+          width: 28.5px;
+          height: 28.5x;
+          margin-left: 5px;
         }
 
         .user-btn {
@@ -238,29 +308,25 @@
           height: 30px;
         }
 
-        price-and-rating-row {
+        .price-and-rating-row {
           display: flex;
           align-items: center;
           margin-top: 10px; // Adjust the margin as needed
-          justify-content: space-between;
 
-          .product-price,
+          .price-container {
+            margin-right: auto; // Adjust the margin between price and stars
+          }
+
           .stars,
-          .rating-stars,
-          .avatar-btn {
-            margin-right: 10px; // Adjust the margin between items
-          }
-
-          .product-price{
-            margin-right: 50px;
+          .rating-stars {
+            margin-left: 0px;
+            color: #007883; // Adjust the margin between stars and rating
           }
 
           .avatar-btn {
-            margin-left: auto; // Push avatar button to the right
+            margin-left: 10px; // Adjust the margin between rating and avatar
           }
         }
-
-
         .product-price {
           font-size: 1.5rem;
           color: #3c3c3c;
@@ -270,7 +336,9 @@
           font-size: 2rem;
           color: #333;
           margin-bottom: 30px;
+          font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
+
 
         .product-condition,
         .product-category {
@@ -281,7 +349,8 @@
           border-radius: 0.25rem;
           display: inline-block;
           margin-right: 0.5rem;
-          margin-bottom: 20px; /* Add margin between condition/category and the next item */
+          font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          // margin-bottom: 20px;
         }
 
         .product-description {
@@ -289,7 +358,8 @@
           color: #666;
           line-height: 1.5;
           margin-top: 1rem;
-          margin-bottom: 20px; /* Increase margin between description and the next item */
+          font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          // margin-bottom: 20px;
         }
       }
 

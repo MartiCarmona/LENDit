@@ -79,6 +79,7 @@ class BookingsController < ApplicationController
   def decline
     @booking = Booking.find(params[:id])
     update_booking_status('declined')
+    Chat.find_by(booking_id: @booking.id).destroy
   end
 
   def cancel

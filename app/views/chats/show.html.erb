@@ -22,7 +22,7 @@
       <% if @product.user.profile_photo.attached? %>
         <%= image_tag(@product.user.profile_photo.variant(resize_to_limit: [50, 50]).processed, class: "avatar", alt: "User profile") %>
       <% else %>
-        <%= image_tag("default-avatar.png", class: "avatar") %>
+        <%= image_tag("profile.png", class: "avatar") %>
       <% end %>
     <% end %>
   <% end %>
