@@ -12,6 +12,7 @@
     <div class="product-details">
       <div class="product-info">
         <div class="icons-row">
+
           <% if user_signed_in? && current_user != @product.user %>
             <% if @product.favorited_by_user?(current_user) && current_user != @product.user %>
               <%= link_to toggle_favorite_product_path(@product), method: :post, class: 'product-icon-filled' do %>
@@ -22,30 +23,12 @@
                 <%= image_tag 'likeGOODnot.png' %>
               <% end %>
             <% end %>
-            <%= link_to chats_path(current_user), class: "nav-link d-flex align-items-center" do %>
-              <%= image_tag "speech-bubble.png", class: "chat-icon" %>
-            <% end %>
           <% elsif !user_signed_in? %>
             <%= link_to new_user_session_path, id: "btn-products", class: "tab-btn active" do %>
-              <span class="stars">★★★★★</span>
-              <span class="rating-stars">(4)</span>
+           <%= link_to new_user_session_path, method: :post, class: 'product-icon' do %>
+                <%= image_tag 'likeGOODnot.png' %>
+              <% end %>
             <% end %>
-
-            <div class="product-icon">
-              <%= link_to new_user_session_path, method: :post do %>
-                <%= image_tag 'like.png' %>
-              <% end %>
-              <%= link_to new_user_session_path do %>
-                <button class="btn-chat user-btn">Chat</button>
-              <% end %>
-              <%= link_to profile_path(@product.user), class: "btn btn-primary avatar-btn" do %>
-                <% if current_user.profile_photo.attached? %>
-                  <%= image_tag(current_user.profile_photo.variant(resize_to_limit: [100, 100]).processed, class: "avatar", alt: "User profile") %>
-                <% else %>
-                  <%= image_tag("profile.png", class: "avatar") %>
-                <% end %>
-              <% end %>
-            </div>
           <% end %>
         </div>
 
@@ -74,8 +57,12 @@
           <% end %>
 
           <%= link_to profile_path(@product.user), class: "avatar-btn" do %>
+            <% if current_user %>
             <% if current_user.profile_photo.attached? %>
               <%= image_tag(current_user.profile_photo.variant(resize_to_limit: [30, 30]).processed, class: "avatar", alt: "User profile") %>
+            <% else %>
+              <%= image_tag("profile.png", class: "avatar") %>
+            <% end %>
             <% else %>
               <%= image_tag("profile.png", class: "avatar") %>
             <% end %>

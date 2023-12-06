@@ -7,6 +7,7 @@ h3 {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+
 ul.chat-list {
   list-style: none;
   padding: 0;
@@ -19,7 +20,7 @@ ul.chat-list {
   width: calc(100% - 20px); /* Adjust the width as needed */
   border-radius: 8px;
   overflow: hidden;
-  height: 100px;
+  height: 115px;
   border: 0.5px solid #01C1AD;
   transition: box-shadow 0.3s ease-in-out;
 
@@ -32,8 +33,8 @@ ul.chat-list {
     display: flex;
 
     .image-container {
-      width: 100px; /* Adjust the width of the square container */
-      height: 100px; /* Make it a square */
+      width: 115px; /* Adjust the width of the square container */
+      height: 115px; /* Make it a square */
       overflow: hidden;
       border-radius: 8px 0 0 8px; /* Rounded left corners */
 
@@ -45,14 +46,35 @@ ul.chat-list {
     }
 
     .card-details {
-      padding: 16px;
+      padding: 18px;
       flex-grow: 1;
 
-      .card-title {
-        margin-top: 5px;
+      .person-names {
         margin-left: 10px;
-        font-size: 18px;
+        color: rgb(93, 93, 93);
+        font-size: 15px;
+        font-weight: 200;
+      }
+
+      .card-title {
+        margin-top: 3px;
+        margin-bottom: 10px;
+        margin-left: 10px;
+        font-size: 16px;
         font-weight: bold;
+      }
+
+      .last-message {
+        margin-left: 10px;
+        color: rgb(93, 93, 93);
+        font-size: 16px;
+        margin-bottom: 0px;
+      }
+
+      .timestamp {
+        font-size: small;
+        font-weight: lighter;
+        margin-left: 5px;
       }
     }
   }

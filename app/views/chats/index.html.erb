@@ -10,7 +10,18 @@
               <%= image_tag(chat.booking.product.image.url, class: "card-image") %>
             </div>
             <div class="card-details">
+              <div class="person-names">
+                <% other_user = chat.booking.other_user(current_user) %>
+                <%= other_user.full_name %>
+              </div>
               <h3 class="card-title"><%= chat.booking.product.title %></h3>
+              <p class="last-message">
+                <% last_message = chat.messages.last %>
+                <%= last_message.content if last_message.present? %>
+                <span class="timestamp">
+                  <%= last_message.timestamp_formatted if last_message.present? %>
+                </span>
+              </p>
             </div>
           <% else %>
             <p>No booking product information available</p>
