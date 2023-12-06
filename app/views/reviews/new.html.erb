@@ -1,41 +1,55 @@
-<section id="container">
+<section id=container>
   <div class="form-container">
     <div class="info">
-      <h1>Add Review for <%= @booking.product.title %></h1>
+        <h1>Add Review for <%= @booking.product.title %></h1>
 
-      <%= simple_form_for [@booking, @review], url: booking_reviews_path(@booking), method: :post do |form| %>
+          <%= simple_form_for [@booking, @review], url: booking_reviews_path(@booking), method: :post do |form| %>
 
-        <% unless @booking.product.user == current_user %>
-          <fieldset>
-            <legend>Product Review</legend>
+            <% unless @booking.product.user == current_user %>
+              <fieldset>
+              <strong>  <h4><label class="form-label">Product Review</label></h4></strong>
 
-            <%= form.label :product_rating, 'Product Rating' %>
-            <%= form.number_field :product_rating, in: 1..5 %>
+              <div class="mb-3">
+                <strong> <%= form.label :product_rating, 'Product Rating' %> </strong>
+                <%= form.number_field :product_rating, in: 1..5 %>
+              </div>
 
-            <%= form.label :product_content, 'Product Content' %>
-            <%= form.text_area :product_content %>
+              <div class="mb-3">
+                <strong> <%= form.label :product_content, 'Product Content' %> </strong>
+                <%= form.text_area :product_content %>
+              </div>
 
-            <%= form.hidden_field :booking_id, value: @booking.id %>
-            <%= form.hidden_field :review_type, value: 'by_renter' %>
-          </fieldset>
-        <% end %>
+              <div class="mb-3">
+                <%= form.hidden_field :booking_id, value: @booking.id %>
+                <%= form.hidden_field :review_type, value: 'by_renter' %>
+              </div>
+              </fieldset>
+            <% end %>
 
-        <fieldset>
-          <legend>Booking Review</legend>
+            <fieldset>
 
-          <%= form.label :booking_rating, 'Booking Rating' %>
-          <%= form.number_field :booking_rating, in: 1..5 %>
+                <h4><label class="form-label">Booking Review</label></h4>
 
-          <%= form.label :booking_content, 'Booking Content' %>
-          <%= form.text_area :booking_content %>
+            <div class="mb-3">
+              <strong> <%= form.label :booking_rating, 'Booking Rating' %> </strong>
+              <%= form.number_field :booking_rating, in: 1..5 %>
+            </div>
 
-          <%= form.hidden_field :booking_id, value: @booking.id %>
-          <%= form.hidden_field :review_type, value: 'by_owner' %>
-        </fieldset>
+            <div class="mb-3">
+              <strong> <%= form.label :booking_content, 'Booking Content' %> </strong>
+              <%= form.text_area :booking_content %>
+            </div>
 
-        <%= form.submit 'Submit Reviews' %>
+            <div class="mb-3">
+              <%= form.hidden_field :booking_id, value: @booking.id %>
+              <%= form.hidden_field :review_type, value: 'by_owner' %>
+            </div>
+            </fieldset>
+            <div class="upload-button">
+              <%= form.submit 'Submit Reviews', class: "btn btn-primary"%>
+            </div>
 
-      <% end %>
+          <% end %>
+        </div>
     </div>
-  </div>
 </section>
