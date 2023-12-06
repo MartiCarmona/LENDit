@@ -11,12 +11,31 @@
         <div class="profile-name-email">
           <h2 class="profile-name"><%= "#{@user.first_name} #{@user.last_name}" %></h2>
 
+    <div class="tabs">
+      <button class="tab star-tab" id="tab-star-tab" onclick="toggleTab('reviews')">
+      <% review_count = @user.number_of_received_reviews%>
+        <span class="stars" style="color: #007883">
+          <% filled_stars = (@user.average_rating || 0).to_i %>
+          <% half_star = (@user.average_rating || 0) - filled_stars %>
+          <% empty_stars = 5 - filled_stars - (half_star.positive? ? 1 : 0) %>
 
-        <div class="tabs">
-          <button style="background-color: #f4f4f4; margin-left: -24px;" class="tab-2 star-tab" id=" tab-2 star-tab"onclick="toggleTab('reviews')"> <span class="stars" style="color: #007883">★★★★★</span> <span class="rating-stars">(4)</span>
-          </button>
+          <% filled_stars.times do %>
+            <i class="fa-solid fa-star"></i>
+          <% end %>
 
-          </div>
+          <% if half_star.positive? %>
+            <i class="fa-solid fa-star-half-stroke"></i>
+          <% end %>
+
+          <% empty_stars.times do %>
+            <i class="fa-regular fa-star"></i>
+          <% end %>
+        </span>
+        <span class="rating-stars" style= "color: rgb(93, 93, 93)";>( <%= (@user.all_received_reviews.count || 0) %> )</span>
+      </button>
+    </div>
+
+
 
         </div>
         <div class="profile-actions">

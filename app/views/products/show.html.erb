@@ -3,16 +3,18 @@
     <div class="product-image-wrapper">
       <%= image_tag(@product.image, class: 'product-image') if @product.image.attached? %>
       <div class="floating-button">
-        <%= link_to root_path, class: 'btn btn-floating' do %>
-        4.2 <span class="star">★</span>
-    <% end %>
-    </div>
-  </div>
 
-    <div class="product-details">
+        <div class="tabs">
+        <button class="tab btn-floating" onclick="toggleTab('reviews')">      <span class="rating-stars" style= "color: rgb(93, 93, 93)";>( <%= (@reviews.average(:product_rating)&.round(1)  || 0) %> )</span>
+        <span class="star"><i class="fa-solid fa-star"></i></span></button>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="detailsTab" class="product-details">
       <div class="product-info">
         <div class="icons-row">
-
           <% if user_signed_in? && current_user != @product.user %>
             <% if @product.favorited_by_user?(current_user) && current_user != @product.user %>
               <%= link_to toggle_favorite_product_path(@product), method: :post, class: 'product-icon-filled' do %>
@@ -25,9 +27,7 @@
             <% end %>
           <% elsif !user_signed_in? %>
             <%= link_to new_user_session_path, id: "btn-products", class: "tab-btn active" do %>
-           <%= link_to new_user_session_path, method: :post, class: 'product-icon' do %>
-                <%= image_tag 'likeGOODnot.png' %>
-              <% end %>
+              <%= image_tag 'likeGOODnot.png' %>
             <% end %>
           <% end %>
         </div>
@@ -51,18 +51,33 @@
             <strong><span class="product-price"><%= number_to_currency(@product.price_per_day, unit: '', format: "%n€") %>/day</span></strong>
           </div>
 
-          <%= link_to product_reviews_index_path, id: "btn-products", class: "tab-btn active" do %>
-            <span class="stars">★★★★★</span>
-            <span class="rating-stars" style="color: rgb(93, 93, 93);">(4)</span>
+           <span class="stars" style="color: #007883">
+          <% filled_stars = (@product.user.average_rating || 0).to_i %>
+          <% half_star = (@product.user.average_rating || 0) - filled_stars %>
+          <% empty_stars = 5 - filled_stars - (half_star.positive? ? 1 : 0) %>
+
+          <% filled_stars.times do %>
+            <i class="fa-solid fa-star"></i>
           <% end %>
+
+          <% if half_star.positive? %>
+            <i class="fa-solid fa-star-half-stroke"></i>
+          <% end %>
+
+          <% empty_stars.times do %>
+            <i class="fa-regular fa-star"></i>
+
+          <% end %>
+        </span>
+        <span class="rating-stars" style= "color: rgb(93, 93, 93)";>( <%= (@product.user.all_received_reviews.count  || 0) %> )</span>
 
           <%= link_to profile_path(@product.user), class: "avatar-btn" do %>
             <% if current_user %>
-            <% if current_user.profile_photo.attached? %>
-              <%= image_tag(current_user.profile_photo.variant(resize_to_limit: [30, 30]).processed, class: "avatar", alt: "User profile") %>
-            <% else %>
-              <%= image_tag("profile.png", class: "avatar") %>
-            <% end %>
+              <% if current_user.profile_photo.attached? %>
+                <%= image_tag(current_user.profile_photo.variant(resize_to_limit: [30, 30]).processed, class: "avatar", alt: "User profile") %>
+              <% else %>
+                <%= image_tag("profile.png", class: "avatar") %>
+              <% end %>
             <% else %>
               <%= image_tag("profile.png", class: "avatar") %>
             <% end %>
@@ -72,7 +87,7 @@
           data-controller="map"
           data-map-markers-value="<%= [{ lat: @product.user.latitude, lng: @product.user.longitude }].to_json %>"
           data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-      </div>
+        </div>
       </div>
 
       <div class=under-container>
@@ -94,5 +109,29 @@
         </div>
       </div>
     </div>
+
+
+
+
+
+
+
+    <div id="reviewsTab" class="product-reviews d-none">
+      <div class="grey-card">
+    <!-- Add your content for the grey card here -->
+    <h1 class="product-title">Reviews</h1>
+    <p>This is the review content.</p>
+  </div>
+    </div>
+
   </div>
 </section>
+
+<script>
+  function toggleTab() {
+
+    document.getElementById(`reviewsTab`).classList.toggle('d-none');
+    document.getElementById(`detailsTab`).classList.toggle('d-none');
+
+  }
+</script>

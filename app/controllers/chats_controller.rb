@@ -3,6 +3,8 @@ class ChatsController < ApplicationController
 
   def index
     @chats = Chat.all
+    @user = current_user
+
     render layout: "with_sidebar"
   end
 
@@ -19,6 +21,8 @@ class ChatsController < ApplicationController
     @message = Message.new
     @booking = @chat.booking
     @product = @booking.product if @booking.present?
+    @user = current_user
+
     render layout: "with_sidebar"
   end
 end
