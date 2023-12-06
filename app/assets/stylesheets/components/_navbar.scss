@@ -22,7 +22,7 @@ body, html {
   display: flex;
 }
 
-#navbarSupportedContent .btn-upload {
+#navbarSupportedContent .btn-upload .btn-login {
   color: white;
   font-weight: normal;
   text-transform: capitalize;
@@ -124,6 +124,27 @@ body, html {
   }
 }
 
+.btn-login {
+  border: 1px solid #01C1AD;
+  border-radius: 20px;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 1.3rem;
+
+  &:hover {
+    background-color: #0078831e;
+  }
+
+  &:before {
+    display: inline-block;
+    margin-right: 0.5rem;
+  }
+}
 
 .dropdown-menu {
   border-radius: 4px;

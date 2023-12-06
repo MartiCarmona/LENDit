@@ -17,7 +17,7 @@
         </form>
 
           <li class="nav-item active">
-            <%= link_to "Upload Product", new_product_path, class: "nav-link btn-upload" %>
+            <%= link_to "Upload Product", new_product_path, class: "nav-link btn-upload", style: "color: white;" %>
           <li class="nav-item active">
             <%= link_to profile_favorites_path(current_user), class: "nav-link d-flex align-items-center" do %>
               <%= image_tag "passion.png", class: "nav-icon me-2" %>
@@ -48,8 +48,12 @@
             <input type="text" class="form-control search-bar" placeholder="Search for items" name="search" style="font-family: Helvetica Neue">
           </form>
 
+          <li class="nav-item active">
+            <%= link_to "Upload Product", new_product_path, class: "nav-link btn-upload", style: "color: white;"%>
+          <li class="nav-item active">
+
           <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+            <%= link_to "Login", new_user_session_path, class: "nav-link btn-login" %>
           </li>
         <% end %>
       </ul>
