@@ -51,9 +51,9 @@
             <strong><span class="product-price"><%= number_to_currency(@product.price_per_day, unit: '', format: "%n€") %>/day</span></strong>
           </div>
 
-          <%= link_to index_reviews_path, id: "btn-products", class: "tab-btn active" do %>
+          <%= link_to product_reviews_index_path, id: "btn-products", class: "tab-btn active" do %>
             <span class="stars">★★★★★</span>
-            <span class="rating-stars">(4)</span>
+            <span class="rating-stars" style="color: rgb(93, 93, 93);">(4)</span>
           <% end %>
 
           <%= link_to profile_path(@product.user), class: "avatar-btn" do %>
