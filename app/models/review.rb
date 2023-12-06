@@ -19,5 +19,5 @@ class Review < ApplicationRecord
   def by_renter?
     user == booking.user
   end
-end
 
+end
