@@ -26,7 +26,6 @@
   overflow: hidden;
   transition: box-shadow 0.3s ease-in-out;
   background-color: white;
-  width: 270px;
 
   &:hover {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -58,7 +57,7 @@
       margin-right: 0.5rem;
       max-width: fit-content;
       margin-left: auto;
-      font-size: 18.5px;
+      font-size: 17px;
 
       .product-icon-filled{
         color: #007883;
@@ -68,7 +67,7 @@
 
     .title {
       max-width: fit-content;
-      font-size: 18.5px;
+      font-size: 17px;
     }
 
     .title, .description {

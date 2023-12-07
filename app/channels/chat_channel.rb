@@ -9,12 +9,17 @@ class ChatChannel < ApplicationCable::Channel
     # Any cleanup needed when channel is unsubscribed
   end
 
+  def receive(data)
+    send_message(data)
+  end
+
   def send_message(data)
-    chat = Chat.find(params[:chat_id])
+    debugger
+    chat = Chat.find(data["chat_id"])
     user = current_user # Implement your authentication logic here
 
     message = Message.create(user: user, chat: chat, content: data['content'])
-    ActionCable.server.broadcast("chat_#{params[:chat_id]}", message: render_message(message))
+    ChatChannel.broadcast_to(chat, message: render_message(message))
   end
 
   private

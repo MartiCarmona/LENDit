@@ -2,24 +2,24 @@ import { Controller } from '@hotwired/stimulus';
 import { createConsumer } from "@rails/actioncable"
 
 export default class extends Controller {
-  static targets = ['messages', 'input'];
+  static targets = ['messages', 'input', 'form'];
   static values = { chatid: Number }
 
   connect() {
     this.setupSubscription();
     this.setupEnterKeyListener();
+    this.messagesTarget.scrollTop = this.messagesTarget.scrollHeight
 
     console.log(this.chatidValue);
   }
 
   setupSubscription() {
     const chatId = this.chatidValue
-
-
       const chatChannel = createConsumer().subscriptions.create({ channel: 'ChatChannel', chat_id: chatId }, {
         received: (data) => {
           console.log('hola');
           this.appendMessage(data);
+          this.messagesTarget.scrollTop = this.messagesTarget.scrollHeight
         },
       });
 
@@ -31,7 +31,7 @@ export default class extends Controller {
     this.inputTarget.addEventListener('keypress', (event) => {
       if (event.key === 'Enter') {
         event.preventDefault();
-        this.sendMessage();
+        this.sendMessage(event);
       }
     });
   }
@@ -53,11 +53,13 @@ export default class extends Controller {
 
   }
 
-  sendMessage() {
+  sendMessage(e) {
+    e.preventDefault();
     const content = this.inputTarget.value;
     if (content.trim() !== '') {
-      const chatId = this.data.get('chatId');
-      this.chatChannel.send({ content, chat_id: chatId });
+      const chatId = this.chatidValue;
+      console.log(chatId)
+      fetch(this.formTarget.action, {  method: "POST", body: new FormData(this.formTarget )})
       this.inputTarget.value = '';
     }
   }

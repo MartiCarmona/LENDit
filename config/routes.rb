@@ -31,10 +31,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :chats, only: [:show] do
-    resources :messages, only: [:create]
-  end
-
   resources :users, only: [:show, :update] do
     resources :reviews
   end
