@@ -56,7 +56,6 @@
   background: #f4f4f4;
   padding: 2rem;
   display: flex;
-  justify-content: center;
 
   .product-title {
     font-size: 2rem;
@@ -194,9 +193,22 @@
 
       .map-container {
         margin-top: 1rem;
-        height: 200px;
+        height: 170px;
         width: 100%;
         display: none;
+        z-index: 10;
+      }
+      .mapboxgl-canvas {
+        height: 170px;
+        width: 100%;
+      }
+
+      .mapboxgl-ctrl {
+        display: none;
+      }
+
+      .mapboxgl-ctrl {
+        z-index: 5;
       }
 
       input.btn{
@@ -339,7 +351,7 @@
 
           .stars,
           .rating-stars {
-            margin-left: 0px;
+            margin-left: 3px;
             color: #007883; // Adjust the margin between stars and rating
           }
 
