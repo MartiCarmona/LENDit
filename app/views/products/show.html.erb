@@ -17,7 +17,7 @@
           <% if user_signed_in? && current_user != @product.user %>
             <% if @product.favorited_by_user?(current_user) && current_user != @product.user %>
               <%= link_to toggle_favorite_product_path(@product), method: :post, class: 'product-icon-filled' do %>
-                <%= image_tag 'Un.png' %>
+                <%= image_tag 'likeGOODblue.png' %>
               <% end %>
             <% else %>
               <%= link_to toggle_favorite_product_path(@product), method: :post, class: 'product-icon' do %>

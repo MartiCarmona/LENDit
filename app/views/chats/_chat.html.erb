@@ -50,7 +50,7 @@
       </div>
     <% end %>
   </div>
-  <%= form_with(model: [@chat, @message], url: chat_messages_path(@chat), local: true, method: :post, html: { class: 'chat-form' }) do |form| %>
+  <%= form_with(model: [@chat, @message], url: chat_messages_path(@chat), local: true, method: :post, html: { class: 'chat-form', data: { chat_target: "form" }}) do |form| %>
     <%= form.text_area :content, placeholder: 'Type your message...', rows: 3 , data: { chat_target: 'input' }, class: 'form-control chat-input'%>
     <%= form.submit 'Send Message', class: 'btn btn-primary chat-send-button' %>
   <% end %>
