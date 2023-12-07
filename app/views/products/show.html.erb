@@ -9,7 +9,6 @@
         <span class="star"><i class="fa-solid fa-star"></i></span></button>
         </div>
       </div>
-
     </div>
 
     <div id="detailsTab" class="product-details">
@@ -18,7 +17,7 @@
           <% if user_signed_in? && current_user != @product.user %>
             <% if @product.favorited_by_user?(current_user) && current_user != @product.user %>
               <%= link_to toggle_favorite_product_path(@product), method: :post, class: 'product-icon-filled' do %>
-                <%= image_tag 'likeGOOD.png' %>
+                <%= image_tag 'Un.png' %>
               <% end %>
             <% else %>
               <%= link_to toggle_favorite_product_path(@product), method: :post, class: 'product-icon' do %>
@@ -74,6 +73,7 @@
           <%= link_to profile_path(@product.user) do %>
               <span class="rating-stars" style= "color: rgb(93, 93, 93)">( <%= (@product.user.all_received_reviews.count  || 0) %> )</span>
           <% end %>
+
             <%= link_to profile_path(@product.user), class: "avatar-btn" do %>
               <% if current_user %>
                 <% if current_user.profile_photo.attached? %>
@@ -85,6 +85,7 @@
                 <%= image_tag("profile.png", class: "avatar") %>
               <% end %>
             <% end %>
+
         </div>
 
         <div class="map-container"

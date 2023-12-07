@@ -11,7 +11,9 @@ class ProductsController < ApplicationController
       else
         @products = Product.all
       end
+
     end
+
   end
 
 #

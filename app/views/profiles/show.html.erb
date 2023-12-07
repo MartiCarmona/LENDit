@@ -4,10 +4,10 @@
   <div class="profile-header">
     <div class="profile-picture">
       <% if @user.profile_photo.attached? %>
-        <%= image_tag(@user.profile_photo.variant(resize_to_limit: [100, 100])) %>
-      <% else %>
-        <%= image_tag("profile.png", class: "profile-image") %>
-      <% end %>
+          <%= image_tag(@user.profile_photo.variant(resize_to_limit: [100, 100]).processed,class:"profile-image") %>
+          <% else %>
+            <%= image_tag("profile.png", class: "profile-image") %>
+        <% end %>
     </div>
 
     <div class="profile-details">
