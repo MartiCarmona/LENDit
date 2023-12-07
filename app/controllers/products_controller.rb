@@ -18,6 +18,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @booking = Booking.new
     @favorite = Favorite.new
+    @disabled_dates = @product.bookings.map { |booking| { from: booking.start_date, to: booking.end_date } }
     @booked_products = current_user.nil? ? [] : current_user.booked_products
 
     @reviews = Review.where(booking: Booking.where(product: @product))
