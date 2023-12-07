@@ -4,6 +4,7 @@
     <%= notice %>
   </div>
 <% end %>
+
 <% if alert %>
   <div class="alert alert-warning alert-dismissible fade show m-1" role="alert">
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -13,7 +14,7 @@
 
 
 <script>
-  // Timeout for notice alert
+
   var noticeAlert = document.getElementById('notice-alert');
   if (noticeAlert) {
     setTimeout(function() {
@@ -21,7 +22,6 @@
     }, 3000);
   }
 
-  // Timeout for alert alert
   var alertAlert = document.getElementById('alert-alert');
   if (alertAlert) {
     setTimeout(function() {
