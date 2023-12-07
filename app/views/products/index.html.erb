@@ -10,9 +10,12 @@
     <% end %>
   <% end %>
 
+
   <% unless params[:category_id].present? %>
     <div class="products-grid">
+    <% already_displayed= []%>
       <% @products.first(5).each do |product| %>
+        <% already_displayed << product.id %>
         <%= link_to product_path(product), class: 'product-link mb-3' do %>
           <div class="product-card">
             <%= image_tag(product.image, class: 'product-image') if product.image.attached? %>
@@ -32,15 +35,14 @@
       </div>
   <% end %>
 
-
-
    <% unless params[:category_id].present? %>
     <h2 class="my-4"><strong>Recommended for you:</strong></h2>
   <% end %>
 
   <% unless params[:category_id].present? %>
     <div class="products-grid">
-      <% @products.drop(5).each do |product| %>
+    <% products = @products.where.not(id:already_displayed) %>
+      <% products.each do |product| %>
         <%= link_to product_path(product), class: 'product-link' do %>
           <div class="product-card">
             <%= image_tag(product.image, class: 'product-image') if product.image.attached? %>

@@ -2,9 +2,13 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   def index
     if params[:search].present?
-      @products = Product.where("title ILIKE ? OR description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%").where.not(id: current_user.booked_products.pluck(:id))
+      @products = Product.where("title ILIKE ? OR description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
     elsif params[:category_id].present?
-      @products = Product.where(category_id: params[:category_id]).where.not(id: current_user.booked_products.pluck(:id))
+      if current_user.present?
+        @products = Product.where(category_id: params[:category_id]).where.not(id: current_user.booked_products.pluck(:id))
+      else
+        @products = Product.where(category_id: params[:category_id])
+      end
     else
       if current_user.present?
         @products = Product.where.not(user: current_user).where.not(id: current_user.booked_products.pluck(:id))
