@@ -1,5 +1,6 @@
 require 'open-uri'
 
+Review.destroy_all
 Chat.destroy_all
 Booking.destroy_all
 Product.destroy_all
@@ -7,9 +8,9 @@ User.destroy_all
 Category.destroy_all
 
 
-User.create(email: 'ignacio@gmail.com', first_name: 'Ignacio', last_name: 'Borrell', password: '123456')
-User.create(email: 'nahuel@gmail.com', first_name: 'Nahuel', last_name: 'Ribera', password: '123456')
-User.create(email: 'marti@gmail.com', first_name: 'Marti', last_name: 'Carmona', password: '123456')
+ignacio = User.create(email: 'ignacio@gmail.com', first_name: 'Ignacio', last_name: 'Borrell', password: '123456')
+nahuel = User.create(email: 'nahuel@gmail.com', first_name: 'Nahuel', last_name: 'Ribera', password: '123456')
+marti = User.create(email: 'marti@gmail.com', first_name: 'Marti', last_name: 'Carmona', password: '123456')
 
 fashion_category = Category.find_or_create_by(name: 'Fashion')
 cameras_category = Category.find_or_create_by(name: 'Cameras')
@@ -30,12 +31,12 @@ products = [
   },
 
   {
-    title: 'Jacquemus Handbag',
-    description: 'Jacquemus Le Chiquito, bought in Paris.',
-    price_per_day: 29.90,
+    title: 'HTC Vive 2',
+    description: 'Experience the future of virtual reality with the HTC Vive 2.',
+    price_per_day: 22,
     condition: 'As new',
-    category: fashion_category,
-    image_url: 'https://media.karousell.com/media/photos/products/2022/6/3/_jacquemus_le_chiquito_moyen_i_1654252564_c99c802c_progressive.jpg'
+    category: consoles_category,
+    image_url: 'https://i.gzn.jp/img/2021/08/08/vive-pro-2/00.jpg'
   },
 
   {
@@ -228,12 +229,12 @@ products = [
     image_url: 'https://i.ebayimg.com/images/g/6awAAOSwwophcEos/s-l1200.jpg'
   },
   {
-    title: 'HTC Vive 2',
-    description: 'Experience the future of virtual reality with the HTC Vive 2.',
-    price_per_day: 22,
+    title: 'Jacquemus Handbag',
+    description: 'Jacquemus Le Chiquito, bought in Paris.',
+    price_per_day: 29.90,
     condition: 'As new',
-    category: consoles_category,
-    image_url: 'https://i.gzn.jp/img/2021/08/08/vive-pro-2/00.jpg'
+    category: fashion_category,
+    image_url: 'https://media.karousell.com/media/photos/products/2022/6/3/_jacquemus_le_chiquito_moyen_i_1654252564_c99c802c_progressive.jpg'
   },
   {
     title: 'PS5',
@@ -436,6 +437,10 @@ end
 
 Booking.create!(user:User.first,product: Product.first, start_date: (Date.today - 3), end_date: (Date.today - 1), status: "accepted")
 
-Booking.create!(user:User.first,product: Product.second, start_date: (Date.today - 9), end_date: (Date.today - 3), status: "accepted")
+#Booking.create!(user:User.first,product: Product.second, start_date: (Date.today - 9), end_date: (Date.today - 3), status: "accepted")
 
 Booking.create!(user:User.first,product: Product.third, start_date: Date.tomorrow, end_date: (Date.tomorrow + 1), status: "pending")
+
+nahuel_booking = Booking.create!(user: nahuel,product: Product.second, start_date: (Date.today - 12), end_date: (Date.today - 10), status: "accepted")
+
+Review.create!(user: nahuel, booking: nahuel_booking, review_type: "by_renter", booking_rating: 5, booking_content: "Great owner, very punctual!", product_rating: 4, product_content: "The product was in good state, but it was slightly used.")
