@@ -1,8 +1,11 @@
 require 'open-uri'
 
+Chat.destroy_all
+Booking.destroy_all
 Product.destroy_all
 User.destroy_all
 Category.destroy_all
+
 
 User.create(email: 'ignacio@gmail.com', first_name: 'Ignacio', last_name: 'Borrell', password: '123456')
 User.create(email: 'nahuel@gmail.com', first_name: 'Nahuel', last_name: 'Ribera', password: '123456')
@@ -15,8 +18,17 @@ audio_category = Category.find_or_create_by(name: 'Audio')
 consoles_category = Category.find_or_create_by(name: 'Consoles')
 furniture_category = Category.find_or_create_by(name: 'Furniture')
 
-
 products = [
+
+  {
+    title: 'Electric dirtbike',
+    description: 'Bought three months ago, I love it but I live in a big city.',
+    price_per_day: 125,
+    condition: 'As new',
+    category: sports_category,
+    image_url: 'https://cdn.motor1.com/images/mgl/nxzro/s1/4x3/meet-the-sur-ron-light-bee-long-range-e-bike.webp'
+  },
+
   {
     title: 'Jacquemus Handbag',
     description: 'Jacquemus Le Chiquito, bought in Paris.',
@@ -27,21 +39,21 @@ products = [
   },
 
   {
-    title: 'Louis Vuitton Bag',
-    description: 'Original LV Neverfull bag, used a few times.',
-    price_per_day: 34.90,
+    title: 'Smaco scuba gear',
+    description: 'Complete SMACO S400pro equipment, high pressure compressor included, like new.',
+    price_per_day: 35,
     condition: 'As new',
-    category: fashion_category,
-    image_url: 'https://di2ponv0v5otw.cloudfront.net/posts/2022/09/29/6335c6a91741be83d1cc7e46/m_634472728634cba59b17aefb.jpg'
+    category: sports_category,
+    image_url: 'https://cdn.wallapop.com/images/10420/fo/63/__/c10420p947587769/i3551779136.jpg?pictureSize=W640'
   },
 
   {
-    title: 'Goyard Bag',
-    description: 'I love haute couture! Goyard Messenger bag available.',
-    price_per_day: 45,
-    condition: 'As new',
-    category: fashion_category,
-    image_url: 'https://media.karousell.com/media/photos/products/2019/10/02/authentic_preloved_goyard_belvedere_pm_messenger_bag_1569992309_dd0e66bc.jpg'
+    title: 'Insta 360',
+    description: 'Reimagine your storytelling with Insta360. This compact camera captures every angle in stunning 360.',
+    price_per_day: 20,
+    condition: 'Good state',
+    category: cameras_category,
+    image_url: 'https://cdn.wallapop.com/images/10420/fa/v2/__/c10420p925238078/i3425159627.jpg?pictureSize=W640'
   },
 
   {
@@ -70,6 +82,16 @@ products = [
     category: fashion_category,
     image_url: 'https://media-photos.depop.com/b0/2166277/1007502475_a2726218052e4bdfababbc74ecb5a7b9/P0.jpg'
   },
+
+  {
+    title: 'Louis Vuitton Bag',
+    description: 'Original LV Neverfull bag, used a few times.',
+    price_per_day: 34.90,
+    condition: 'As new',
+    category: fashion_category,
+    image_url: 'https://di2ponv0v5otw.cloudfront.net/posts/2022/09/29/6335c6a91741be83d1cc7e46/m_634472728634cba59b17aefb.jpg'
+  },
+
 
   {
     title: 'Valentino Bag',
@@ -155,14 +177,7 @@ products = [
     category: sports_category,
     image_url: 'https://bowhuntersunited.com/wp-content/uploads/2018/06/00-Hero-Bowhunting-Checklist-101-Photo-Credit-ATA.jpg'
   },
-  {
-    title: 'Electric dirtbike',
-    description: 'Bought three months ago, I love it but I live in a big city.',
-    price_per_day: 125,
-    condition: 'As new',
-    category: sports_category,
-    image_url: 'https://cdn.motor1.com/images/mgl/nxzro/s1/4x3/meet-the-sur-ron-light-bee-long-range-e-bike.webp'
-  },
+
   {
     title: 'Porsche E-bike',
     description: 'Stunning electric bike with great autonomy, speed and design.',
@@ -171,14 +186,7 @@ products = [
     category: sports_category,
     image_url: 'https://images.ctfassets.net/1oyzmkwpf3d5/4XcmGDZf7rohAHwpjPd89d/d4fe63af6027ed5e007dea9c1a637234/eBike_Kopie_1.jpg'
   },
-  {
-    title: 'Smaco scuba gear',
-    description: 'Complete SMACO S400pro equipment, high pressure compressor included, like new.',
-    price_per_day: 35,
-    condition: 'As new',
-    category: sports_category,
-    image_url: 'https://cdn.wallapop.com/images/10420/fo/63/__/c10420p947587769/i3551779136.jpg?pictureSize=W640'
-  },
+
   {
     title: 'Hunting Crossbow',
     description: 'Powerful and precise, this hunting crossbow delivers the perfect combination of speed and accuracy.',
@@ -283,14 +291,7 @@ products = [
     category: cameras_category,
     image_url: 'https://cdn.wallapop.com/images/10420/ez/4h/__/c10420p905522774/i3307121797.jpg?pictureSize=W320'
   },
-  {
-    title: 'Insta 360',
-    description: 'Reimagine your storytelling with Insta360. This compact camera captures every angle in stunning 360.',
-    price_per_day: 20,
-    condition: 'Good state',
-    category: cameras_category,
-    image_url: 'https://cdn.wallapop.com/images/10420/fa/v2/__/c10420p925238078/i3425159627.jpg?pictureSize=W640'
-  },
+
   {
     title: 'Nikon D7500',
     description: 'Take amazing shots with this Nikon D7500 reflex camera.',
@@ -432,3 +433,9 @@ products.each do |product|
     puts "Error creating product '#{product[:title]}': #{e.message}"
   end
 end
+
+Booking.create!(user:User.first,product: Product.first, start_date: (Date.today - 3), end_date: (Date.today - 1), status: "accepted")
+
+Booking.create!(user:User.first,product: Product.second, start_date: (Date.today - 9), end_date: (Date.today - 3), status: "accepted")
+
+Booking.create!(user:User.first,product: Product.second, start_date: Date.tomorrow, end_date: (Date.tomorrow + 1), status: "pending")

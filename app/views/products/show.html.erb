@@ -66,9 +66,9 @@
 
           <% empty_stars.times do %>
             <i class="fa-regular fa-star"></i>
-
           <% end %>
         </span>
+
         <span class="rating-stars" style= "color: rgb(93, 93, 93)">( <%= (@product.user.all_received_reviews.count  || 0) %> )</span>
 
           <%= link_to profile_path(@product.user), class: "avatar-btn" do %>
