@@ -48,11 +48,6 @@ class User < ApplicationRecord
     end
   end
 
-  def show
-    @user = User.find(params[:id])
-    @products = @user.products
-    @booked_products = @user.booked_products
-  end
 
   def name_with_initial
     "#{first_name} #{last_name.first}."

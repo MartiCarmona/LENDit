@@ -2,33 +2,36 @@
   <div class="booking-container">
     <div class="booking">
       <% if @booked_products.include?(@product) %>
-        <p>Already booked</p>
-      <% else %>
-        <%= simple_form_for [@product, @booking], html: { id: 'booking-form', data: { controller: 'booking-form' } } do |f| %>
-          <div class="date-inputs">
-            <%= f.input :start_date,
-                  as: :string,
-                  input_html: {
-                    data: {
-                      controller: "datepicker",
-                      booking_form_target: "startDate",
-                      action: "change->booking-form#validateDates"
-                      }
-                    } %>
+        <p>You already have a booking</p>
+      <% end %>
 
-            <%= f.input :end_date,
-                  as: :string,
-                  input_html: {
-                    data: {
-                      controller: "datepicker",
-                      booking_form_target: "endDate",
-                      action: "change->booking-form#validateDates"
-                      }
-                    } %>
+      <%= simple_form_for [@product, @booking], html: { id: 'booking-form', data: { controller: 'booking-form' } } do |f| %>
+        <div class="date-inputs">
+          <%= f.input :start_date,
+                as: :string,
+                input_html: {
+                  data: {
+                    controller: "datepicker",
+                    booking_form_target: "startDate",
+                    action: "change->booking-form#validateDates",
+                    datepicker_disabled_dates_value: @disabled_dates.to_json
+                    }
+                  } %>
 
-          </div>
-          <%= f.button :submit, 'Book now', class: 'btn-rent-now', data: { disable_with: 'Renting...', booking_form_target: "submitButton" }, disabled: false %>
-        <% end %>
+          <%= f.input :end_date,
+                as: :string,
+                input_html: {
+                  data: {
+                    controller: "datepicker",
+                    booking_form_target: "endDate",
+                    action: "change->booking-form#validateDates",
+                    datepicker_disabled_dates_value: @disabled_dates.to_json
+
+                    }
+                  } %>
+
+        </div>
+        <%= f.button :submit, 'Book now', class: 'btn-rent-now', data: { disable_with: 'Renting...', booking_form_target: "submitButton" }, disabled: false %>
       <% end %>
     </div>
   </div>
