@@ -1,9 +1,6 @@
 <div class="rent-button-wrapper">
   <div class="booking-container">
     <div class="booking">
-      <% if @booked_products.include?(@product) %>
-        <p>You already have a booking</p>
-      <% end %>
 
       <%= simple_form_for [@product, @booking], html: { id: 'booking-form', data: { controller: 'booking-form' } } do |f| %>
         <div class="date-inputs">
@@ -35,4 +32,12 @@
       <% end %>
     </div>
   </div>
+
+        <% if @booked_products.include?(@product) %>
+          <% bookings = current_user.bookings.where(product: @product) %>
+          <% bookings.each do |booking| %>
+            <p>You already have a booking for <%= @product.title %> from <%= booking.start_date %> to <%= booking.end_date %></p>
+          <% end %>
+        <% end %>
+
 </div>
