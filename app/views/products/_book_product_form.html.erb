@@ -1,9 +1,6 @@
 <div class="rent-button-wrapper">
   <div class="booking-container">
     <div class="booking">
-      <% if @booked_products.include?(@product) %>
-        <p>You already have a booking</p>
-      <% end %>
 
       <%= simple_form_for [@product, @booking], html: { id: 'booking-form', data: { controller: 'booking-form' } } do |f| %>
         <div class="date-inputs">
@@ -35,4 +32,5 @@
       <% end %>
     </div>
   </div>
+ 
 </div>
