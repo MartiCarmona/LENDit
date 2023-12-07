@@ -33,7 +33,7 @@
 
         <h1 class="product-title"><%= @product.title %></h1>
 
-        <div class="row-container">
+           <div class="row-container">
           <div class="product-condition">
             <%= @product.condition %>
           </div>
@@ -43,42 +43,51 @@
           <%= image_tag('map3.png', id: 'map-trigger', class: "image-address") %>
         </div>
 
+
         <p class="product-description"><%= @product.description %></p>
 
         <div class="price-and-rating-row">
           <div class="price-container">
             <strong><span class="product-price"><%= number_to_currency(@product.price_per_day, unit: '', format: "%n€") %>/day</span></strong>
           </div>
+           <%= link_to profile_path(@product.user) do %>
+              <span class="stars" style="color: #007883">
+                <% filled_stars = (@product.user.average_rating || 0).to_i %>
+                <% half_star = (@product.user.average_rating || 0) - filled_stars %>
+                <% empty_stars = 5 - filled_stars - (half_star.positive? ? 1 : 0) %>
 
-           <span class="stars" style="color: #007883">
-          <% filled_stars = (@product.user.average_rating || 0).to_i %>
-          <% half_star = (@product.user.average_rating || 0) - filled_stars %>
-          <% empty_stars = 5 - filled_stars - (half_star.positive? ? 1 : 0) %>
+                <% filled_stars.times do %>
+                  <i class="fa-solid fa-star"></i>
+                <% end %>
 
-          <% filled_stars.times do %>
-            <i class="fa-solid fa-star"></i>
-          <% end %>
+                <% if half_star.positive? %>
+                  <i class="fa-solid fa-star-half-stroke"></i>
+                <% end %>
 
-          <% if half_star.positive? %>
-            <i class="fa-solid fa-star-half-stroke"></i>
-          <% end %>
-
-          <% empty_stars.times do %>
-            <i class="fa-regular fa-star"></i>
-          <% end %>
-        </span>
-
-        <span class="rating-stars" style= "color: rgb(93, 93, 93)">( <%= (@product.user.all_received_reviews.count  || 0) %> )</span>
-
-          <%= link_to profile_path(@product.user), class: "avatar-btn" do %>
-            <% if @product.user.profile_photo.attached? %>
-              <%= image_tag(@product.user.profile_photo.variant(resize_to_limit: [30, 30]).processed, class: "avatar", alt: "User profile") %>
-            <% else %>
-              <%= image_tag("profile.png", class: "avatar") %>
+                <% empty_stars.times do %>
+                  <i class="fa-regular fa-star"></i>
+                <% end %>
+              </span>
             <% end %>
+
+          <%= link_to profile_path(@product.user) do %>
+              <span class="rating-stars" style= "color: rgb(93, 93, 93)">( <%= (@product.user.all_received_reviews.count  || 0) %> )</span>
           <% end %>
+
+            <%= link_to profile_path(@product.user), class: "avatar-btn" do %>
+              <% if current_user %>
+                <% if current_user.profile_photo.attached? %>
+                  <%= image_tag(current_user.profile_photo.variant(resize_to_limit: [30, 30]).processed, class: "avatar", alt: "User profile") %>
+                <% else %>
+                  <%= image_tag("profile.png", class: "avatar") %>
+                <% end %>
+              <% else %>
+                <%= image_tag("profile.png", class: "avatar") %>
+              <% end %>
+            <% end %>
 
         </div>
+
         <div class="map-container"
           data-controller="map"
           data-map-markers-value="<%= [{ lat: @product.user.latitude, lng: @product.user.longitude }].to_json %>"

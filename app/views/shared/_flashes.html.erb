@@ -1,25 +1,23 @@
 <% if notice %>
-  <div class="alert alert-info alert-dismissible fade show m-1" role="alert">
+  <div class="alert alert-info alert-dismissible fade show m-1" role="alert" id="notice-alert">
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     <%= notice %>
   </div>
 <% end %>
 
 <% if alert %>
-  <div class="alert alert-warning alert-dismissible fade show m-1" role="alert">
+  <div class="alert alert-warning alert-dismissible fade show m-1" role="alert" id="alert-alert">
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     <%= alert %>
   </div>
 <% end %>
 
-
 <script>
-
   var noticeAlert = document.getElementById('notice-alert');
   if (noticeAlert) {
     setTimeout(function() {
       noticeAlert.style.display = 'none';
-    }, 3000);
+    }, 2000);
   }
 
   var alertAlert = document.getElementById('alert-alert');

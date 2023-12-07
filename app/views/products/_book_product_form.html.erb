@@ -32,12 +32,4 @@
       <% end %>
     </div>
   </div>
-
-        <% if @booked_products.include?(@product) %>
-          <% bookings = current_user.bookings.where(product: @product) %>
-          <% bookings.each do |booking| %>
-            <p>You already have a booking for <%= @product.title %> from <%= booking.start_date %> to <%= booking.end_date %></p>
-          <% end %>
-        <% end %>
-
 </div>

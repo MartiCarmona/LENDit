@@ -4,13 +4,19 @@ class ProductsController < ApplicationController
     if params[:search].present?
       @products = Product.where("title ILIKE ? OR description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
     elsif params[:category_id].present?
-      @products = Product.where(category_id: params[:category_id])
+      @products = Product.where(category_id: params[:category_id]).where.not(user: current_user)
     else
-      @products = Product.all
+      if current_user.present?
+        @products = Product.where.not(user: current_user)
+      else
+        @products = Product.all
+      end
+
     end
 
   end
 
+#
   def show
     @product = Product.find(params[:id])
     @booking = Booking.new
