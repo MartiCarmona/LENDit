@@ -31,3 +31,21 @@
     <%= link_to 'Back to Bookings', borrows_bookings_path(@product), class: 'btn btn-secondary' %>
   </div>
 </div>
+
+<script>
+  // Timeout for notice alert
+  var noticeAlert = document.getElementById('notice-alert');
+  if (noticeAlert) {
+    setTimeout(function() {
+      noticeAlert.style.display = 'none';
+    }, 3000);
+  }
+
+  // Timeout for alert alert
+  var alertAlert = document.getElementById('alert-alert');
+  if (alertAlert) {
+    setTimeout(function() {
+      alertAlert.style.display = 'none';
+    }, 3000);
+  }
+</script>
