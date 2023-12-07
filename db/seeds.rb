@@ -438,4 +438,4 @@ Booking.create!(user:User.first,product: Product.first, start_date: (Date.today 
 
 Booking.create!(user:User.first,product: Product.second, start_date: (Date.today - 9), end_date: (Date.today - 3), status: "accepted")
 
-Booking.create!(user:User.first,product: Product.second, start_date: Date.tomorrow, end_date: (Date.tomorrow + 1), status: "pending")
+Booking.create!(user:User.first,product: Product.third, start_date: Date.tomorrow, end_date: (Date.tomorrow + 1), status: "pending")
