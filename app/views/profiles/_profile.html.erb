@@ -75,41 +75,40 @@
   <div class="tab-content" id="reviewsTab">
   <div class="reviews-container">
     <% @reviews.each do |review| %>
-
-          <span>Reviewed by </span> <span><%= "#{review.user.first_name} #{review.user.last_name}" %></span>
-
       <li class="review-card" style="margin-top: 10px; margin-bottom: 30px;">
         <% if review.booking.present? && review.booking.product.present? %>
-          <div class="card-content" style="background-color: #f4f4f4;">
-            <div class="image-container">
-              <%= image_tag(review.booking.product.image.url, class: "card-image") if review.booking.product.image.attached? %>
-            </div>
-            <div class="card-details">
-              <h3 class="card-title"><%= review.booking.product.title %></h3>
-              <div class="review-details">
-                <div class="rating">
-                  <span class="stars" style="color: #007883;">
-                    <% filled_stars = (review.booking_rating || 0).to_i %>
-                    <% half_star = (review.booking_rating || 0) - filled_stars %>
-                    <% empty_stars = 5 - filled_stars - (half_star.positive? ? 1 : 0) %>
+          <%= link_to product_path(review.booking.product) do %>
+            <div class="card-content" style="background-color: #f4f4f4;">
+              <div class="image-container">
+                <%= image_tag(review.booking.product.image.url, class: "card-image") if review.booking.product.image.attached? %>
+              </div>
+              <div class="card-details">
+                <h3 class="card-title"><%= review.booking.product.title %></h3>
+                <div class="review-details">
+                  <div class="rating">
+                    <span class="stars" style="color: #007883;">
+                      <% filled_stars = (review.booking_rating || 0).to_i %>
+                      <% half_star = (review.booking_rating || 0) - filled_stars %>
+                      <% empty_stars = 5 - filled_stars - (half_star.positive? ? 1 : 0) %>
 
-                    <% filled_stars.times do %>
-                      <i class="fa-solid fa-star"></i>
-                    <% end %>
+                      <% filled_stars.times do %>
+                        <i class="fa-solid fa-star"></i>
+                      <% end %>
 
-                    <% if half_star.positive? %>
-                      <i class="fa-solid fa-star-half-stroke"></i>
-                    <% end %>
+                      <% if half_star.positive? %>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                      <% end %>
 
-                    <% empty_stars.times do %>
-                      <i class="fa-regular fa-star"></i>
-                    <% end %>
-                  </span>
+                      <% empty_stars.times do %>
+                        <i class="fa-regular fa-star"></i>
+                      <% end %>
+                    </span>
+                  </div>
+                  <p class="content"><%= review.booking_content %></p>
                 </div>
-                <p class="content"><%= review.booking_content %></p>
               </div>
             </div>
-          </div>
+          <% end %>
         <% else %>
           <p>No booking product information available</p>
         <% end %>
@@ -117,6 +116,7 @@
     <% end %>
   </div>
 </div>
+
 </div>
 
 
