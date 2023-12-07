@@ -75,12 +75,8 @@
           <% end %>
 
             <%= link_to profile_path(@product.user), class: "avatar-btn" do %>
-              <% if current_user %>
-                <% if current_user.profile_photo.attached? %>
-                  <%= image_tag(current_user.profile_photo.variant(resize_to_limit: [30, 30]).processed, class: "avatar", alt: "User profile") %>
-                <% else %>
-                  <%= image_tag("profile.png", class: "avatar") %>
-                <% end %>
+              <% if @product.user.profile_photo.attached? %>
+                <%= image_tag(@product.user.profile_photo.variant(resize_to_limit: [30, 30]).processed, class: "avatar", alt: "User profile") %>
               <% else %>
                 <%= image_tag("profile.png", class: "avatar") %>
               <% end %>
