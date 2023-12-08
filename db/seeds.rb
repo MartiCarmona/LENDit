@@ -10,7 +10,10 @@ Category.destroy_all
 
 ignacio = User.create(email: 'ignacio@gmail.com', first_name: 'Ignacio', last_name: 'Borrell', password: '123456')
 nahuel = User.create(email: 'nahuel@gmail.com', first_name: 'Nahuel', last_name: 'Ribera', password: '123456')
+marcos = User.create(email: 'marcos@gmail.com', first_name: 'Marcos', last_name: 'Lopez', password: '123456')
+
 marti = User.create(email: 'marti@gmail.com', first_name: 'Marti', last_name: 'Carmona', password: '123456')
+
 
 fashion_category = Category.find_or_create_by(name: 'Fashion')
 cameras_category = Category.find_or_create_by(name: 'Cameras')
@@ -101,6 +104,15 @@ products = [
     condition: 'As new',
     category: fashion_category,
     image_url: 'https://i.pinimg.com/564x/2f/9d/c8/2f9dc853a5ce75cc043ec5b2c7f53c24.jpg'
+  },
+
+  {
+    title: 'Nintendo Switch',
+    description: 'Versatility and endless gaming fun with the Nintendo Switch. Switch between handheld and TV modes.',
+    price_per_day: 14.90,
+    condition: 'As new',
+    category: consoles_category,
+    image_url: 'https://i.ebayimg.com/images/g/6awAAOSwwophcEos/s-l1200.jpg'
   },
 
   {
@@ -220,14 +232,7 @@ products = [
     category: consoles_category,
     image_url: 'https://media-mbst-pub-ue1.s3.amazonaws.com/creatr-uploaded-images/2020-11/00ab1e71-1f19-11eb-9b53-ff3bab8dbe8c'
   },
-  {
-    title: 'Nintendo Switch',
-    description: 'Versatility and endless gaming fun with the Nintendo Switch. Switch between handheld and TV modes.',
-    price_per_day: 14.90,
-    condition: 'As new',
-    category: consoles_category,
-    image_url: 'https://i.ebayimg.com/images/g/6awAAOSwwophcEos/s-l1200.jpg'
-  },
+
   {
     title: 'Jacquemus Handbag',
     description: 'Jacquemus Le Chiquito, bought in Paris.',
@@ -435,12 +440,20 @@ products.each do |product|
   end
 end
 
-Booking.create!(user:User.first,product: Product.first, start_date: (Date.today - 3), end_date: (Date.today - 1), status: "accepted")
+nintendo_switch = Product.find_by(title: 'Nintendo Switch')
 
-#Booking.create!(user:User.first,product: Product.second, start_date: (Date.today - 9), end_date: (Date.today - 3), status: "accepted")
+Booking.create!(user: User.first, product: Product.first, start_date: (Date.today - 3), end_date: (Date.today - 1), status: "accepted")
 
-Booking.create!(user:User.first,product: Product.third, start_date: Date.tomorrow, end_date: (Date.tomorrow + 1), status: "pending")
+Booking.create!(user: User.first, product: Product.third, start_date: Date.tomorrow, end_date: (Date.tomorrow + 1), status: "pending")
 
-nahuel_booking = Booking.create!(user: nahuel,product: Product.second, start_date: (Date.today - 12), end_date: (Date.today - 10), status: "accepted")
+marcos_booking = Booking.create!(user: marcos, product: Product.second, start_date: (Date.today - 3), end_date: (Date.today - 1), status: "accepted")
 
-Review.create!(user: nahuel, booking: nahuel_booking, review_type: "by_renter", booking_rating: 5, booking_content: "Great owner, very punctual!", product_rating: 4, product_content: "The product was in good state, but it was slightly used.")
+Review.create!(user: marcos, booking: marcos_booking, review_type: "by_renter", booking_rating: 4, booking_content: "Great guy, everythnig went well", product_rating: 4, product_content: "The product was in good state, but it was tricky to use")
+
+nahuel_booking = Booking.create!(user: nahuel, product: Product.second, start_date: (Date.today - 12), end_date: (Date.today - 10), status: "accepted")
+
+Review.create!(user: nahuel, booking: nahuel_booking, review_type: "by_renter", booking_rating: 5, booking_content: "Great owner, very punctual!", product_rating: 5, product_content: "The product was in good state, had a really great time.")
+
+nahuel_booking2 = Booking.create!(user: nahuel, product: nintendo_switch, start_date: (Date.today - 12), end_date: (Date.today - 10), status: "accepted")
+
+Review.create!(user: nahuel, booking: nahuel_booking2, review_type: "by_renter", booking_rating: 4, booking_content: "Very punctual!", product_rating: 2, product_content: "The battery runs out really fast.")
