@@ -3,15 +3,17 @@
   <div class="products-grid">
     <% current_user.favorited_products.each do |product| %>
       <%= link_to product_path(product), class: 'product-link' do %>
-        <div class="product-card">
-          <%= image_tag(product.image, class: 'product-image') if product.image.attached? %>
-          <div class="product-info">
-            <span class="price">
-              €<%= product.price_per_day.to_i == product.price_per_day ? product.price_per_day.to_i : product.price_per_day %>
-            </span>
-            <p class="title"><%= product.title %></p>
+          <div class="product-card">
+            <%= image_tag(product.image, class: 'product-image') if product.image.attached? %>
+            <div class="product-info" style="background-color: white;">
+              <div class="title-price-row">
+                <span class="title" style="background-color: transparent;"><%= product.title %></span>
+                <span class="price">
+                  <%= number_with_precision(product.price_per_day, precision: (product.price_per_day.to_i == product.price_per_day) ? 0 : 2) %>€
+                </span>
+              </div>
+            </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
     <% end %>
   </div>
