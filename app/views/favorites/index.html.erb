@@ -1,5 +1,5 @@
 
-  <h2 style="font-family: 'Helvetica Neue', sans-serif; margin-bottom: 25px;">Your Favorite Products</h1>
+  <h2 style="font-family: 'Helvetica Neue', sans-serif; margin-bottom: 25px;">Favorite Products</h1>
   <div class="products-grid">
     <% current_user.favorited_products.each do |product| %>
       <%= link_to product_path(product), class: 'product-link' do %>
